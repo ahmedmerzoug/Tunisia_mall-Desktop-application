@@ -36,6 +36,7 @@ public class Tunisia_mall {
         User e = new User("mraihi", "amine", "03/08/1995", "amine", "mraihi", "amine.mraihi", "role", 5085234, "adresse", 12.5f, "12/12/2012", "12/12/2012", "",b);
        // e.setId_user(5);
         //System.out.println(e);
+        
        iUserService.add(e);
 
     }
