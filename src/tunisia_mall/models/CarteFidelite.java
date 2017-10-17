@@ -5,6 +5,9 @@
  */
 package tunisia_mall.models;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author Amine
@@ -28,6 +31,12 @@ public class CarteFidelite {
         this.user = user;
     }
 
+    public CarteFidelite(int nb_point, String date_creation) {
+        this.nb_point = nb_point;
+        this.date_creation = date_creation;
+    }
+
+  
     public int getId_carte_fidelite() {
         return id_carte_fidelite;
     }
@@ -89,5 +98,20 @@ public class CarteFidelite {
         return "CarteFidelite{" + "id_carte_fidelite=" + id_carte_fidelite + ", nb_point=" + nb_point + ", date_creation=" + date_creation + ", user=" + user + '}';
     }
     
+     public static String convert(java.sql.Date d) {
+        SimpleDateFormat df = new SimpleDateFormat("dd/ MMMM/ yyyy");
+        String text = df.format(d);
+        return text;
+    }
+     
+      public java.sql.Date convert (String date) throws ParseException{
+      
+    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+    java.util.Date date1 = sdf1.parse(date);
+    java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
+   
+    
+    return sqlDate ;  
+    } 
     
 }

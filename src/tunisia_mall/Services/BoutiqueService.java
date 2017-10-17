@@ -7,8 +7,11 @@ package tunisia_mall.Services;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import tunisia_mall.Interface.IBoutiqueService;
 import tunisia_mall.Technique.DataSource;
 import tunisia_mall.models.Boutique;
@@ -51,9 +54,24 @@ public class BoutiqueService implements IBoutiqueService {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+ @Override
     public Boutique findById(Integer r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Boutique b = null;
+        String req = "select * from boutique where id_boutique =?";
+        PreparedStatement preparedStatement;
+
+        try {
+            preparedStatement = connection.prepareStatement(req);
+            preparedStatement.setInt(1, r);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                b = new Boutique(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), new UserService().findById(resultSet.getInt(5)));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(BoutiqueService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return b;
     }
 
     @Override

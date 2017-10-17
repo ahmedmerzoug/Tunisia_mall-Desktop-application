@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tunisia_mall.Interface;
-
-import tunisia_mall.models.OffreEmploi;
+package tunisia_mall.Services;
 
 /**
  *
  * @author Amine
  */
-public interface IOffreEmploiService extends IService<OffreEmploi, Integer>{
+public class Demande_emploiService {
     
 }

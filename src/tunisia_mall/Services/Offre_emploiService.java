@@ -6,21 +6,22 @@
 package tunisia_mall.Services;
 
 import java.util.List;
-import tunisia_mall.Interface.ICarteFidelite;
+import tunisia_mall.models.Offre_emploi;
+import tunisia_mall.Interface.IOffre_emploiService;
 
 /**
  *
  * @author Amine
  */
-public class CarteFidelite implements ICarteFidelite {
+public class Offre_emploiService implements IOffre_emploiService{
 
     @Override
-    public void add(tunisia_mall.models.CarteFidelite t) {
+    public void add(Offre_emploi t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(tunisia_mall.models.CarteFidelite t) {
+    public void update(Offre_emploi t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -30,12 +31,12 @@ public class CarteFidelite implements ICarteFidelite {
     }
 
     @Override
-    public tunisia_mall.models.CarteFidelite findById(Integer r) {
+    public Offre_emploi findById(Integer r) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<tunisia_mall.models.CarteFidelite> getAll() {
+    public List<Offre_emploi> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
