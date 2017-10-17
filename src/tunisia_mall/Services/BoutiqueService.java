@@ -80,7 +80,7 @@ public class BoutiqueService implements IBoutiqueService {
 
     }
 
-    @Override
+ @Override
     public Boutique findById(Integer r) {
         Boutique b = null;
         String req = "select * from boutique where id_boutique =?";

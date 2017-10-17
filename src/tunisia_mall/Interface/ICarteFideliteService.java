@@ -11,6 +11,6 @@ import tunisia_mall.models.CarteFidelite;
  *
  * @author Amine
  */
-public interface ICarteFidelite extends IService<CarteFidelite, Integer>{
+public interface ICarteFideliteService extends IService<CarteFidelite, Integer>{
     
 }
