@@ -56,6 +56,7 @@ public class Tunisia_mall {
         iUserService.findbyIdRole(1, "role");
         iUserService.remove(1);
 
+<<<<<<< HEAD
        iUserService.add(e);
        iUserService.getAll();
        iUserService.update(e);
