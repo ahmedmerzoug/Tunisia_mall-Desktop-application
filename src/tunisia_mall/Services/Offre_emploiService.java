@@ -6,22 +6,22 @@
 package tunisia_mall.Services;
 
 import java.util.List;
-import tunisia_mall.Interface.IOffreEmploiService;
-import tunisia_mall.models.OffreEmploi;
+import tunisia_mall.models.Offre_emploi;
+import tunisia_mall.Interface.IOffre_emploiService;
 
 /**
  *
  * @author Amine
  */
-public class OffreEmploiService implements IOffreEmploiService{
+public class Offre_emploiService implements IOffre_emploiService{
 
     @Override
-    public void add(OffreEmploi t) {
+    public void add(Offre_emploi t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(OffreEmploi t) {
+    public void update(Offre_emploi t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -31,12 +31,12 @@ public class OffreEmploiService implements IOffreEmploiService{
     }
 
     @Override
-    public OffreEmploi findById(Integer r) {
+    public Offre_emploi findById(Integer r) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<OffreEmploi> getAll() {
+    public List<Offre_emploi> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

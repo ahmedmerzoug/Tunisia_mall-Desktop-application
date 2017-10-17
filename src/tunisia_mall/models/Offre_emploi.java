@@ -9,7 +9,7 @@ package tunisia_mall.models;
  *
  * @author Amine
  */
-public class OffreEmploi {
+public class Offre_emploi {
     private int id_offre_emploi;
     private String poste;
     private String specialite;
@@ -17,7 +17,7 @@ public class OffreEmploi {
     private int nbr_demande;
     private String date_expiration;
 
-    public OffreEmploi(int id_offre_emploi, String poste, String specialite, float salaire, int nbr_demande, String date_expiration) {
+    public Offre_emploi(int id_offre_emploi, String poste, String specialite, float salaire, int nbr_demande, String date_expiration) {
         this.id_offre_emploi = id_offre_emploi;
         this.poste = poste;
         this.specialite = specialite;
@@ -26,7 +26,7 @@ public class OffreEmploi {
         this.date_expiration = date_expiration;
     }
 
-    public OffreEmploi(String poste, String specialite, float salaire, int nbr_demande, String date_expiration) {
+    public Offre_emploi(String poste, String specialite, float salaire, int nbr_demande, String date_expiration) {
         this.poste = poste;
         this.specialite = specialite;
         this.salaire = salaire;
@@ -99,7 +99,7 @@ public class OffreEmploi {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final OffreEmploi other = (OffreEmploi) obj;
+        final Offre_emploi other = (Offre_emploi) obj;
         if (this.id_offre_emploi != other.id_offre_emploi) {
             return false;
         }

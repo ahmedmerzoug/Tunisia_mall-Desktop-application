@@ -8,6 +8,7 @@ package tunisia_mall.Services;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
@@ -82,12 +83,31 @@ public class UserService implements IUserService {
 
     @Override
     public User findById(Integer r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        User user = null;
+        String req = "select * from user where id_user =? ";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(req);
+            preparedStatement.setInt(1, r);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+                        User.convert(resultSet.getDate(4)), resultSet.getString(5), resultSet.getString(6),
+                        resultSet.getString(7), resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10),
+                        resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)),
+                        User.convert(resultSet.getDate(14)), resultSet.getString(15),
+                        new BoutiqueService().findById(resultSet.getInt(16)));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return user;
     }
 
     @Override
     public List<User> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }
+
+

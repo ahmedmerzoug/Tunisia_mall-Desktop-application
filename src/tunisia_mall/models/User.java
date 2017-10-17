@@ -5,6 +5,7 @@
  */
 package tunisia_mall.models;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
@@ -16,7 +17,8 @@ public class User {
     private  int id_user ; 
     private  String nom ; 
     private  String prenom ; 
-    private String date_naissance ; 
+    private String date_naissance ;
+    private String sexe ; 
     private String login ; 
     private String password ; 
     private String mail ; 
@@ -32,9 +34,11 @@ public class User {
     public User() {
     }
 
-    public User(String nom, String prenom, String login, String password, String mail, String role, int numero_telephone, String adresse, float salaire,  String path) {
+    public User(String nom, String prenom, String date_naissance, String sexe, String login, String password, String mail, String role, int numero_telephone, String adresse, float salaire, String date_embauche, String date_expiration, String path, Boutique boutique) {
         this.nom = nom;
         this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.sexe = sexe;
         this.login = login;
         this.password = password;
         this.mail = mail;
@@ -42,17 +46,21 @@ public class User {
         this.numero_telephone = numero_telephone;
         this.adresse = adresse;
         this.salaire = salaire;
+        this.date_embauche = date_embauche;
+        this.date_expiration = date_expiration;
         this.path = path;
-        
+        this.boutique = boutique;
     }
-    
+
+ 
     
     
 
-    public User(String nom, String prenom, String date_naissance, String login, String password, String mail, String role, int numero_telephone, String adresse, float salaire, String date_embauche, String date_expiration, String path) {
+    public User(String nom, String prenom, String date_naissance, String sexe ,String login, String password, String mail, String role, int numero_telephone, String adresse, float salaire, String date_embauche, String date_expiration, String path) {
         this.nom = nom;
         this.prenom = prenom;
         this.date_naissance = date_naissance;
+        this.sexe =sexe;
         this.login = login;
         this.password = password;
         this.mail = mail;
@@ -65,11 +73,12 @@ public class User {
         this.path = path;
     }
 
-    public User(int id_user, String nom, String prenom, String date_naissance, String login, String password, String mail, String role, int numero_telephone, String adresse, float salaire, String date_embauche, String date_expiration, String path) {
+    public User(int id_user, String nom, String prenom, String date_naissance,String sexe, String login, String password, String mail, String role, int numero_telephone, String adresse, float salaire, String date_embauche, String date_expiration, String path) {
         this.id_user = id_user;
         this.nom = nom;
         this.prenom = prenom;
         this.date_naissance = date_naissance;
+        this.sexe =sexe;
         this.login = login;
         this.password = password;
         this.mail = mail;
@@ -277,7 +286,38 @@ public class User {
         this.date_expiration = date_expiration;
     }
     
-    
+    public static String convert(java.sql.Date d) {
+        DateFormat df = new SimpleDateFormat("dd MMMM yyyy");
+        String text = df.format(d);
+        return text;
+    }
+
+    public User(int id_user, String nom, String prenom, String date_naissance, String sexe, String login, String password, String mail, String role, int numero_telephone, String adresse, float salaire, String date_embauche, String date_expiration, String path, Boutique boutique) {
+        this.id_user = id_user;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.sexe = sexe;
+        this.login = login;
+        this.password = password;
+        this.mail = mail;
+        this.role = role;
+        this.numero_telephone = numero_telephone;
+        this.adresse = adresse;
+        this.salaire = salaire;
+        this.date_embauche = date_embauche;
+        this.date_expiration = date_expiration;
+        this.path = path;
+        this.boutique = boutique;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
     
     
     
