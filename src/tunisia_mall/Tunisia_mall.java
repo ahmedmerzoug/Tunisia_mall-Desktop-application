@@ -61,7 +61,7 @@ public class Tunisia_mall {
 //        iPubliciteService.update(p1);
 //        iPubliciteService.remove(3);
 //        System.out.println(iPubliciteService.findById(2));
-//        System.out.println(iPubliciteService.getAll());
+        System.out.println(iPubliciteService.getAll());
 
     }
 }
