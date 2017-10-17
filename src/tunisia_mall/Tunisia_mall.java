@@ -74,22 +74,22 @@ IForumService iForumService = new ForumService();
       */
       
 
-    }
-}
-         for (User u :  iUserService.getAll()) {
-            System.out.println(u);
-        }
+ //   }
+//}
+      //   for (User u :  iUserService.getAll()) {
+     //       System.out.println(u);
+       // }
        
-        User e = new User("ahmed", "amine", "03/08/1995","homme", "amine", "mraihi", "amine.mraihi", "role", 5085234, "adresse", 12.5f, "12/12/2012", "12/12/2012", "",b);
+   //     User e = new User("ahmed", "amine", "03/08/1995","homme", "amine", "mraihi", "amine.mraihi", "role", 5085234, "adresse", 12.5f, "12/12/2012", "12/12/2012", "",b);
 
-        iUserService.findById(1);
-        iUserService.findbyIdRole(1, "role");
-        iUserService.remove(1);
+     //   iUserService.findById(1);
+    //    iUserService.findbyIdRole(1, "role");
+    //    iUserService.remove(1);
 
-       iUserService.add(e);
-       iUserService.getAll();
-       iUserService.update(e);
-       */
+    //   iUserService.add(e);
+    //   iUserService.getAll();
+     //  iUserService.update(e);
+       
        
         ////User e = new User("ahmed", "amine", "03/08/1995","homme", "amine", "mraihi", "amine.mraihi", "role", 5085234, "adresse", 12.5f, "12/12/2012", "12/12/2012", "",b);
 /*
