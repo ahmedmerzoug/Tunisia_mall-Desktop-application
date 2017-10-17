@@ -100,6 +100,11 @@ IForumService iForumService = new ForumService();
        iCarteFideliteService.add(c);
         ////iCarteFideliteService.update(c);
         
+        
+        
+        
+        
+        
       */  
 /*
          User e = new User("ahmed", "amine", "03/08/1995","homme", "amine", "mraihi", "amine.mraihi", "role", 5085234, "adresse", 12.5f, "12/12/2012", "12/12/2012", "",b);
