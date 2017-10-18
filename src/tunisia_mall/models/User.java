@@ -288,8 +288,6 @@ public class User {
     
     return sqlDate ;  
     } 
-    
-    
     public static String convert(java.sql.Date d) {
         SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy");
         String text = df.format(d);
