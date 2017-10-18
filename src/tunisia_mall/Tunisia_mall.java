@@ -38,7 +38,7 @@ public class Tunisia_mall {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-      /*  IBoutiqueService iBoutiqueService = new BoutiqueService();
+        /*  IBoutiqueService iBoutiqueService = new BoutiqueService();
         Boutique b = new Boutique("tibou", "vetement", "1ere etage");
 
        b.setId_boutique(5);
@@ -60,33 +60,31 @@ public class Tunisia_mall {
        iUserService.add(e);
        iUserService.getAll();
        iUserService.update(e);
-       */
-      IBoutiqueService iBoutiqueService = new BoutiqueService();
-       Boutique b = new Boutique("ahmed", "vetement", "1ere etage");
-      
-     //// iBoutiqueService.add(b);
-      IUserService iUserService = new UserService();
-      b.setId_boutique(51);
-      User e = new User("ahmed", "amine", "03/08/1995","homme", "amine", "mraihi", "amine.mraihi", "role", 5085234, "adresse", 12.5f, "12/12/2012", "12/12/2012", "",b);
+         */
+        IBoutiqueService iBoutiqueService = new BoutiqueService();
+        Boutique b = new Boutique("ahmed", "vetement", "1ere etage");
 
-iUserService.add(e);
+        //// iBoutiqueService.add(b);
+        IUserService iUserService = new UserService();
+        b.setId_boutique(51);
+        User e = new User("ahmed", "amine", "03/08/1995", "homme", "amine", "mraihi", "amine.mraihi", "role", 5085234, "adresse", 12.5f, "12/12/2012", "12/12/2012", "", b);
 
-     IPubliciteService iPubliciteService = new PubliciteService();
-     Publicite p= new Publicite("12/14/2012", "12/12/2014", 0, "dss", "sdd",b);
-     iPubliciteService.add(p);
-     
-     IJardinEnfantService iJardinEnfantService= new JardinEnfantService(); 
-     JardinEnfant j = new JardinEnfant(12, 4, "12/12/2012", e); 
-     iJardinEnfantService.add(j);
-     Produit pp = new Produit();
-  ////   pp.setId_produit(1);
-     IFactureService iFactureService = new FactureService();
-    //// Facture f = new Facture(e, pp, b, 0.1f, "12/12/2000");
-    /// iFactureService.add(f);
-     
-     
-    
-       /*
+        iUserService.add(e);
+
+        IPubliciteService iPubliciteService = new PubliciteService();
+        Publicite p = new Publicite("12/14/2012", "12/12/2014", 0, "dss", "sdd", b);
+        iPubliciteService.add(p);
+
+        IJardinEnfantService iJardinEnfantService = new JardinEnfantService();
+        JardinEnfant j = new JardinEnfant(12, 4, "12/12/2012", e);
+        iJardinEnfantService.add(j);
+        Produit pp = new Produit();
+        ////   pp.setId_produit(1);
+        IFactureService iFactureService = new FactureService();
+        //// Facture f = new Facture(e, pp, b, 0.1f, "12/12/2000");
+        /// iFactureService.add(f);
+
+        /*
         ICarteFideliteService iCarteFideliteService = new CarteFideliteService();
       e.setId_user(1);
        
@@ -101,26 +99,18 @@ IForumService iForumService = new ForumService();
 
    
      iForumService.add(f); */
-     
-      
-
- //   }
+        //   }
 //}
-      //   for (User u :  iUserService.getAll()) {
-     //       System.out.println(u);
-       // }
-       
-   //     User e = new User("ahmed", "amine", "03/08/1995","homme", "amine", "mraihi", "amine.mraihi", "role", 5085234, "adresse", 12.5f, "12/12/2012", "12/12/2012", "",b);
-
-     //   iUserService.findById(1);
-    //    iUserService.findbyIdRole(1, "role");
-    //    iUserService.remove(1);
-
-    //   iUserService.add(e);
-    //   iUserService.getAll();
-     //  iUserService.update(e);
-       
-       
+        //   for (User u :  iUserService.getAll()) {
+        //       System.out.println(u);
+        // }
+        //     User e = new User("ahmed", "amine", "03/08/1995","homme", "amine", "mraihi", "amine.mraihi", "role", 5085234, "adresse", 12.5f, "12/12/2012", "12/12/2012", "",b);
+        //   iUserService.findById(1);
+        //    iUserService.findbyIdRole(1, "role");
+        //    iUserService.remove(1);
+        //   iUserService.add(e);
+        //   iUserService.getAll();
+        //  iUserService.update(e);
         ////User e = new User("ahmed", "amine", "03/08/1995","homme", "amine", "mraihi", "amine.mraihi", "role", 5085234, "adresse", 12.5f, "12/12/2012", "12/12/2012", "",b);
 /*
         ICarteFideliteService iCarteFideliteService = new CarteFideliteService();
@@ -138,8 +128,8 @@ IForumService iForumService = new ForumService();
         
         
         
-      */  
-/*
+         */
+ /*
          User e = new User("ahmed", "amine", "03/08/1995","homme", "amine", "mraihi", "amine.mraihi", "role", 5085234, "adresse", 12.5f, "12/12/2012", "12/12/2012", "",b);
 
 IForumService iForumService = new ForumService();
@@ -147,10 +137,8 @@ IForumService iForumService = new ForumService();
 
    
      iForumService.add(f);
-      */
-
-
-/*
+         */
+ /*
 jasssem
 
 User a = new User ();
@@ -187,5 +175,6 @@ User a = new User ();
      for (Reclamation em : iReclamationService.getAll()) {
             System.out.println(em);
         }
-*/
-    }}
+         */
+    }
+}
