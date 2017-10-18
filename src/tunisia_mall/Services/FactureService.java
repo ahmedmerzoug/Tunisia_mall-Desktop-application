@@ -111,7 +111,7 @@ public class FactureService implements IFactureService{
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                facture = new Facture (resultSet.getInt(1),new UserService().findById(resultSet.getInt(2)),new ProduitService().findById(resultSet.getInt(3)),new BoutiqueService().findById(resultSet.getInt(4)),resultSet.getFloat(5),Facture.convert(resultSet.getDate(6)));
+                facture = new Facture (resultSet.getInt("id_facture"),new UserService().findById(resultSet.getInt(2)),new ProduitService().findById(resultSet.getInt(3)),new BoutiqueService().findById(resultSet.getInt(4)),resultSet.getFloat(5),Facture.convert(resultSet.getDate(6)));
             }
         } catch (SQLException ex) {
  ex.printStackTrace();

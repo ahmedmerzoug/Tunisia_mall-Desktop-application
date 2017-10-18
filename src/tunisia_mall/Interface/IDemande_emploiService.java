@@ -13,7 +13,7 @@ import tunisia_mall.models.User;
  *
  * @author Amine
  */
-public interface IDemande_emploiService {
+public interface IDemande_emploiService extends IService <Demande_emploi, Integer> {
         List<Demande_emploi> getByUser (User user);
 
 }
