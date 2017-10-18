@@ -5,11 +5,16 @@
  */
 package tunisia_mall.models;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author Amine
  */
 public class Evenement {
+
     private int id_evenement;
     private String nom;
     private String description;
@@ -115,8 +120,20 @@ public class Evenement {
 
     @Override
     public String toString() {
-        return "Evenement{" + "id_evenement=" + id_evenement + ", nom=" + nom + ", description=" + description + ", date=" + date + ", path=" + path + ", user=" + user + '}';
+        return "Evenement{" + "id_evenement=" + id_evenement + ", nom=" + nom + ", description=" + description + ", date=" + date + ", path=" + path + ", user=" + user + '}'+"\n";
     }
-    
-    
+
+    public java.sql.Date convert(String date) throws ParseException {
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date date1 = sdf1.parse(date);
+        java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
+        return sqlDate;
+    }
+
+    public static String convert(java.sql.Date d) {
+        DateFormat df = new SimpleDateFormat("dd MMMM yyyy");
+        String text = df.format(d);
+        return text;
+    }
+
 }

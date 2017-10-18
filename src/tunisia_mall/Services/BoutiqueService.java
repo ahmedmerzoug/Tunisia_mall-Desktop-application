@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,28 +31,53 @@ public class BoutiqueService implements IBoutiqueService {
 
     @Override
     public void add(Boutique t) {
-        String req = "insert into boutique (nom,type,position) values (?,?,?)";
+        String req = "insert into boutique (nom,type,position,id_user) values (?,?,?,?)";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);
             preparedStatement.setString(1, t.getNom());
             preparedStatement.setString(2, t.getType());
             preparedStatement.setString(3, t.getPosition());
+            preparedStatement.setInt(4, t.getUser().getId_user());
             preparedStatement.executeUpdate();
+
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(BoutiqueService.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
     @Override
     public void update(Boutique t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String req = "update boutique set nom=?,type=?,position=?,id_user=? where id_boutique = ?";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(req);
+            preparedStatement.setString(1, t.getNom());
+            preparedStatement.setString(2, t.getType());
+            preparedStatement.setString(3, t.getPosition());
+            preparedStatement.setInt(4, t.getUser().getId_user());
+            preparedStatement.setInt(5, t.getId_boutique());
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BoutiqueService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @Override
     public void remove(Integer r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String req = "delete from boutique where id_boutique =?";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(req);
+            preparedStatement.setInt(1, r);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(BoutiqueService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
  @Override
@@ -76,7 +102,20 @@ public class BoutiqueService implements IBoutiqueService {
 
     @Override
     public List<Boutique> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Boutique> boutiques = new ArrayList<>();
+        String req = "select * from boutique ";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(req);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Boutique b = new Boutique(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), new UserService().findById(resultSet.getInt(5)));
+                boutiques.add(b);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BoutiqueService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return boutiques;
     }
 
 }

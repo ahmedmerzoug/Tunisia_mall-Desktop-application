@@ -111,7 +111,7 @@ public class Boutique {
 
     @Override
     public String toString() {
-        return "Boutique{" + "id_boutique=" + id_boutique + ", nom=" + nom + ", type=" + type + ", position=" + position + ", user=" + user + '}';
+        return "Boutique{" + "id_boutique=" + id_boutique + ", nom=" + nom + ", type=" + type + ", position=" + position + ", user=" + user + '}'+"\n";
     }
     
     

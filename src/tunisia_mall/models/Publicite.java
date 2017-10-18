@@ -5,6 +5,10 @@
  */
 package tunisia_mall.models;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author Amine
@@ -140,6 +144,17 @@ public class Publicite {
         return "Publicite{" + "id_pub=" + id_pub + ", date_debut=" + date_debut + ", date_fin=" + date_fin + ", prix=" + prix + ", page=" + page + ", path=" + path + ", boutique=" + boutique + '}';
     }
     
+    public java.sql.Date convert (String date) throws ParseException{
+    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+    java.util.Date date1 = sdf1.parse(date);
+    java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
+    return sqlDate ;  
+    } 
     
+    public static String convert(java.sql.Date d) {
+        DateFormat df = new SimpleDateFormat("dd MMMM yyyy");
+        String text = df.format(d);
+        return text;
+    }
 
 }
