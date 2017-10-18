@@ -5,35 +5,49 @@
  */
 package tunisia_mall.models;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author Amine
  */
 public class JardinEnfant {
     private int id_jardinenfant;
-    private final int nb_place_total=50;
+    private int nb_place_total;
     private int nb_place_libre;
     private String date_reservation;
     private User user;
 
-    public JardinEnfant(int id_jardinenfant, int nb_place_libre, String date_reservation, User user) {
+    public JardinEnfant(int id_jardinenfant, int nb_place_totat, int nb_place_libre, String date_reservation, User user) {
         this.id_jardinenfant = id_jardinenfant;
+        this.nb_place_total = nb_place_totat;
         this.nb_place_libre = nb_place_libre;
         this.date_reservation = date_reservation;
         this.user = user;
     }
 
-    public JardinEnfant(int nb_place_libre, String date_reservation, User user) {
+    public JardinEnfant(int nb_place_totat, int nb_place_libre, String date_reservation, User user) {
+        this.nb_place_total = nb_place_totat;
         this.nb_place_libre = nb_place_libre;
         this.date_reservation = date_reservation;
         this.user = user;
     }
 
-    public JardinEnfant(int nb_place_libre, String date_reservation) {
+    public JardinEnfant(int id_jardinenfant, int nb_place_totat, int nb_place_libre, String date_reservation) {
+        this.id_jardinenfant = id_jardinenfant;
+        this.nb_place_total = nb_place_totat;
         this.nb_place_libre = nb_place_libre;
         this.date_reservation = date_reservation;
     }
 
+    public JardinEnfant(int nb_place_totat, int nb_place_libre, String date_reservation) {
+        this.nb_place_total = nb_place_totat;
+        this.nb_place_libre = nb_place_libre;
+        this.date_reservation = date_reservation;
+    }
+
+    
     public int getId_jardinenfant() {
         return id_jardinenfant;
     }
@@ -66,6 +80,14 @@ public class JardinEnfant {
         this.user = user;
     }
 
+    public int getNb_place_total() {
+        return nb_place_total;
+    }
+
+    public void setNb_place_total(int nb_place_totat) {
+        this.nb_place_total = nb_place_totat;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -94,6 +116,14 @@ public class JardinEnfant {
     public String toString() {
         return "JardinEnfant{" + "id_jardinenfant=" + id_jardinenfant + ", nb_place_total=" + nb_place_total + ", nb_place_libre=" + nb_place_libre + ", date_reservation=" + date_reservation + ", user=" + user + '}';
     }
+    public java.sql.Date convert (String date) throws ParseException{
+      
+    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+    java.util.Date date1 = sdf1.parse(date);
+    java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
+   
     
+    return sqlDate ;  
+    }  
     
 }

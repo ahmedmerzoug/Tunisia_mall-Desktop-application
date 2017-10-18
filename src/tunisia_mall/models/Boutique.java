@@ -14,39 +14,32 @@ public class Boutique {
     private String nom ; 
     private String type ; 
     private String position ; 
-    private User user ; 
+   
 
     public Boutique() {
     }
     
-
-    public Boutique(int id_boutique, String nom, String type, String position, User user) {
-        this.id_boutique = id_boutique;
-        this.nom = nom;
-        this.type = type;
-        this.position = position;
-        this.user = user;
-    }
-
-    public Boutique(String nom, String type, String position, User user) {
-        this.nom = nom;
-        this.type = type;
-        this.position = position;
-        this.user = user;
-    }
 
     public Boutique(int id_boutique, String nom, String type, String position) {
         this.id_boutique = id_boutique;
         this.nom = nom;
         this.type = type;
         this.position = position;
+       
     }
 
     public Boutique(String nom, String type, String position) {
         this.nom = nom;
         this.type = type;
         this.position = position;
+        
     }
+
+    public Boutique(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+ 
 
     public int getId_boutique() {
         return id_boutique;
@@ -80,13 +73,7 @@ public class Boutique {
         this.position = position;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    
 
     @Override
     public int hashCode() {
@@ -111,7 +98,7 @@ public class Boutique {
 
     @Override
     public String toString() {
-        return "Boutique{" + "id_boutique=" + id_boutique + ", nom=" + nom + ", type=" + type + ", position=" + position + ", user=" + user + '}'+"\n";
+        return "Boutique{" + "id_boutique=" + id_boutique + ", nom=" + nom + ", type=" + type + ", position=" + position + '}'+"\n";
     }
     
     

@@ -4,78 +4,95 @@
  * and open the template in the editor.
  */
 package tunisia_mall.models;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author Amine
  */
 public class Offre_emploi {
-    private int id_offre_emploi;
+    
+    private int id_offre;
+    private User user;
+    private Boutique boutique;
     private String poste;
     private String specialite;
     private float salaire;
-    private int nbr_demande;
+    private int nbr_demandé;
     private String date_expiration;
 
-    public Offre_emploi(int id_offre_emploi, String poste, String specialite, float salaire, int nbr_demande, String date_expiration) {
-        this.id_offre_emploi = id_offre_emploi;
+    public Offre_emploi() {
+    }
+
+    public Offre_emploi(int id_offre, User user, Boutique boutique, String poste, String specialite, float salaire, int nbr_demandé, String date_expiration) {
+        this.id_offre = id_offre;
+        this.user = user;
+        this.boutique = boutique;
         this.poste = poste;
         this.specialite = specialite;
         this.salaire = salaire;
-        this.nbr_demande = nbr_demande;
+        this.nbr_demandé = nbr_demandé;
         this.date_expiration = date_expiration;
     }
 
-    public Offre_emploi(String poste, String specialite, float salaire, int nbr_demande, String date_expiration) {
-        this.poste = poste;
-        this.specialite = specialite;
-        this.salaire = salaire;
-        this.nbr_demande = nbr_demande;
-        this.date_expiration = date_expiration;
+    public int getId_offre() {
+        return id_offre;
     }
 
-    public int getId_offre_emploi() {
-        return id_offre_emploi;
+    public User getUser() {
+        return user;
     }
 
-    public void setId_offre_emploi(int id_offre_emploi) {
-        this.id_offre_emploi = id_offre_emploi;
+    public Boutique getBoutique() {
+        return boutique;
     }
 
     public String getPoste() {
         return poste;
     }
 
-    public void setPoste(String poste) {
-        this.poste = poste;
-    }
-
     public String getSpecialite() {
         return specialite;
-    }
-
-    public void setSpecialite(String specialite) {
-        this.specialite = specialite;
     }
 
     public float getSalaire() {
         return salaire;
     }
 
-    public void setSalaire(float salaire) {
-        this.salaire = salaire;
-    }
-
-    public int getNbr_demande() {
-        return nbr_demande;
-    }
-
-    public void setNbr_demande(int nbr_demande) {
-        this.nbr_demande = nbr_demande;
+    public int getNbr_demandé() {
+        return nbr_demandé;
     }
 
     public String getDate_expiration() {
         return date_expiration;
+    }
+
+    public void setId_offre(int id_offre) {
+        this.id_offre = id_offre;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setBoutique(Boutique boutique) {
+        this.boutique = boutique;
+    }
+
+    public void setPoste(String poste) {
+        this.poste = poste;
+    }
+
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
+    }
+
+    public void setSalaire(float salaire) {
+        this.salaire = salaire;
+    }
+
+    public void setNbr_demandé(int nbr_demandé) {
+        this.nbr_demandé = nbr_demandé;
     }
 
     public void setDate_expiration(String date_expiration) {
@@ -83,34 +100,34 @@ public class Offre_emploi {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
+    public String toString() {
+        return "Offre_emploi{" + "id=" + id_offre + ", user=" + user + ", boutique=" + boutique + ", poste=" + poste + ", specialite=" + specialite + ", salaire=" + salaire + ", nbr_demand\u00e9=" + nbr_demandé + ", date_expiration=" + date_expiration + '}';
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (o == this) {
             return true;
         }
-        if (obj == null) {
-            return false;
+        if (o instanceof Offre_emploi) {
+            final Offre_emploi a = (Offre_emploi) o;
+            return id_offre == a.id_offre ;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Offre_emploi other = (Offre_emploi) obj;
-        if (this.id_offre_emploi != other.id_offre_emploi) {
-            return false;
-        }
-        return true;
+        return false;
     }
-
-    @Override
-    public String toString() {
-        return "OffreEmploi{" + "id_offre_emploi=" + id_offre_emploi + ", poste=" + poste + ", specialite=" + specialite + ", salaire=" + salaire + ", nbr_demande=" + nbr_demande + ", date_expiration=" + date_expiration + '}';
-    }
+  
     
+   public java.sql.Date convert (String date) throws ParseException{
+      
+    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+    java.util.Date date1 = sdf1.parse(date);
+    java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
+   
     
-    
+    return sqlDate ;  
+    } 
+ 
 }

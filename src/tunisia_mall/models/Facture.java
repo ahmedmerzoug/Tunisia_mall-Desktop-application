@@ -5,88 +5,98 @@
  */
 package tunisia_mall.models;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author Amine
  */
 public class Facture {
     private int id_facture;
-    private int quantite;
-    private String date;
     private User user;
     private Produit produit;
     private Boutique boutique;
+    private float prix;
+    private String date;
 
-    public Facture(int id_facture, int quantite, String date, User user, Produit produit, Boutique boutique) {
+    public Facture() {
+    }
+
+    public Facture(int id_facture, User user, Produit produit, Boutique boutique, float prix, String date) {
         this.id_facture = id_facture;
-        this.quantite = quantite;
-        this.date = date;
         this.user = user;
         this.produit = produit;
         this.boutique = boutique;
+        this.prix = prix;
+        this.date = date;
     }
 
-    public Facture(int quantite, String date, User user, Produit produit, Boutique boutique) {
-        this.quantite = quantite;
-        this.date = date;
+    public Facture(User user, Produit produit, Boutique boutique, float prix, String date) {
         this.user = user;
         this.produit = produit;
         this.boutique = boutique;
+        this.prix = prix;
+        this.date = date;
     }
+
+    
+  
 
     public int getId_facture() {
         return id_facture;
-    }
-
-    public void setId_facture(int id_facture) {
-        this.id_facture = id_facture;
-    }
-
-    public int getQuantite() {
-        return quantite;
-    }
-
-    public void setQuantite(int quantite) {
-        this.quantite = quantite;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Produit getProduit() {
         return produit;
-    }
-
-    public void setProduit(Produit produit) {
-        this.produit = produit;
     }
 
     public Boutique getBoutique() {
         return boutique;
     }
 
+    public float getPrix() {
+        return prix;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setId_facture(int id_facture) {
+        this.id_facture = id_facture;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setProduit(Produit produit) {
+        this.produit = produit;
+    }
+
     public void setBoutique(Boutique boutique) {
         this.boutique = boutique;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
+    public void setPrix(float prix) {
+        this.prix = prix;
     }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Facture{" + "id_facture=" + id_facture + ", user=" + user + ", produit=" + produit + ", boutique=" + boutique + ", prix=" + prix + ", date=" + date + '}';
+    }
+
+  
 
     @Override
     public boolean equals(Object obj) {
@@ -106,10 +116,20 @@ public class Facture {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Facture{" + "id_facture=" + id_facture + ", quantite=" + quantite + ", date=" + date + ", user=" + user + ", produit=" + produit + ", boutique=" + boutique + '}';
+    public java.sql.Date convert (String date) throws ParseException{
+      
+    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+    java.util.Date date1 = sdf1.parse(date);
+    java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
+   
+    
+    return sqlDate ;  
     }
     
-    
+      public static String convert(java.sql.Date d) {
+        SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy");
+        String text = df.format(d);
+        return text;
+    }
+   
 }

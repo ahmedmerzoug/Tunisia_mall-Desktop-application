@@ -5,12 +5,15 @@
  */
 package tunisia_mall.Interface;
 
+import java.util.List;
 import tunisia_mall.models.Offre_emploi;
+import tunisia_mall.models.User;
 
 /**
  *
  * @author Amine
  */
 public interface IOffre_emploiService extends IService<Offre_emploi, Integer>{
-    
+        List<Offre_emploi> getByUser (User user);
+
 }

@@ -5,12 +5,16 @@
  */
 package tunisia_mall.Interface;
 
+import java.util.List;
 import tunisia_mall.models.Facture;
+import tunisia_mall.models.User;
 
 /**
  *
  * @author Amine
  */
 public interface IFactureService extends IService<Facture, Integer>{
+        List<Facture> getByUser (User user);
+
     
 }

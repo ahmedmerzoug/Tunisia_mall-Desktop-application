@@ -5,15 +5,12 @@
  */
 package tunisia_mall.Interface;
 
-import java.util.List;
-import tunisia_mall.models.Demande_emploi;
-import tunisia_mall.models.User;
+import tunisia_mall.models.CarteFidelite;
 
 /**
  *
  * @author Amine
  */
-public interface IDemande_emploiService {
-        List<Demande_emploi> getByUser (User user);
-
+public interface ICarteFidelite extends IService<CarteFidelite, Integer>{
+    
 }

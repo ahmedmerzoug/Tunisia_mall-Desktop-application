@@ -32,14 +32,14 @@ public class BoutiqueService implements IBoutiqueService {
 
     @Override
     public void add(Boutique t) {
-        String req = "insert into boutique (nom,type,position,id_user) values (?,?,?,?)";
+        String req = "insert into boutique (nom,type,position) values (?,?,?)";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);
             preparedStatement.setString(1, t.getNom());
             preparedStatement.setString(2, t.getType());
             preparedStatement.setString(3, t.getPosition());
-            preparedStatement.setInt(4, t.getUser().getId_user());
+            
             preparedStatement.executeUpdate();
 
         } catch (SQLException ex) {
@@ -50,15 +50,15 @@ public class BoutiqueService implements IBoutiqueService {
 
     @Override
     public void update(Boutique t) {
-        String req = "update boutique set nom=?,type=?,position=?,id_user=? where id_boutique = ?";
+        String req = "update boutique set nom=?,type=?,position=? where id_boutique = ?";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);
             preparedStatement.setString(1, t.getNom());
             preparedStatement.setString(2, t.getType());
             preparedStatement.setString(3, t.getPosition());
-            preparedStatement.setInt(4, t.getUser().getId_user());
-            preparedStatement.setInt(5, t.getId_boutique());
+            
+            preparedStatement.setInt(4, t.getId_boutique());
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(BoutiqueService.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,7 +92,7 @@ public class BoutiqueService implements IBoutiqueService {
             preparedStatement.setInt(1, r);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                b = new Boutique(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), new UserService().findById(resultSet.getInt(5)));
+                b = new Boutique(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4));
             }
 
         } catch (SQLException ex) {
@@ -110,7 +110,7 @@ public class BoutiqueService implements IBoutiqueService {
             preparedStatement = connection.prepareStatement(req);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Boutique b = new Boutique(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), new UserService().findById(resultSet.getInt(5)));
+                Boutique b = new Boutique(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4));
                 boutiques.add(b);
             }
         } catch (SQLException ex) {
