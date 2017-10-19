@@ -1,32 +1,65 @@
 package tunisia_mall.GUI;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import tunisia_mall.Interface.IBoutiqueService;
-import tunisia_mall.Interface.IUserService;
-import tunisia_mall.Services.BoutiqueService;
-import tunisia_mall.models.Boutique;
+import tunisia_mall.Technique.DataSource;
 
 public class FXMLController {
 
-    @FXML
-    private TextField position_txt;
+    Connection connection;
 
     @FXML
-    private TextField type_txt;
+    private TextField username_txt;
 
     @FXML
-    private TextField nom_txt;
+    private PasswordField password_txt;
+
+    @FXML
+    private Label message;
+
+    public void StartConnection() {
+        connection = DataSource.getInsatance().getConnection();
+    }
+
+    public boolean isLogin(String user, String pass) throws SQLException {
+        StartConnection();
+        String query = "select * from user where login = ? and password = ?";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, user);
+            preparedStatement.setString(2, pass);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     @FXML
     void onactionclick(ActionEvent event) {
-        IBoutiqueService ibs = new BoutiqueService(); 
-      Boutique b = new Boutique(nom_txt.getText() ,type_txt.getText(), position_txt.getText());
-      ibs.add(b);
-        
-        
-
+        try {
+            if (isLogin(username_txt.getText(), password_txt.getText())) {
+                message.setText("youre ok");
+            } else {
+                message.setText("youre NOT ok");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
