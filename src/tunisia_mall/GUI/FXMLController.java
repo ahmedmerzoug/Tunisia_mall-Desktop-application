@@ -31,7 +31,9 @@ public class FXMLController {
     }
 
     public boolean isLogin(String user, String pass) throws SQLException {
+        
         StartConnection();
+        
         String query = "select * from user where login = ? and password = ?";
         PreparedStatement preparedStatement;
         try {
