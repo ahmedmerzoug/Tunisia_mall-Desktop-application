@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="374.0" prefWidth="762.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.GestionBoutiqueFXMLController">
+   <children>
+      <TableView fx:id="TableBoutique" layoutX="14.0" layoutY="14.0" prefHeight="341.0" prefWidth="360.0">
+        <columns>
+          <TableColumn fx:id="Nom_Column" prefWidth="75.0" text="Nom" />
+          <TableColumn fx:id="Type_Column" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="Position_Column" prefWidth="75.0" text="Position" />
+        </columns>
+      </TableView>
+      <Label layoutX="415.0" layoutY="14.0" text="Detail du boutique">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="txt_nom" layoutX="624.0" layoutY="106.0" text="nom">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="txt_type" layoutX="625.0" layoutY="160.0" text="type">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="txt_position" layoutX="610.0" layoutY="218.0" text="position">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Button layoutX="401.0" layoutY="299.0" mnemonicParsing="false" onAction="#ajouter" text="ajouter">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="510.0" layoutY="299.0" mnemonicParsing="false" onAction="#modifier" text="modifier">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="625.0" layoutY="299.0" mnemonicParsing="false" onAction="#supprimer" text="supprimer">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="422.0" layoutY="111.0" text="Nom Boutique:" />
+      <Label layoutX="422.0" layoutY="165.0" text="Type boutique" />
+      <Label layoutX="422.0" layoutY="223.0" text="Position boutique" />
+   </children>
+</AnchorPane>

@@ -16,20 +16,24 @@ import javafx.stage.Stage;
  *
  * @author ahmed
  */
-public class mainfx extends Application{
-        public void start(Stage stage) throws Exception {
+public class mainfx extends Application {
 
-       Parent root = FXMLLoader.load(getClass().getResource("FXML.fxml"));
-        
+    public static Stage window;
+
+    @Override
+    public void start(final Stage stage) throws Exception {
+        window = stage;
+
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.show();
-    
-    
-}
 
- public static void main(String[] args) {
+    }
+
+    public static void main(String[] args) {
         launch(args);
     }
 

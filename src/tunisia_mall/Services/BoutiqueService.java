@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package tunisia_mall.Services;
 
 import java.sql.Connection;
@@ -14,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import tunisia_mall.Interface.IBoutiqueService;
 import tunisia_mall.Technique.DataSource;
 import tunisia_mall.models.Boutique;
@@ -39,7 +40,7 @@ public class BoutiqueService implements IBoutiqueService {
             preparedStatement.setString(1, t.getNom());
             preparedStatement.setString(2, t.getType());
             preparedStatement.setString(3, t.getPosition());
-            
+
             preparedStatement.executeUpdate();
 
         } catch (SQLException ex) {
@@ -57,7 +58,7 @@ public class BoutiqueService implements IBoutiqueService {
             preparedStatement.setString(1, t.getNom());
             preparedStatement.setString(2, t.getType());
             preparedStatement.setString(3, t.getPosition());
-            
+
             preparedStatement.setInt(4, t.getId_boutique());
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
@@ -81,7 +82,7 @@ public class BoutiqueService implements IBoutiqueService {
 
     }
 
- @Override
+    @Override
     public Boutique findById(Integer r) {
         Boutique b = null;
         String req = "select * from boutique where id_boutique =?";
@@ -117,6 +118,26 @@ public class BoutiqueService implements IBoutiqueService {
             Logger.getLogger(BoutiqueService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return boutiques;
+    }
+
+    @Override
+    public ObservableList<Boutique> displayall() {
+        ObservableList<Boutique> listeboutique=FXCollections.observableArrayList();
+        String req="select * from boutique";
+        PreparedStatement preparedStatement;
+        
+        try {
+            preparedStatement=connection.prepareStatement(req);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            while(resultSet.next()){
+                Boutique b=new Boutique(resultSet.getInt(1),resultSet.getString(2), resultSet.getString(3), resultSet.getString(4));
+                listeboutique.add(b);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BoutiqueService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listeboutique;
     }
 
 }

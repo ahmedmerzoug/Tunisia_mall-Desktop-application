@@ -5,6 +5,7 @@
  */
 package tunisia_mall.Interface;
 
+import javafx.collections.ObservableList;
 import tunisia_mall.models.Boutique;
 
 /**
@@ -12,5 +13,7 @@ import tunisia_mall.models.Boutique;
  * @author ahmed
  */
 public interface IBoutiqueService extends IService<Boutique, Integer>{
+    
+    public ObservableList<Boutique> displayall();
     
 }

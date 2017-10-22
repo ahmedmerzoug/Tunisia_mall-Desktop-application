@@ -43,15 +43,22 @@ public class Tunisia_mall {
      */
     public static void main(String[] args) throws Exception {
 
+//        add
         IBoutiqueService iBoutiqueService = new BoutiqueService();
         Boutique b = new Boutique("ahmed", "vetement", "1ere etage");
+//        iBoutiqueService.add(b);
 
-        //iBoutiqueService.add(b);
-        IUserService iUserService = new UserService();
-        b.setId_boutique(1);
-        User e = new User(20, "nom", "prenom", "22/12/1995", "sexe", "login", "password", "mail", "Client", 0, "adresse", 0, "22/12/1995", "22/12/1995", "", b);
+//            update
+//        b.setId_boutique(79);
+//        b.setNom("amine");
+//        iBoutiqueService.update(b);
 
-        iUserService.add(e);
-
+        
+        
+        
+//        IUserService iUserService = new UserService();
+//        b.setId_boutique(1);
+//        User e = new User(20, "nom", "prenom", "22/12/1995", "sexe", "login", "password", "mail", "Client", 0, "adresse", 0, "22/12/1995", "22/12/1995", "", b);
+//        iUserService.add(e);
     }
 }
