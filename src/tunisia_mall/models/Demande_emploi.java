@@ -5,6 +5,7 @@
  */
 package tunisia_mall.models;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -19,7 +20,7 @@ public class Demande_emploi {
     private Offre_emploi offre_emploi;
     private String nom_emp;
     private String prenom_emp;
-    private String date_naissance;
+    private Date date_naissance;
     private String adresse;
     private String sexe;
     private String email;
@@ -30,7 +31,13 @@ public class Demande_emploi {
     public Demande_emploi() {
     }
 
-    public Demande_emploi(int id_demande, User user, Offre_emploi offre_emploi, String nom_emp, String prenom_emp, String date_naissance, String adresse, String sexe, String email, String num_tel, String qualification, int experience) {
+    public Demande_emploi(int experience) {
+        this.experience = experience;
+    }
+    
+    
+
+    public Demande_emploi(int id_demande, User user, Offre_emploi offre_emploi, String nom_emp, String prenom_emp, Date date_naissance, String adresse, String sexe, String email, String num_tel, String qualification, int experience) {
         this.id_demande = id_demande;
         this.user = user;
         this.offre_emploi = offre_emploi;
@@ -44,6 +51,30 @@ public class Demande_emploi {
         this.qualification = qualification;
         this.experience = experience;
     }
+
+    public Demande_emploi(Offre_emploi offre_emploi) {
+        this.offre_emploi = offre_emploi;
+    }
+
+    public Demande_emploi(String nom_emp, String prenom_emp, Date date_naissance, String adresse, String sexe, String email, String num_tel, String qualification, int experience) {
+        
+        this.nom_emp = nom_emp;
+        this.prenom_emp = prenom_emp;
+        this.date_naissance = date_naissance;
+        this.adresse = adresse;
+        this.sexe = sexe;
+        this.email = email;
+        this.num_tel = num_tel;
+        this.qualification = qualification;
+        this.experience = experience;
+    }
+
+    public Demande_emploi(int id_demande, Offre_emploi offre_emploi) {
+        this.id_demande = id_demande;
+        this.offre_emploi = offre_emploi;
+    }
+    
+    
 
     public int getId_demande() {
         return id_demande;
@@ -65,7 +96,7 @@ public class Demande_emploi {
         return prenom_emp;
     }
 
-    public String getDate_naissance() {
+    public Date getDate_naissance() {
         return date_naissance;
     }
 
@@ -113,7 +144,7 @@ public class Demande_emploi {
         this.prenom_emp = prenom_emp;
     }
 
-    public void setDate_naissance(String date_naissance) {
+    public void setDate_naissance(Date date_naissance) {
         this.date_naissance = date_naissance;
     }
 
@@ -166,7 +197,7 @@ public class Demande_emploi {
         return true;
     }
     
-    public java.sql.Date convert (String date) throws ParseException{
+  /*  public java.sql.Date convert (String date) throws ParseException{
       
     SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
     java.util.Date date1 = sdf1.parse(date);
@@ -174,7 +205,7 @@ public class Demande_emploi {
    
     
     return sqlDate ;  
-    } 
+    } */
     
 }
 

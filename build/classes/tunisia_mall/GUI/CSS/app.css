@@ -79,7 +79,7 @@
 }
 
 .menu-catalogacao {
-    -fx-graphic: url("../img/icon/catalogar.png");
+    -fx-graphic: url("../img/icon/user.png");
 }
 
 .menu-catalogacao:selected {

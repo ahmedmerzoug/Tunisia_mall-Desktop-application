@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="667.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.FXMLReclamationCAController">
+   <children>
+      <HBox layoutX="20.0" layoutY="20.0" prefHeight="60.0" prefWidth="1107.0" styleClass="box-topo">
+         <children>
+            <Label fx:id="lbTitulo1" layoutX="10.0" maxWidth="1.7976931348623157E308" styleClass="titulo" text="Gestion des Réclamations" textFill="#19221b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="445.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtPesquisar" prefHeight="50.0" prefWidth="417.0" promptText="chercher" styleClass="pesquisar" />
+            <ToggleButton fx:id="repondreR" layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#repondreR" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-editar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton fx:id="supprimerR" layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#supprimerR" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-excluir" />
+               </styleClass>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menu" />
+               </toggleGroup>
+            </ToggleButton>
+         </children>
+      </HBox>
+      <TableView fx:id="tblreclamation" layoutX="6.0" layoutY="429.0" prefHeight="200.0" prefWidth="1121.0">
+         <columns>
+            <TableColumn fx:id="tblclmtype" prefWidth="75.0" text="type" />
+            <TableColumn fx:id="tblclmdescription" prefWidth="489.0" text="description" />
+            <TableColumn fx:id="tblclmnom" prefWidth="117.0" text="nom reclamant" />
+            <TableColumn fx:id="tblclmprenom" prefWidth="122.0" text=" prenom reclamant" />
+            <TableColumn fx:id="tblclmmail" prefWidth="158.0" text="mail" />
+            <TableColumn fx:id="tblclmnumtel" prefWidth="152.0" text="numero telephone" />
+         </columns>
+      </TableView>
+      <ComboBox fx:id="id_combo" layoutX="151.0" layoutY="90.0" prefWidth="150.0" promptText="Nom , Prenom" />
+      <ComboBox fx:id="type_combo" layoutX="151.0" layoutY="132.0" prefWidth="150.0" promptText="type" />
+      <TextField fx:id="mail_txt" layoutX="151.0" layoutY="178.0" promptText="mail" />
+      <TextArea fx:id="description_txt" layoutX="151.0" layoutY="218.0" prefHeight="200.0" prefWidth="484.0" promptText="Description" />
+      <Label layoutX="16.0" layoutY="94.0" prefHeight="17.0" prefWidth="98.0" text="Client reclamant" />
+      <Label layoutX="37.0" layoutY="136.0" text="type" />
+      <Label layoutX="37.0" layoutY="183.0" text="mail" />
+      <Label layoutX="37.0" layoutY="309.0" text="Description" />
+   </children>
+   <stylesheets>
+      <URL value="@CSS/custom.css" />
+      <URL value="@CSS/default.css" />
+   </stylesheets>
+</AnchorPane>

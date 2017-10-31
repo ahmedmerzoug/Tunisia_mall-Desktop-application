@@ -1,55 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="374.0" prefWidth="762.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.GestionBoutiqueFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="628.0" prefWidth="1148.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.GestionBoutiqueFXMLController">
    <children>
-      <TableView fx:id="TableBoutique" layoutX="14.0" layoutY="14.0" prefHeight="341.0" prefWidth="360.0">
-        <columns>
-          <TableColumn fx:id="Nom_Column" prefWidth="75.0" text="Nom" />
-          <TableColumn fx:id="Type_Column" prefWidth="75.0" text="Type" />
-            <TableColumn fx:id="Position_Column" prefWidth="75.0" text="Position" />
-        </columns>
+      <TableView fx:id="TableBoutique" layoutX="28.0" layoutY="251.0" prefHeight="382.0" prefWidth="1120.0">
+         <columns>
+            <TableColumn fx:id="Nom_Column" prefWidth="374.0" text="Nom" />
+            <TableColumn fx:id="Type_Column" prefWidth="344.0" text="Type" />
+            <TableColumn fx:id="Position_Column" prefWidth="401.0" text="Position" />
+         </columns>
       </TableView>
-      <Label layoutX="415.0" layoutY="14.0" text="Detail du boutique">
+      <Text layoutX="61.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom : ">
          <font>
-            <Font size="36.0" />
+            <Font size="14.0" />
          </font>
-      </Label>
-      <Label fx:id="txt_nom" layoutX="624.0" layoutY="106.0" text="nom">
-         <font>
-            <Font size="18.0" />
-         </font></Label>
-      <Label fx:id="txt_type" layoutX="625.0" layoutY="160.0" text="type">
-         <font>
-            <Font size="18.0" />
-         </font></Label>
-      <Label fx:id="txt_position" layoutX="610.0" layoutY="218.0" text="position">
-         <font>
-            <Font size="18.0" />
-         </font></Label>
-      <Button layoutX="401.0" layoutY="299.0" mnemonicParsing="false" onAction="#ajouter" text="ajouter">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="510.0" layoutY="299.0" mnemonicParsing="false" onAction="#modifier" text="modifier">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="625.0" layoutY="299.0" mnemonicParsing="false" onAction="#supprimer" text="supprimer">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Label layoutX="422.0" layoutY="111.0" text="Nom Boutique:" />
-      <Label layoutX="422.0" layoutY="165.0" text="Type boutique" />
-      <Label layoutX="422.0" layoutY="223.0" text="Position boutique" />
+      </Text>
+      <TextField fx:id="NomB" layoutX="145.0" layoutY="79.0" />
+      <HBox prefHeight="60.0" prefWidth="1207.0" styleClass="box-topo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="lbTitulo1" layoutX="10.0" maxWidth="1.7976931348623157E308" styleClass="titulo" text="Gestion des Boutiques" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="445.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="txtPesquisar" prefHeight="50.0" prefWidth="417.0" promptText="chercher" styleClass="pesquisar" />
+            <ToggleButton mnemonicParsing="false" onAction="#rechercherB">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="pesquisar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" onAction="#ajouter" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-add" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#modifier" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-editar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#supprimer" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-excluir" />
+               </styleClass>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menu" />
+               </toggleGroup>
+            </ToggleButton>
+         </children>
+         <stylesheets>
+            <URL value="@CSS/default.css" />
+            <URL value="@CSS/custom.css" />
+         </stylesheets>
+      </HBox>
+      <Text layoutX="61.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type :" />
+      <Text layoutX="56.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Position : " />
+      <ComboBox fx:id="cbType" layoutX="146.0" layoutY="132.0" prefWidth="150.0" promptText="Veuillez choirsir le type" />
+      <ComboBox fx:id="cbPosition" layoutX="146.0" layoutY="185.0" prefWidth="150.0" promptText="Veuillez choirsir la position" />
    </children>
+   <stylesheets>
+      <URL value="@CSS/default.css" />
+      <URL value="@CSS/custom.css" />
+   </stylesheets>
 </AnchorPane>

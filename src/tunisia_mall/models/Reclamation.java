@@ -5,6 +5,8 @@
  */
 package tunisia_mall.models;
 
+import java.util.Objects;
+
 /**
  *
  * @author Amine
@@ -14,19 +16,22 @@ public class Reclamation {
     private int id_reclamation;
     private String type;
     private String text;
-    private User user;
+    private User userreclamant;
+    private User userreclame;
 
-    public Reclamation(int id_reclamation, String type, String text, User user) {
+    public Reclamation(int id_reclamation, String type, String text, User userreclamant, User userreclame) {
         this.id_reclamation = id_reclamation;
         this.type = type;
         this.text = text;
-        this.user = user;
+        this.userreclamant = userreclamant;
+        this.userreclame = userreclame;
     }
 
-    public Reclamation(String type, String text, User user) {
+    public Reclamation(String type, String text, User userreclamant, User userreclame) {
         this.type = type;
         this.text = text;
-        this.user = user;
+        this.userreclamant = userreclamant;
+        this.userreclame = userreclame;
     }
 
     public Reclamation(int id_reclamation, String type, String text) {
@@ -64,17 +69,30 @@ public class Reclamation {
         this.text = text;
     }
 
-    public User getUser() {
-        return user;
+    public User getUserreclamant() {
+        return userreclamant;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserreclamant(User userreclamant) {
+        this.userreclamant = userreclamant;
+    }
+
+    public User getUserreclame() {
+        return userreclame;
+    }
+
+    public void setUserreclame(User userreclame) {
+        this.userreclame = userreclame;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
+        hash = 53 * hash + this.id_reclamation;
+        hash = 53 * hash + Objects.hashCode(this.type);
+        hash = 53 * hash + Objects.hashCode(this.text);
+        hash = 53 * hash + Objects.hashCode(this.userreclamant);
+        hash = 53 * hash + Objects.hashCode(this.userreclame);
         return hash;
     }
 
@@ -98,9 +116,7 @@ public class Reclamation {
 
     @Override
     public String toString() {
-        return "Reclamation{" + "id_reclamation=" + id_reclamation + ", type=" + type + ", text=" + text + ", user=" + user + '}';
+        return "Reclamation{" + "id_reclamation=" + id_reclamation + ", type=" + type + ", text=" + text + ", userreclamant=" + userreclamant + ", userreclame=" + userreclame + '}';
     }
-    
-    
 
 }

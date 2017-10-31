@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package tunisia_mall.models;
+import java.sql.Date;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 /**
@@ -19,12 +21,13 @@ public class Offre_emploi {
     private String specialite;
     private float salaire;
     private int nbr_demandé;
-    private String date_expiration;
+    private Date date_expiration;
+   // private int id_boutique;
 
     public Offre_emploi() {
     }
 
-    public Offre_emploi(int id_offre, User user, Boutique boutique, String poste, String specialite, float salaire, int nbr_demandé, String date_expiration) {
+    public Offre_emploi(int id_offre, User user, Boutique boutique, String poste, String specialite, float salaire, int nbr_demandé, Date date_expiration) {
         this.id_offre = id_offre;
         this.user = user;
         this.boutique = boutique;
@@ -34,6 +37,50 @@ public class Offre_emploi {
         this.nbr_demandé = nbr_demandé;
         this.date_expiration = date_expiration;
     }
+
+    public Offre_emploi(int id_offre, User user, Boutique boutique, String poste, String specialite, float salaire, int nbr_demandé) {
+        this.id_offre = id_offre;
+        this.user = user;
+        this.boutique = boutique;
+        this.poste = poste;
+        this.specialite = specialite;
+        this.salaire = salaire;
+        this.nbr_demandé = nbr_demandé;
+    }
+
+    public Offre_emploi(Boutique boutique) {
+        this.boutique = boutique;
+    }
+
+ 
+    
+
+  /*  public Offre_emploi(int id_boutique,String poste, String specialite, float salaire, int nbr_demandé, Date date_expiration) {
+        this.id_boutique = id_boutique;
+        this.poste = poste;
+        this.specialite = specialite;
+        this.salaire = salaire;
+        this.nbr_demandé = nbr_demandé;
+        this.date_expiration = date_expiration;
+        
+    }*/
+
+    public Offre_emploi(int id_offre,Boutique boutique, String poste , String specialite,float salaire, int nbr_demandé, Date date_expiration) {
+        this.id_offre=id_offre;
+        this.boutique = boutique;
+        this.poste = poste;
+        this.specialite = specialite;
+        this.salaire = salaire;
+        this.nbr_demandé = nbr_demandé;
+        this.date_expiration = date_expiration;
+        
+       
+    }
+    
+    
+    
+    
+    
 
     public int getId_offre() {
         return id_offre;
@@ -63,7 +110,7 @@ public class Offre_emploi {
         return nbr_demandé;
     }
 
-    public String getDate_expiration() {
+    public Date getDate_expiration() {
         return date_expiration;
     }
 
@@ -95,7 +142,7 @@ public class Offre_emploi {
         this.nbr_demandé = nbr_demandé;
     }
 
-    public void setDate_expiration(String date_expiration) {
+    public void setDate_expiration(Date date_expiration) {
         this.date_expiration = date_expiration;
     }
 
@@ -120,7 +167,7 @@ public class Offre_emploi {
     }
   
     
-   public java.sql.Date convert (String date) throws ParseException{
+   /*public java.sql.Date convert (String date) throws ParseException{
       
     SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
     java.util.Date date1 = sdf1.parse(date);
@@ -128,6 +175,6 @@ public class Offre_emploi {
    
     
     return sqlDate ;  
-    } 
+    } */
  
 }

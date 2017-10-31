@@ -17,6 +17,10 @@ public class CarteFidelite {
     private int nb_point;
     private String date_creation;
     private User user;
+    
+    public CarteFidelite() {
+    }
+
 
     public CarteFidelite(int id_carte_fidelite, int nb_point, String date_creation, User user) {
         this.id_carte_fidelite = id_carte_fidelite;
@@ -98,20 +102,21 @@ public class CarteFidelite {
         return "CarteFidelite{" + "id_carte_fidelite=" + id_carte_fidelite + ", nb_point=" + nb_point + ", date_creation=" + date_creation + ", user=" + user + '}';
     }
     
-     public static String convert(java.sql.Date d) {
-        SimpleDateFormat df = new SimpleDateFormat("dd/ MMMM/ yyyy");
+   public static String convert(java.sql.Date d) {
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         String text = df.format(d);
         return text;
     }
      
       public java.sql.Date convert (String date) throws ParseException{
       
-    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
     java.util.Date date1 = sdf1.parse(date);
     java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
    
     
     return sqlDate ;  
     } 
+    
     
 }

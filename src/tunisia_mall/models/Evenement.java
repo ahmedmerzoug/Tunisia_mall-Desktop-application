@@ -22,6 +22,11 @@ public class Evenement {
     private String path;
     private User user;
 
+    public Evenement() {
+    }
+    
+    
+
     public Evenement(int id_evenement, String nom, String description, String date, String path, User user) {
         this.id_evenement = id_evenement;
         this.nom = nom;
@@ -118,10 +123,7 @@ public class Evenement {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Evenement{" + "id_evenement=" + id_evenement + ", nom=" + nom + ", description=" + description + ", date=" + date + ", path=" + path + ", user=" + user + '}'+"\n";
-    }
+    
 
     public java.sql.Date convert(String date) throws ParseException {
         SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
@@ -131,9 +133,16 @@ public class Evenement {
     }
 
     public static String convert(java.sql.Date d) {
-        DateFormat df = new SimpleDateFormat("dd MMMM yyyy");
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String text = df.format(d);
         return text;
     }
+
+    @Override
+    public String toString() {
+        return "Evenement{" + "id_evenement=" + id_evenement + ", nom=" + nom + ", description=" + description + ", date=" + date + ", path=" + path + ", user=" + user + '}';
+    }
+    
+    
 
 }

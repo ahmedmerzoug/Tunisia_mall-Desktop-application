@@ -15,11 +15,12 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" styleClass="background" stylesheets="@CSS/login.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.LoginController">
     <children>
-        <VBox alignment="CENTER" fillWidth="false" prefHeight="619.0" prefWidth="445.0" spacing="15.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Button fx:id="fechar" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#fechar" onMouseClicked="#fechar" styleClass="bt-close-nota" stylesheets="@CSS/dialog.css" text="Fechar" />
+        <VBox alignment="CENTER" fillWidth="false" onMouseClicked="#close" prefHeight="619.0" prefWidth="445.0" spacing="15.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <AnchorPane prefHeight="240.0" prefWidth="400.0">
                     <children>
-                        <AnchorPane layoutY="17.0" prefHeight="223.0" prefWidth="389.0" styleClass="box-login" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+                        <AnchorPane layoutY="17.0" prefHeight="264.0" prefWidth="400.0" styleClass="box-login" AnchorPane.bottomAnchor="-38.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
                             <children>
                                 <TextField fx:id="txt_login" layoutX="68.0" layoutY="65.0" prefHeight="40.0" prefWidth="336.0" promptText="Login" styleClass="nome" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
                                     <font>
@@ -31,11 +32,20 @@
                                         <Font size="14.0" />
                                     </font>
                                 </PasswordField>
-                                <Button layoutX="17.0" layoutY="235.0" mnemonicParsing="false" onAction="#login" prefHeight="20.0" styleClass="bt-logar" text="Login" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                <Button layoutX="16.0" layoutY="169.0" mnemonicParsing="false" onAction="#login" prefHeight="20.0" styleClass="bt-logar" text="Login" textFill="WHITE" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </Button>
+                        <Button layoutX="18.0" layoutY="211.0" maxWidth="366.0" mnemonicParsing="false" onAction="#signup" prefHeight="39.0" prefWidth="366.0" stylesheets="@CSS/custom.css" text="SignUp" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="bt-logar1" />
+                              <String fx:value="menu-red" />
+                           </styleClass>
+                        </Button>
                             </children>
                         </AnchorPane>
                         <StackPane layoutY="-3.0" prefHeight="40.0" prefWidth="248.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

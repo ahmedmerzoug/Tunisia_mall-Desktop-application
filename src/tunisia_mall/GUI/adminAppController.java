@@ -1,17 +1,31 @@
 package tunisia_mall.GUI;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import tunisia_mall.Interface.IUserService;
+import tunisia_mall.Services.UserService;
+import tunisia_mall.models.User;
 
-public class adminAppController {
+public class adminAppController implements Initializable {
 
     private static adminAppController instance;
 
@@ -21,8 +35,7 @@ public class adminAppController {
     private VBox boxEmprestimo;
     @FXML
     private VBox boxVisitas;
-    @FXML
-    private VBox boxLocalizacao;
+
     @FXML
     private VBox boxUtilitarios;
     @FXML
@@ -30,54 +43,31 @@ public class adminAppController {
     @FXML
     private VBox boxCatalogacao;
     @FXML
-    private Label lbUser;
-    @FXML
     private Label lbMensagem;
 
 //    **************************************Gestion Employers**********************
     @FXML
     private ToggleButton bouton_gestion_employers;
 
-    @FXML
-    private ToggleButton btAjoutEmployer;
-
-    @FXML
-    private ToggleButton btSupprimerEmployer;
-
-    @FXML
-    private ToggleButton btModifierEmployer;
-
-    @FXML
-    private ToggleButton btAfficherEmployer;
-
 //    ********************************************Gestion Boutiques********************************
     @FXML
     private ToggleButton bouton_gestion_boutique;
-
-    @FXML
-    private ToggleButton btAjoutBoutique;
-
-    @FXML
-    private ToggleButton btSupprimerBoutique;
-
-    @FXML
-    private ToggleButton btModifierBoutique;
-
-    @FXML
-    private ToggleButton btAfficherBoutique;
 
 ////////////////////////////////////////////////////////////////////////////////    
 //    ********************************************Gestion clients********************************
     @FXML
     private ToggleButton bouton_gestion_client;
 
-    @FXML
-    private ToggleButton btAfficherClient;
-
 //////////////////////////////////////////////////////////////////////////////
 //    ********************************************Gestion responsablesBoutique********************************
     @FXML
     private ToggleButton bouton_gestion_responsable_boutique;
+
+    @FXML
+    private VBox boxLocalizacao;
+
+    @FXML
+    private ToggleButton btAjoutResponsable;
 
     @FXML
     private ToggleButton btAfficherResponsableBoutique;
@@ -89,89 +79,36 @@ public class adminAppController {
     @FXML
     private VBox boxReclamation;
 
-    @FXML
-    private ToggleButton btAfficherReclamation;
-
     //////////////////////////////////////////////////////////////////////////
     //    ********************************************Gestion offre emploi********************************
     @FXML
     private ToggleButton bouton_Offre_emploi;
     @FXML
     private VBox boxOffreEmploi;
-    @FXML
     private ToggleButton btAjoutOffreEmploi;
-    @FXML
     private ToggleButton btSupprimerOffreEmploi;
-    @FXML
     private ToggleButton btModifierOffreEmploi;
-    @FXML
     private ToggleButton btAfficherOffreEmploi;
 
 //////////////////////////////////////////////    
+    //    ********************************************Gestion publicite********************************
     @FXML
-    private ToggleButton btSetor;
-//    @FXML
-//    private ToggleButton btVisitas;
+    private VBox boxPublicite;
+
     @FXML
-    private ToggleButton btLocal;
-//    @FXML
-//    private ToggleButton btInstituicao;
-//    @FXML
-//    private ToggleButton btExcursao;
-////    @FXML
-//    private ToggleButton btCatalogar;
+    private ToggleButton bouton_Publicite;
+
+////////////////////////////////////////////////////////////////////////////////    
+    //    ********************************************Gestion reclamation********************************
     @FXML
-    private ToggleButton btLocalizacao;
+    private VBox boxEvenement;
+
     @FXML
-    private ToggleButton btLocalizar;
-//    @FXML
-//    private ToggleButton btColecao;
-    @FXML
-    private ToggleButton btEmprestimos;
-    @FXML
-    private ToggleButton btEmprestimo;
-    @FXML
-    private ToggleButton btHistorico;
-    @FXML
-    private ToggleButton btItens;
-    @FXML
-    private ToggleButton btUtilitarios;
-    @FXML
-    private ToggleButton btOrganizacao;
-    @FXML
-    private ToggleButton btDesginacao;
-    @FXML
-    private ToggleButton btUsuarios;
-    @FXML
-    private ToggleButton btDevolucao;
-//    @FXML
-//    private ToggleButton btCatalogacao;
-    @FXML
-    private ToggleButton btEstratigrafia;
-//    @FXML
-//    private ToggleButton btVisitantes;
-    @FXML
-    private ToggleButton btMovimentacao;
-    @FXML
-    private ToggleButton btIdentificacao;
-    @FXML
-    private ToggleButton btRelatorios;
-    @FXML
-    private ToggleButton btPesquisa;
-    @FXML
-    private ToggleButton btSeguranca;
+    private ToggleButton bouton_Evenement;
     @FXML
     private ToggleGroup grupoLocaliacao;
     @FXML
-    private ToggleGroup grupoUtilidades;
-    @FXML
     private ToggleGroup grupoMenus;
-    @FXML
-    private ToggleGroup grupoEmprestimo;
-    @FXML
-    private ToggleGroup grupoCatalogacao;
-    @FXML
-    private ToggleGroup grupoVisitantes;
 
     /**
      * Obter instancia do controler
@@ -179,29 +116,75 @@ public class adminAppController {
     public static adminAppController getInstance() {
         return instance;
     }
+    @FXML
+    private ToggleGroup grupoEmprestimo1;
+    @FXML
+    private ToggleGroup grupoMenus1;
+    @FXML
+    private ToggleGroup grupoMenus2;
+    @FXML
+    private ToggleGroup grupoMenus11;
+    @FXML
+    private ToggleGroup grupoMenus111;
+    @FXML
+    private Label hello_text;
+    @FXML
+    private Button btnClose;
+    @FXML
+    private VBox boxPublicite1;
+    @FXML
+    private ToggleButton bouton_demande_pub;
+    @FXML
+    private ToggleGroup grupoMenus112;
+    @FXML
+    private ToggleButton bouton_demande_emploi1;
+    @FXML
+    private ToggleGroup grupoMenus21;
+    @FXML
+    private ToggleButton bouton_Parametres;
+    @FXML
+    private ToggleGroup grupoMenus1121;
+    @FXML
+    private ToggleButton winner_admin;
+    @FXML
+    private ToggleGroup grupoMenus11211;
 
 //    ****************************************Gestion Employers**************************
     @FXML
     void menu_gestion_employers(ActionEvent event) {
-        submenus(bouton_gestion_employers, boxCatalogacao, btAjoutEmployer, btSupprimerEmployer, btModifierEmployer, btAfficherEmployer);
+        try {
+            boxConteudo.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("FXMLGestionEmployeCA.fxml"));
+            boxConteudo.getChildren().add(newLoadedPane);
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    @FXML
-    void subAjoutEmployer(ActionEvent event) {
-
+    void subAjoutEmployer(ActionEvent event) throws IOException {
+        try {
+            boxConteudo.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("test.fxml"));
+            boxConteudo.getChildren().add(newLoadedPane);
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    @FXML
     void subSupprimerEmployer(ActionEvent event) {
-
+        try {
+            boxConteudo.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("test1.fxml"));
+            boxConteudo.getChildren().add(newLoadedPane);
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    @FXML
     void subAfficherEmployer(ActionEvent event) {
 
     }
 
-    @FXML
     void subModifierEmployer(ActionEvent event) {
 
     }
@@ -210,25 +193,28 @@ public class adminAppController {
     //    ********************************************Gestion Boutiques********************************
     @FXML
     void menu_gestion_boutiques(ActionEvent event) {
-        submenus(bouton_gestion_boutique, boxVisitas, btAjoutBoutique, btSupprimerBoutique, btModifierBoutique, btAfficherBoutique);
+        try {
+            boxConteudo.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("GestionBoutiqueFXML.fxml"));
+            boxConteudo.getChildren().add(newLoadedPane);
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
-    @FXML
     void subAjoutBoutique(ActionEvent event) {
 
     }
 
-    @FXML
     void subISupprimerBoutique(ActionEvent event) {
 
     }
 
-    @FXML
     void subModifierBoutique(ActionEvent event) {
 
     }
 
-    @FXML
     void subAfficherBoutique(ActionEvent event) {
 
     }
@@ -237,19 +223,32 @@ public class adminAppController {
 //    ********************************************Gestion clients********************************
     @FXML
     void menu_gestion_clients(ActionEvent event) {
-        submenus(bouton_gestion_client, boxEmprestimo, btAfficherClient);
-    }
-
-    @FXML
-    void subAfficherClient(ActionEvent event) {
-
+        try {
+            boxConteudo.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("FXMLGestionClient.fxml"));
+            boxConteudo.getChildren().add(newLoadedPane);
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 //////////////////////////////////////////////////////////////////////////////////////    
     //    ********************************************Gestion responsable boutique********************************
     @FXML
     void menu_gestion_responsable_boutique(ActionEvent event) {
-        submenus(bouton_gestion_responsable_boutique, boxLocalizacao, btAfficherResponsableBoutique);
+        //submenus(bouton_gestion_responsable_boutique, boxLocalizacao, btAfficherResponsableBoutique, btAjoutResponsable);
+        try {
+            boxConteudo.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("FXMLGestionPropCA.fxml"));
+            boxConteudo.getChildren().add(newLoadedPane);
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    void subAjoutResponsable(ActionEvent event) {
+
     }
 
     @FXML
@@ -261,70 +260,106 @@ public class adminAppController {
     //    ********************************************Gestion  reclamation********************************
     @FXML
     void menu_reclamation(ActionEvent event) {
-        submenus(bouton_reclamation, boxReclamation, btAfficherReclamation);
-
-    }
-
-    @FXML
-    void subAfficherReclamation(ActionEvent event) {
-
+        try {
+            boxConteudo.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("FXMLReclamationCA.fxml"));
+            boxConteudo.getChildren().add(newLoadedPane);
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
     //    ********************************************Gestion  offre emploi********************************
     @FXML
     void menu_offre_emploi(ActionEvent event) {
-        submenus(bouton_Offre_emploi, boxOffreEmploi, btAjoutOffreEmploi, btSupprimerOffreEmploi, btModifierOffreEmploi, btAfficherOffreEmploi);
+        try {
+            boxConteudo.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("GestionOffre_emploiAdmin.fxml"));
+            boxConteudo.getChildren().add(newLoadedPane);
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
-    @FXML
     void subAfficherOffreEmploi(ActionEvent event) {
 
     }
 
-    @FXML
     void subAjoutOffreEmploi(ActionEvent event) {
 
     }
 
-    @FXML
     void subModifierOffreEmploi(ActionEvent event) {
 
     }
 
-    @FXML
     void subSupprimerOffreEmploi(ActionEvent event) {
 
     }
 
 //////////////////////////////////////////////////////////////////////////////    
+    //    ********************************************Gestion publicite********************************
     @FXML
+    void menu_Publicite(ActionEvent event) {
+//Publicite
+        try {
+            boxConteudo.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("Pub.fxml"));
+            boxConteudo.getChildren().add(newLoadedPane);
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //    ********************************************Gestion evenement********************************
+
+    @FXML
+    void menu_Evenement(ActionEvent event) {
+        try {
+            boxConteudo.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("Event.fxml"));
+            boxConteudo.getChildren().add(newLoadedPane);
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //    ********************************************Gestion demande pub********************************
+
+    @FXML
+    private void menu_demande_pub(ActionEvent event) {
+        try {
+            boxConteudo.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("demande_pub_liste.fxml"));
+            boxConteudo.getChildren().add(newLoadedPane);
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     void menuEmprestimo(ActionEvent event) {
 
     }
 
-    @FXML
     void menuIdentificacao(ActionEvent event) {
 
     }
 
-    @FXML
     void menuLocalizacao(ActionEvent event) {
 
     }
 
-    @FXML
     void menuMovimentacao(ActionEvent event) {
 
     }
 
-    @FXML
     void menuPesquisa(ActionEvent event) {
 
     }
 
-    @FXML
     void menuRelatorios(ActionEvent event) {
 
     }
@@ -332,17 +367,15 @@ public class adminAppController {
 //    close doesnt work need revision !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     @FXML
     void CloseWindow(ActionEvent event) {
-        System.out.println("test");
-        mainfx.window.close();
+        Stage stage = (Stage) btnClose.getScene().getWindow();
+        stage.close();
 
     }
 
-    @FXML
     void menuSeguranca(ActionEvent event) {
 
     }
 
-    @FXML
     void menuUtilitario(ActionEvent event) {
 
     }
@@ -352,62 +385,50 @@ public class adminAppController {
 
     }
 
-    @FXML
     void subDevolucaoEmprestimo(ActionEvent event) {
 
     }
 
-    @FXML
     void subEmprestimo(ActionEvent event) {
 
     }
 
-    @FXML
     void subHistoricoEmprestimo(ActionEvent event) {
 
     }
 
-    @FXML
     void subInstituicao(ActionEvent event) {
 
     }
 
-    @FXML
     void subItensEmprestimo(ActionEvent event) {
 
     }
 
-    @FXML
     void subLocal(ActionEvent event) {
 
     }
 
-    @FXML
     void subLocalizar(ActionEvent event) {
 
     }
 
-    @FXML
     void subOrganizacao(ActionEvent event) {
 
     }
 
-    @FXML
     void subSetor(ActionEvent event) {
 
     }
 
-    @FXML
     void subUsuarios(ActionEvent event) {
 
     }
 
-    @FXML
     void subVisitantes(ActionEvent event) {
 
     }
 
-    @FXML
     void initialize() {
 //        instance = this;
 //        Grupo.notEmpty(grupoMenus, grupoCatalogacao, grupoEmprestimo, grupoLocaliacao, grupoUtilidades, grupoVisitantes);//não permite grupos de menus com menus deselecionados
@@ -458,6 +479,51 @@ public class adminAppController {
     public void estilo(Node no, String estilo) {
         no.getStyleClass().remove(3);
         no.getStyleClass().add(estilo);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        String nom = LoginController.LoggedUser.getNom();
+        String prenom = LoginController.LoggedUser.getPrenom();
+        hello_text.setText("hello " + nom + " " + prenom);
+
+    }
+
+    @FXML
+    private void menu_demande_emploi(ActionEvent event) {
+
+        try {
+            boxConteudo.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("ConsulterDemande_emploiAdmin.fxml"));
+            boxConteudo.getChildren().add(newLoadedPane);
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    private void menu_Parametres(ActionEvent event) {
+        try {
+            boxConteudo.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("FXMLCompteAdmin.fxml"));
+            boxConteudo.getChildren().add(newLoadedPane);
+
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void on_winner_action(ActionEvent event) {
+         try {
+            boxConteudo.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("Winner.fxml"));
+            boxConteudo.getChildren().add(newLoadedPane);
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
 }

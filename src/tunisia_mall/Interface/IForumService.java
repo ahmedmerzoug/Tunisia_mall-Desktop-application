@@ -5,6 +5,7 @@
  */
 package tunisia_mall.Interface;
 
+import javafx.collections.ObservableList;
 import tunisia_mall.models.Forum;
 
 /**
@@ -12,5 +13,7 @@ import tunisia_mall.models.Forum;
  * @author Amine
  */
 public interface IForumService extends IService<Forum, Integer>{
-    
+   ObservableList<Forum> displayall();
+   public ObservableList<Forum>  findbycategorie(String cat);
+   int recherchecommentaire(); 
 }

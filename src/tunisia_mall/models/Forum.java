@@ -5,36 +5,84 @@
  */
 package tunisia_mall.models;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  *
- * @author Amine
+ * @author ahmed
  */
 public class Forum {
-    private int id_forum;
+    private int id_topic;
+    private String categorie ; 
     private String description;
+    private String datetopic ; 
     private User user;
 
-    public Forum(int id_forum, String description, User user) {
-        this.id_forum = id_forum;
+    public Forum(int id_topic, String categorie, String description, String datetopic, User user) {
+        this.id_topic = id_topic;
+        this.categorie = categorie;
+        this.description = description;
+        this.datetopic = datetopic;
+        this.user = user;
+    }
+
+ 
+  
+    public String getDatetopic() {
+        return datetopic;
+    }
+
+    public void setDatetopic(String datetopic) {
+        this.datetopic = datetopic;
+        
+    }
+
+
+    public Forum(String categorie, String description) {
+        this.categorie = categorie;
+        this.description = description;
+    }
+
+    
+    public Forum(int id_topic, String categorie, String description, User user) {
+        this.id_topic = id_topic;
+        this.categorie = categorie;
         this.description = description;
         this.user = user;
     }
 
-    public Forum(String description, User user) {
+    public Forum(String categorie, String description, String datetopic, User user) {
+        this.categorie = categorie;
+        this.description = description;
+        this.datetopic = datetopic;
+        this.user = user;
+    }
+
+    public Forum(String categorie, String description, User user) {
+        this.categorie = categorie;
         this.description = description;
         this.user = user;
     }
 
-    public Forum(String description) {
-        this.description = description;
+    public Forum() {
     }
 
-    public int getId_forum() {
-        return id_forum;
+    public int getId_topic() {
+        return id_topic;
     }
 
-    public void setId_forum(int id_forum) {
-        this.id_forum = id_forum;
+    public void setId_topic(int id_topic) {
+        this.id_topic = id_topic;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
     }
 
     public String getDescription() {
@@ -54,6 +102,14 @@ public class Forum {
     }
 
     @Override
+    public String toString() {
+        return "Forum{" + "id_topic=" + id_topic + ", categorie=" + categorie + ", description=" + description + ", datetopic=" + datetopic + ", user=" + user + '}';
+    }
+
+
+   
+
+    @Override
     public int hashCode() {
         int hash = 7;
         return hash;
@@ -71,16 +127,29 @@ public class Forum {
             return false;
         }
         final Forum other = (Forum) obj;
-        if (this.id_forum != other.id_forum) {
+        if (this.id_topic != other.id_topic) {
             return false;
         }
         return true;
     }
+   
+    public java.sql.Date convert(String date) throws ParseException {
 
-    @Override
-    public String toString() {
-        return "Forum{" + "id_forum=" + id_forum + ", description=" + description + ", user=" + user + '}';
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date date1 = sdf1.parse(date);
+        java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
+
+        return sqlDate;
+    }
+
+    public static String convert(java.sql.Date d) {
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String text = df.format(d);
+        return text;
+    }
+
+    
     }
     
-    
-}
+
+

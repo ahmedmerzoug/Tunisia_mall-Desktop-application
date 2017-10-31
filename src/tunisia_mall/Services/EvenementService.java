@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import tunisia_mall.Interface.IEvenementService;
 import tunisia_mall.Technique.DataSource;
 import tunisia_mall.models.Evenement;
@@ -116,7 +118,9 @@ public class EvenementService implements IEvenementService {
             preparedStatement = connection.prepareStatement(req);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Evenement evenement = new Evenement(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), Evenement.convert(resultSet.getDate(4)), resultSet.getString(5), new UserService().findById(resultSet.getInt(6)));
+                Evenement evenement = new Evenement(resultSet.getInt(1), resultSet.getString(2),
+                        resultSet.getString(3), Evenement.convert(resultSet.getDate(4)),
+                        resultSet.getString(5), new UserService().findById(resultSet.getInt(6)));
                 evenements.add(evenement);
             }
 
@@ -126,4 +130,44 @@ public class EvenementService implements IEvenementService {
         return evenements;
     }
 
+    @Override
+    public ObservableList<Evenement> displayall() {
+        ObservableList<Evenement> listeevent = FXCollections.observableArrayList();
+        String req = "select * from evenement";
+        PreparedStatement preparedStatement;
+
+        try {
+            preparedStatement = connection.prepareStatement(req);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Evenement b = new Evenement(resultSet.getInt(1), resultSet.getString(2),
+                        resultSet.getString(3), Evenement.convert(resultSet.getDate(4)),
+                        resultSet.getString(5), new UserService().findById(resultSet.getInt(6)));
+                listeevent.add(b);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BoutiqueService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listeevent;
+    }
+
+    @Override
+    public List<String> liste_nom_event() {
+        List<String> listenomevent = FXCollections.observableArrayList();
+        String req = "select nom from evenement";
+        PreparedStatement preparedStatement;
+
+        try {
+            preparedStatement = connection.prepareStatement(req);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                listenomevent.add(resultSet.getString("nom"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PubliciteService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listenomevent;
+    }
+    
 }

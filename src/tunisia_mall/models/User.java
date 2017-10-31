@@ -4,44 +4,84 @@
  * and open the template in the editor.
  */
 package tunisia_mall.models;
+
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
+
 /**
  *
  * @author ahmed
  */
 public class User {
-    private  int id_user ; 
-    private  String nom ; 
-    private  String prenom ; 
-    private String date_naissance ;
-    private String sexe ; 
-    private String login ; 
-    private String password ; 
-    private String mail ; 
-    private String role ; 
-    private int numero_telephone ; 
-    private String adresse ; 
-    private float salaire ; 
-    private String date_embauche ; 
-    private String date_expiration ; 
-    private String path ; 
-    private Boutique boutique ; 
+
+    private int id_user;
+    private String nom;
+    private String prenom;
+    private String date_naissance;
+    private String sexe;
+    private String login;
+    private String password;
+    private String mail;
+    private String role;
+    private int numero_telephone;
+    private String adresse;
+    private float salaire;
+    private String date_embauche;
+    private String date_expiration;
+    private String path;
+    private Boutique boutique;
 
     public User() {
     }
-
  
+    /*this constructeur was added by ahmed merzoug */ 
+    public User(int id_user) {
+        this.id_user = id_user;
+    }
     
     
+    public User(int aInt, int aInt0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-    public User(String nom, String prenom, String date_naissance, String sexe ,String login, String password, String mail, String role, int numero_telephone, String adresse, float salaire, String date_embauche, String date_expiration, String path) {
+    public User(String nom, String prenom, String date_naissance, String sexe, String login, String password, String mail, String role, int numero_telephone, String adresse, String date_embauche, String date_expiration, String path, Boutique boutique) {
         this.nom = nom;
         this.prenom = prenom;
         this.date_naissance = date_naissance;
-        this.sexe =sexe;
+        this.sexe = sexe;
+        this.login = login;
+        this.password = password;
+        this.mail = mail;
+        this.role = role;
+        this.numero_telephone = numero_telephone;
+        this.adresse = adresse;
+        this.date_embauche = date_embauche;
+        this.date_expiration = date_expiration;
+        this.path = path;
+        this.boutique = boutique;
+    }
+
+    public User(String nom, String prenom, String date_naissance, String sexe, String login, String password, String mail, String role, int numero_telephone, String adresse, String path) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.sexe = sexe;
+        this.login = login;
+        this.password = password;
+        this.mail = mail;
+        this.role = role;
+        this.numero_telephone = numero_telephone;
+        this.adresse = adresse;
+        this.path = path;
+    }
+
+    public User(String nom, String prenom, String date_naissance, String sexe, String login, String password, String mail, String role, int numero_telephone, String adresse, float salaire, String date_embauche, String date_expiration, String path) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.sexe = sexe;
         this.login = login;
         this.password = password;
         this.mail = mail;
@@ -54,12 +94,12 @@ public class User {
         this.path = path;
     }
 
-    public User(int id_user, String nom, String prenom, String date_naissance,String sexe, String login, String password, String mail, String role, int numero_telephone, String adresse, float salaire, String date_embauche, String date_expiration, String path) {
+    public User(int id_user, String nom, String prenom, String date_naissance, String sexe, String login, String password, String mail, String role, int numero_telephone, String adresse, float salaire, String date_embauche, String date_expiration, String path) {
         this.id_user = id_user;
         this.nom = nom;
         this.prenom = prenom;
         this.date_naissance = date_naissance;
-        this.sexe =sexe;
+        this.sexe = sexe;
         this.login = login;
         this.password = password;
         this.mail = mail;
@@ -89,7 +129,11 @@ public class User {
         this.path = path;
         this.boutique = boutique;
     }
-
+    
+      
+    
+    
+    
     public User(String nom, String prenom, String date_naissance, String login, String password, String mail, String role, int numero_telephone, String adresse, float salaire, String date_embauche, String date_expiration, String path, Boutique boutique) {
         this.nom = nom;
         this.prenom = prenom;
@@ -145,12 +189,6 @@ public class User {
         this.boutique = boutique;
     }
 
-    public User(int aInt, int aInt0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-    
     
 
     public int getId_user() {
@@ -273,29 +311,35 @@ public class User {
         return Objects.equals(this.login, other.login);
     }
 
+  ///////////ahmed merzoug a changer tostring pour l'utiliser dans un combobox dynamique 
+
     @Override
     public String toString() {
-        return "User{" + "id_user=" + id_user + ", nom=" + nom + ", prenom=" + prenom + ", date_naissance=" + date_naissance + ", sexe=" + sexe + ", login=" + login + ", password=" + password + ", mail=" + mail + ", role=" + role + ", numero_telephone=" + numero_telephone + ", adresse=" + adresse + ", salaire=" + salaire + ", date_embauche=" + date_embauche + ", date_expiration=" + date_expiration + ", path=" + path + ", boutique=" + boutique + '}';
+        return  ""  + nom  + " "+ prenom  ;
     }
 
-    
+    public java.sql.Date convert(String date) throws ParseException {
 
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date date1 = sdf1.parse(date);
+        java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
+        return sqlDate;
+    }
 
-    public java.sql.Date convert (String date) throws ParseException{
-      
-    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
-    java.util.Date date1 = sdf1.parse(date);
-    java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
-   
-    
-    return sqlDate ;  
-    } 
     public static String convert(java.sql.Date d) {
+        if (d != null) {
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            String text = df.format(d);
+            return text;
+        }
+        return "//";
+    }
+
+    /* public static String convert(java.sql.Date d) {
         SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy");
         String text = df.format(d);
         return text;
-    }
-
+    }*/
     public String getDate_naissance() {
         return date_naissance;
     }
@@ -328,14 +372,4 @@ public class User {
         this.sexe = sexe;
     }
 
-  
-
-   
-    
-    
-   
-    
-    
-    
-    
 }

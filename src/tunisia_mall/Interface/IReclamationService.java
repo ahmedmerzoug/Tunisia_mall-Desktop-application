@@ -5,6 +5,7 @@
  */
 package tunisia_mall.Interface;
 
+import javafx.collections.ObservableList;
 import tunisia_mall.models.Reclamation;
 
 /**
@@ -12,5 +13,12 @@ import tunisia_mall.models.Reclamation;
  * @author Amine
  */
 public interface IReclamationService extends IService<Reclamation, Integer> {
-    
+
+    public ObservableList<Reclamation> displayallR();
+
+    public ObservableList<Reclamation> displayallR(int i);
+
+    public ObservableList<String> displayallclientName();
+
+    public ObservableList<String> displayallclientNameCP();
 }

@@ -16,6 +16,8 @@ import tunisia_mall.Technique.DataSource;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import tunisia_mall.models.User;
 import tunisia_mall.Interface.ICarteFideliteService;
 
@@ -86,10 +88,10 @@ public class CarteFideliteService implements ICarteFideliteService {
             preparedStatement.setInt(1, r);
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(BoutiqueService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+  
     @Override
     public CarteFidelite findById(Integer id_carte) {
          CarteFidelite carteFidelite = null;
@@ -126,6 +128,63 @@ public class CarteFideliteService implements ICarteFideliteService {
         }
         return carteFidelites;
 
+    }
+
+  
+    
+    
+    
+    
+    @Override
+    public ObservableList<CarteFidelite> displayall() {
+        ObservableList<CarteFidelite> listeCarte=FXCollections.observableArrayList();
+        String req= "select * from carte_fidelite";
+        PreparedStatement preparedStatement;
+        
+        try {
+            preparedStatement=connection.prepareStatement(req);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            while(resultSet.next()){
+             CarteFidelite carteFidelite = new CarteFidelite(resultSet.getInt(1),resultSet.getInt(2),CarteFidelite.convert(resultSet.getDate(3)), new UserService().findById(resultSet.getInt(4)));
+                listeCarte.add(carteFidelite);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BoutiqueService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listeCarte;
+    }
+/*
+    @Override
+    public ObservableList<CarteFidelite> findCartebyID(Integer search) {
+                 ObservableList<CarteFidelite> listeCarte = FXCollections.observableArrayList();
+
+            CarteFidelite carteFidelite = null;
+        String req = "select * from carte_fidelite where id_carte_fidelite =?";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(req);
+            preparedStatement.setInt(1, search);
+          
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+            CarteFidelite cart= new CarteFidelite();
+                    cart.setId_carte_fidelite(resultSet.getInt(1));
+                    cart.setNb_point(resultSet.getInt(2));
+                    cart.setDate_creation((resultSet.getDate(3)));
+                    new UserService().findById(resultSet.getInt(4));
+           listeCarte.addAll(listeCarte);
+           System.out.println(listeCarte.toString());
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return listeCarte;
+    }*/
+
+    @Override
+    public ObservableList<CarteFidelite> findCartebyID(Integer search) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

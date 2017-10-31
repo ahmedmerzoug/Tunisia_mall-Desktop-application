@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="639.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.FXMLGestionReclamationCPController">
+   <children>
+      <HBox layoutX="30.0" layoutY="30.0" prefHeight="60.0" prefWidth="1107.0" styleClass="box-topo">
+         <children>
+            <Label fx:id="lbTitulo1" layoutX="10.0" maxWidth="1.7976931348623157E308" styleClass="titulo" text="Gestion des Réclamations" textFill="#19221b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="445.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtPesquisar" prefHeight="50.0" prefWidth="417.0" promptText="chercher" styleClass="pesquisar" />
+            <ToggleButton fx:id="rechercheR" mnemonicParsing="false" onAction="#rechercherR">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="pesquisar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton fx:id="repondreR" layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#repondreR" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-editar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton fx:id="supprimerR" layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#supprimerR" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-excluir" />
+               </styleClass>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menu" />
+               </toggleGroup>
+            </ToggleButton>
+         </children>
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </HBox>
+      <TableView fx:id="tblreclamation" layoutX="16.0" layoutY="439.0" prefHeight="200.0" prefWidth="1121.0">
+         <columns>
+            <TableColumn fx:id="tblclmtype" prefWidth="75.0" text="type" />
+            <TableColumn fx:id="tblclmdescription" prefWidth="489.0" text="description" />
+            <TableColumn fx:id="tblclmnom" prefWidth="117.0" text="nom reclamant" />
+            <TableColumn fx:id="tblclmprenom" prefWidth="122.0" text=" prenom reclamant" />
+            <TableColumn fx:id="tblclmmail" prefWidth="117.0" text="mail" />
+            <TableColumn fx:id="tblclmnumtel" prefWidth="123.0" text="numero telephone" />
+         </columns>
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </TableView>
+      <ComboBox fx:id="id_combo" layoutX="163.0" layoutY="100.0" prefWidth="150.0" promptText="nom , prenom">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </ComboBox>
+      <ComboBox fx:id="type_combo" layoutX="163.0" layoutY="142.0" prefWidth="150.0" promptText="type">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </ComboBox>
+      <TextField fx:id="mail_txt" layoutX="163.0" layoutY="188.0" promptText="mail">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </TextField>
+      <TextArea fx:id="description_txt" layoutX="163.0" layoutY="228.0" prefHeight="200.0" prefWidth="484.0" promptText="Description">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </TextArea>
+      <Label layoutX="26.0" layoutY="104.0" prefHeight="17.0" prefWidth="110.0" text="Client reclamant *">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </Label>
+      <Label layoutX="47.0" layoutY="146.0" text="type *">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </Label>
+      <Label layoutX="47.0" layoutY="193.0" text="mail *">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </Label>
+      <Label layoutX="47.0" layoutY="319.0" text="Description *">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </Label>
+   </children>
+   <stylesheets>
+      <URL value="@CSS/custom.css" />
+      <URL value="@CSS/default.css" />
+   </stylesheets>
+</AnchorPane>

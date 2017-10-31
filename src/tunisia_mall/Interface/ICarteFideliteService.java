@@ -5,6 +5,7 @@
  */
 package tunisia_mall.Interface;
 
+import javafx.collections.ObservableList;
 import tunisia_mall.models.CarteFidelite;
 
 /**
@@ -12,5 +13,8 @@ import tunisia_mall.models.CarteFidelite;
  * @author Amine
  */
 public interface ICarteFideliteService extends IService<CarteFidelite, Integer>{
+    
+    public ObservableList<CarteFidelite> displayall();
+    public ObservableList<CarteFidelite> findCartebyID(Integer search);
     
 }

@@ -12,8 +12,20 @@ import tunisia_mall.models.Boutique;
  *
  * @author ahmed
  */
-public interface IBoutiqueService extends IService<Boutique, Integer>{
-    
+public interface IBoutiqueService extends IService<Boutique, Integer> {
+
     public ObservableList<Boutique> displayall();
-    
+
+    public ObservableList<String> displayallnom();
+
+    public ObservableList<String> displayallBshopowner();
+
+    public ObservableList<Boutique> findBoutiqueByName(String search);
+
+    public Boutique findBoutiqueByNom(String nom);
+     public boolean idbutilise(int id);
+     
+         
+ 
+
 }
