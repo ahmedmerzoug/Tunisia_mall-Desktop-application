@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -118,6 +119,14 @@ public class Event_shopownerController implements Initializable {
         afficher();
         EvenementService ips = new EvenementService();
         TextFields.bindAutoCompletion(recherche, ips.liste_nom_event());
+        
+        recherche.textProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+
+                filterEmployeList((String) oldValue, (String) newValue);
+    }
+        });
     }
 
     void afficher() {
@@ -250,6 +259,32 @@ public class Event_shopownerController implements Initializable {
         txt_description.setText(e.getDescription());
         txtpath.setText(e.getPath());
         txtchoixuser.setValue(e.getUser());
+    }
+
+    
+    void filterEmployeList(String oldValue, String newValue) {
+        IEvenementService ius = new EvenementService();
+        ObservableList<Evenement> filteredList = FXCollections.observableArrayList();
+        if (recherche.getText() == null || (newValue.length() < oldValue.length()) || newValue == null) {
+            TableEvent.setItems(ius.displayall());
+
+        } else {
+
+            newValue = newValue.toUpperCase();
+
+            for (Evenement user : TableEvent.getItems()) {
+
+                String filterName = user.getNom();
+
+
+                if (filterName.toUpperCase().contains(newValue)) {
+                    filteredList.add(user);
+}
+
+            }
+            TableEvent.setItems(filteredList);
+
+        }
     }
 
 }

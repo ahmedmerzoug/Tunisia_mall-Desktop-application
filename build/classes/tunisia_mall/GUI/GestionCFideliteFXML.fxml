@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="tbIDcarte" prefHeight="628.0" prefWidth="1102.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.GestionCFideliteController">
+   <children>
+      <TableView fx:id="TableCarteF" layoutX="21.0" layoutY="243.0" prefHeight="301.0" prefWidth="1058.0">
+         <columns>
+            <TableColumn fx:id="tbidclient" prefWidth="98.0" text="Id Client" />
+            <TableColumn fx:id="tbnomclient" prefWidth="277.0" text="Nom client" />
+            <TableColumn fx:id="tbprenomclient" prefWidth="236.0" text="Prénom client " />
+            <TableColumn fx:id="tbnbrpoint" prefWidth="255.0" text="nombre des Points Fidélité" />
+            <TableColumn fx:id="tbdatecreation" prefWidth="625.0" text="date création" />
+         </columns>
+      </TableView>
+      <HBox prefHeight="60.0" prefWidth="1207.0" styleClass="box-topo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="lbTitulo1" layoutX="10.0" maxWidth="1.7976931348623157E308" styleClass="titulo" text="Gestion des Cartes de fidélité" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="445.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="txtPesquisar" prefHeight="50.0" prefWidth="417.0" promptText="chercher" styleClass="pesquisar" />
+            <ToggleButton mnemonicParsing="false" onAction="#rechercherB">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="pesquisar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" onAction="#ajouter" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-add" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#modifier" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-editar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#supprimerCarte" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-excluir" />
+               </styleClass>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menu" />
+               </toggleGroup>
+            </ToggleButton>
+         </children>
+         <stylesheets>
+            <URL value="@CSS/default.css" />
+            <URL value="@CSS/custom.css" />
+         </stylesheets>
+      </HBox>
+      <Text layoutX="59.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date création" />
+      <Text layoutX="59.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id Client" wrappingWidth="43.921875" />
+      <ComboBox fx:id="cbIdclient" layoutX="244.0" layoutY="80.0" prefWidth="150.0" promptText="Veuillez choirsir le client" />
+      <DatePicker fx:id="txtdatecarte" layoutX="242.0" layoutY="176.0" />
+      <TextField fx:id="nbpoints" layoutX="243.0" layoutY="123.0" />
+      <Text layoutX="59.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nombre des Points Fidélité" />
+   </children>
+   <stylesheets>
+      <URL value="@../../../../../teq/2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+      <URL value="@../../../../../teq/2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+   </stylesheets>
+</AnchorPane>

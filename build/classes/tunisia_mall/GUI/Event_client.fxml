@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="734.0" prefWidth="1127.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.Event_clientController">
+   <children>
+      <TableView fx:id="TableEvent" layoutX="4.0" layoutY="135.0" prefHeight="536.0" prefWidth="1120.0">
+        <columns>
+            <TableColumn fx:id="nomeventcolumn" prefWidth="214.0" text="Nom evenement" />
+          <TableColumn fx:id="descriptioncolumn" prefWidth="214.0" text="Description" />
+          <TableColumn fx:id="date_column" prefWidth="184.0" text="Date" />
+            <TableColumn fx:id="path_column" prefWidth="374.0" text="Path" />
+            <TableColumn fx:id="nom_column" prefWidth="374.0" text="Nom" />
+            <TableColumn fx:id="prenom_column" prefWidth="374.0" text="Prenom" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <HBox prefHeight="60.0" prefWidth="1207.0" styleClass="box-topo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TextField fx:id="recherche" onAction="#search" prefHeight="50.0" prefWidth="417.0" promptText="chercher" styleClass="pesquisar" />
+            <ToggleButton mnemonicParsing="false" onAction="#search">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="pesquisar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" onAction="#refresh" text="">
+               <toggleGroup>
+                  <ToggleGroup fx:id="menu1" />
+               </toggleGroup>
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-movimentacao" />
+               </styleClass>
+            </ToggleButton>
+         </children></HBox>
+   </children>
+   <stylesheets>
+      <URL value="@CSS/custom.css" />
+      <URL value="@CSS/default.css" />
+   </stylesheets>
+</AnchorPane>

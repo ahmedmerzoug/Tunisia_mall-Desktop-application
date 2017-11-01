@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="460.0" prefWidth="671.0" stylesheets="@../../../../../teq/2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/bootstrap2.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.WinnerController">
+   <children>
+      <ImageView fitHeight="769.0" fitWidth="1148.0">
+         <image>
+            <Image url="@img/daywin.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="740.0" fitWidth="1164.0">
+         <image>
+            <Image url="@../../../../../teq/2410/Tunisia_mall/src/tunisia_mall/GUI/img/daywin.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnwinner" contentDisplay="BOTTOM" layoutX="448.0" layoutY="210.0" mnemonicParsing="false" onAction="#randombutt" prefHeight="49.0" prefWidth="245.0" styleClass="succes" stylesheets="@../../../../../Downloads/bootstrap/src/main/resources/bootstrap2.css" text="le Gagnant du jour est : " textFill="#d76f6f" textOverrun="CENTER_WORD_ELLIPSIS" AnchorPane.bottomAnchor="516.0" AnchorPane.leftAnchor="448.0" AnchorPane.rightAnchor="423.0" AnchorPane.topAnchor="210.0" />
+      <TextField fx:id="wintxt" layoutX="377.0" layoutY="296.0" prefHeight="35.0" prefWidth="411.0" />
+   </children>
+   <styleClass>
+      <String fx:value="primary" />
+      <String fx:value="middle" />
+   </styleClass>
+</AnchorPane>

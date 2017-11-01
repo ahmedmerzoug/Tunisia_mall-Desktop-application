@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="729.0" prefWidth="1047.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.GestionOffre_emploiAdminController">
+   <children>
+      <AnchorPane fx:id="anchor" layoutX="301.0" layoutY="441.0" prefHeight="203.0" prefWidth="717.0" style="-fx-background-color: #ffffff;" visible="false">
+         <children>
+            <Text layoutX="43.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Poste" wrappingWidth="47.185546875" />
+            <TextField fx:id="post_entry" layoutX="137.0" layoutY="48.0" />
+            <Text layoutX="41.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spécialité" />
+            <TextField fx:id="specialite_entry" layoutX="137.0" layoutY="97.0" />
+            <Text layoutX="439.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salaire" wrappingWidth="56.845703125" />
+            <TextField fx:id="salaire_entry" layoutX="541.0" layoutY="23.0" onKeyReleased="#salairenum" />
+            <Text layoutX="406.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre des employés demandés" />
+            <TextField fx:id="nbrempl_entry" layoutX="635.0" layoutY="60.0" onKeyReleased="#nbrnum" prefHeight="25.0" prefWidth="40.0" />
+            <Text layoutX="422.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date d'expiration" />
+            <DatePicker fx:id="date_expiration_entry" layoutX="528.0" layoutY="97.0" />
+            <Label fx:id="message" layoutX="185.0" layoutY="128.0" prefHeight="44.0" prefWidth="349.0" textFill="#b92828">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="remplirchamp" layoutX="212.0" layoutY="163.0" prefHeight="53.0" prefWidth="307.0" textFill="#8a1919">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="numerror" layoutX="375.0" layoutY="52.0" prefHeight="17.0" prefWidth="178.0" textFill="#ae1717" />
+         </children>
+      </AnchorPane>
+      <HBox layoutX="5.0" layoutY="14.0" prefHeight="60.0" prefWidth="1036.0" styleClass="box-topo">
+         <children>
+            <Label fx:id="lbTitulo1" layoutX="10.0" maxWidth="1.7976931348623157E308" styleClass="titulo" text="Gestion des offres des emplois" textFill="#4ec439" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="445.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="afficher_entry" prefHeight="50.0" prefWidth="417.0" promptText="chercher par poste" styleClass="pesquisar" stylesheets="@CSS/custom.css" />
+            <ToggleButton mnemonicParsing="false" onAction="#rechercher" stylesheets="@CSS/custom.css">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="pesquisar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" onAction="#anchorajout" stylesheets="@CSS/custom.css" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-add" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#anchormodif" stylesheets="@CSS/custom.css" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-editar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#supprimer" stylesheets="@CSS/custom.css" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-excluir" />
+               </styleClass>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menu" />
+               </toggleGroup>
+            </ToggleButton>
+         </children>
+      </HBox>
+      <TableView fx:id="table_offre" layoutX="178.0" layoutY="127.0" onMouseClicked="#affich_in_entry" prefHeight="299.0" prefWidth="742.0">
+         <columns>
+            <TableColumn fx:id="col_boutiq" prefWidth="90.0" text="boutique" />
+            <TableColumn fx:id="col_post" prefWidth="94.0" text="Poste" />
+            <TableColumn fx:id="col_specialite" prefWidth="107.0" text="Spécialité" />
+            <TableColumn fx:id="col_salaire" prefWidth="98.0" text="Salaire" />
+            <TableColumn fx:id="col_nbr" prefWidth="171.0" text="Nombre demandé" />
+            <TableColumn fx:id="col_date" minWidth="0.0" prefWidth="147.0" text="Date d'expiration" />
+         </columns>
+      </TableView>
+      <Button fx:id="refreshbtn" layoutX="944.0" layoutY="136.0" mnemonicParsing="false" onAction="#refresh" text="refresh" />
+      <TextField fx:id="id_offre_entry" layoutX="152.0" layoutY="79.0" visible="false" />
+      <Button fx:id="modifbtn" layoutX="815.0" layoutY="652.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" visible="false" />
+      <Button fx:id="btnvalider" layoutX="695.0" layoutY="652.0" mnemonicParsing="false" onAction="#valider" text="Ajouter" visible="false" />
+      <CheckBox fx:id="minebtn" layoutX="47.0" layoutY="83.0" mnemonicParsing="false" onAction="#mes_boutiques" onMouseDragged="#tout" text="Mes boutiques uniquement" textFill="#cc530ce8">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </CheckBox>
+      <Label fx:id="ajoutavecsucce" layoutX="381.0" layoutY="82.0" prefHeight="44.0" prefWidth="349.0" textFill="#ab1b1b">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="poste_error" layoutX="737.0" layoutY="61.0" prefHeight="44.0" prefWidth="296.0" textFill="#ae1616">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

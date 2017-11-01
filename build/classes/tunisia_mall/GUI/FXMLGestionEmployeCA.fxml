@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="657.0" prefWidth="1262.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.FXMLGestionEmployeCAController">
+   <children>
+      <HBox layoutX="10.0" layoutY="10.0" prefHeight="60.0" prefWidth="1107.0" styleClass="box-topo">
+         <children>
+            <Label fx:id="lbTitulo1" layoutX="10.0" maxWidth="1.7976931348623157E308" styleClass="titulo" text="Gestion des Employés" textFill="#19221b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="445.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtPesquisar" prefHeight="50.0" prefWidth="417.0" promptText="chercher" styleClass="pesquisar" />
+            <ToggleButton fx:id="ajoutE" mnemonicParsing="false" onAction="#ajouterE" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-add" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton fx:id="modifierE" layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#modifierE" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-editar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton fx:id="supprimerE" layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#supprimerE" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-excluir" />
+               </styleClass>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menu" />
+               </toggleGroup>
+            </ToggleButton>
+         </children>
+      </HBox>
+      <TableView fx:id="tblemploye" layoutX="12.0" layoutY="432.0" onMouseClicked="#afficherimage" prefHeight="297.0" prefWidth="1146.0">
+         <columns>
+            <TableColumn fx:id="tblclmnom" prefWidth="75.0" text="nom" />
+            <TableColumn fx:id="tblclmprenom" prefWidth="114.0" text="prenom" />
+            <TableColumn fx:id="tblclmdatenais" prefWidth="156.0" text="date naissance" />
+            <TableColumn minWidth="0.0" prefWidth="0.0" text="sexe" />
+            <TableColumn fx:id="tblclmsexe" prefWidth="54.0" text="sexe" />
+            <TableColumn fx:id="tblclmmail" prefWidth="136.0" text="mail" />
+            <TableColumn fx:id="tblclmnum" prefWidth="126.0" text="numero telephone" />
+            <TableColumn fx:id="tblclmadresse" prefWidth="67.0" text="adresse" />
+            <TableColumn fx:id="tblclmsalaire" prefWidth="53.0" text="salaire" />
+            <TableColumn fx:id="tblclmdateem" prefWidth="145.0" text="date d'embauche" />
+            <TableColumn fx:id="tblclmdateexp" prefWidth="143.0" text="date expiration" />
+            <TableColumn fx:id="tblclmidboutique" prefWidth="116.0" text="boutique" />
+         </columns>
+      </TableView>
+      <TextField fx:id="prenom_txt" layoutX="397.0" layoutY="89.0" promptText="prenom" />
+      <TextField fx:id="login_txt" layoutX="134.0" layoutY="173.0" promptText="login" />
+      <TextField fx:id="numerotel_txt" layoutX="133.0" layoutY="265.0" promptText="numero telephone" />
+      <TextField fx:id="mail_txt" layoutX="134.0" layoutY="219.0" promptText="exemple@gmail.com" />
+      <TextField fx:id="adresse_txt" layoutX="395.0" layoutY="303.0" promptText="adresse" />
+      <TextField fx:id="salaire_txt" layoutX="133.0" layoutY="304.0" promptText="salaire" />
+      <TextField fx:id="nom_txt" layoutX="133.0" layoutY="89.0" promptText="nom" />
+      <TextField fx:id="path_txt" layoutX="395.0" layoutY="350.0" promptText="path image" />
+      <Label layoutX="64.0" layoutY="93.0" text="nom *" />
+      <Label layoutX="328.0" layoutY="93.0" text="prenom *" />
+      <Label layoutX="65.0" layoutY="223.0" text="mail *" />
+      <Label layoutX="329.0" layoutY="177.0" text="password *" />
+      <Label layoutX="64.0" layoutY="177.0" text="Login *" />
+      <Label layoutX="337.0" layoutY="137.0" text="sexe *" />
+      <Label layoutX="40.0" layoutY="137.0" text="date naissance *" />
+      <Label layoutX="328.0" layoutY="309.0" text="adresse" />
+      <Label layoutX="303.0" layoutY="224.0" text="date embauche *" />
+      <Label layoutX="336.0" layoutY="354.0" text="path" />
+      <Label layoutX="52.0" layoutY="356.0" text="Boutique *" />
+      <Label layoutX="305.0" layoutY="269.0" text="date expiration *" />
+      <Label layoutX="60.0" layoutY="308.0" text="salaire *" />
+      <Label layoutX="63.0" layoutY="269.0" text="GSM *" />
+      <ComboBox fx:id="idbout_combo" layoutX="135.0" layoutY="352.0" prefWidth="150.0" />
+      <ComboBox fx:id="sexe_combo" layoutX="396.0" layoutY="133.0" prefWidth="150.0" />
+      <PasswordField fx:id="password_txt" layoutX="396.0" layoutY="173.0" promptText="password" />
+      <DatePicker fx:id="dnaissance_txt" layoutX="134.0" layoutY="132.0" />
+      <DatePicker fx:id="dateem_txt" layoutX="397.0" layoutY="219.0" />
+      <DatePicker fx:id="dateexp_txt" layoutX="397.0" layoutY="265.0" />
+      <ImageView fx:id="image" fitHeight="216.0" fitWidth="183.0" layoutX="884.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../2410/Tunisia_mall/src/tunisia_mall/img/fb-avatar.jpg" />
+         </image>
+      </ImageView>
+      <ToggleButton fx:id="ajoutimage" layoutX="1078.0" layoutY="143.0" mnemonicParsing="false" onAction="#ajouterimg" text="">
+         <styleClass>
+            <String fx:value="menus-tela" />
+            <String fx:value="menu-add" />
+         </styleClass>
+      </ToggleButton>
+   </children>
+   <stylesheets>
+      <URL value="@CSS/default.css" />
+      <URL value="@CSS/custom.css" />
+   </stylesheets>
+</AnchorPane>

@@ -18,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -167,38 +170,48 @@ public class Pub_shopownerController implements Initializable {
 
     @FXML
     private void ajouter(ActionEvent event) {
-        connection = DataSource.getInsatance().getConnection();
-        Publicite t=new Publicite();
-        String req = "insert into demande_pub (date_debut,date_fin,prix,page,path,id_boutique) values (?,?,?,?,?,?)";
-        PreparedStatement preparedStatement;
-        try {
-            preparedStatement = connection.prepareStatement(req);
-            preparedStatement.setDate(1, t.convert(txtdate_debut.getEditor().getText()));
-            preparedStatement.setDate(2, t.convert(txtdate_fin.getEditor().getText()));
-            preparedStatement.setFloat(3, Float.parseFloat(txtprix.getText()));
-            preparedStatement.setString(4, txtpage.getText());
-            
-            
-            File thefile = new File(getImageUrl);
-            FileInputStream input = null;
+        if (!txtdate_debut.getEditor().getText().equals("") && !txtdate_fin.getEditor().getText().equals("")
+                && !txtprix.getText().equals("") && !txtpage.getText().equals("") && !getImageUrl.equals("")) {
+
+            connection = DataSource.getInsatance().getConnection();
+            Publicite t = new Publicite();
+            String req = "insert into demande_pub (date_debut,date_fin,prix,page,path,id_boutique) values (?,?,?,?,?,?)";
+            PreparedStatement preparedStatement;
             try {
-                input = new FileInputStream(thefile);
-            } catch (FileNotFoundException ex) {
+                preparedStatement = connection.prepareStatement(req);
+                preparedStatement.setDate(1, t.convert(txtdate_debut.getEditor().getText()));
+                preparedStatement.setDate(2, t.convert(txtdate_fin.getEditor().getText()));
+                preparedStatement.setFloat(3, Float.parseFloat(txtprix.getText()));
+                preparedStatement.setString(4, txtpage.getText());
+
+                File thefile = new File(getImageUrl);
+                FileInputStream input = null;
+                try {
+                    input = new FileInputStream(thefile);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(PubliciteService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                preparedStatement.setBinaryStream(5, input);
+
+                preparedStatement.setInt(6, txtchoixboutique.getValue().getId_boutique());
+                pathOfimage = getImageUrl;
+
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(PubliciteService.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
                 Logger.getLogger(PubliciteService.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            preparedStatement.setBinaryStream(5, input);
-            
-            preparedStatement.setInt(6, txtchoixboutique.getValue().getId_boutique());
-            
-            pathOfimage=getImageUrl;
-            System.out.println(pathOfimage);
-            preparedStatement.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(PubliciteService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(PubliciteService.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("erreur champs vides");
+            alert.setHeaderText("il ya des champs vides");
+            Optional<ButtonType> result = alert.showAndWait();
         }
+
     }
 
     @FXML

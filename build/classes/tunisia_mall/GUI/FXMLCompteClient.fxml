@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="536.0" prefWidth="1147.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.FXMLCompteClientController">
+   <children>
+      <TextField fx:id="login_txt" layoutX="164.0" layoutY="203.0" promptText="login">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </TextField>
+      <TextField fx:id="numerotel_txt" layoutX="163.0" layoutY="295.0" promptText="numero telephone">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </TextField>
+      <TextField fx:id="mail_txt" layoutX="164.0" layoutY="249.0" promptText="exemple@gmail.com">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </TextField>
+      <TextField fx:id="adresse_txt" layoutX="509.0" layoutY="249.0" promptText="adresse">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </TextField>
+      <TextField fx:id="path_txt" layoutX="509.0" layoutY="295.0" promptText="path image">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </TextField>
+      <Label layoutX="95.0" layoutY="253.0" text="mail *">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </Label>
+      <Label layoutX="416.0" layoutY="207.0" text="password *">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </Label>
+      <Label layoutX="94.0" layoutY="207.0" text="Login *">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </Label>
+      <Label layoutX="429.0" layoutY="167.0" text="sexe *">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </Label>
+      <Label layoutX="70.0" layoutY="167.0" text="date naissance *">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </Label>
+      <Label layoutX="421.0" layoutY="253.0" text="adresse">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </Label>
+      <Label layoutX="429.0" layoutY="299.0" text="path">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </Label>
+      <Label layoutX="93.0" layoutY="299.0" text="GSM *">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </Label>
+      <ComboBox fx:id="sexe_combo" layoutX="509.0" layoutY="163.0" prefWidth="150.0">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </ComboBox>
+      <PasswordField fx:id="password_txt" layoutX="509.0" layoutY="203.0" promptText="password">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </PasswordField>
+      <DatePicker fx:id="dnaissance_txt" layoutX="164.0" layoutY="162.0">
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </DatePicker>
+      <HBox layoutX="40.0" layoutY="40.0" prefHeight="60.0" prefWidth="1107.0" styleClass="box-topo">
+         <children>
+            <Label fx:id="lbTitulo1" layoutX="10.0" maxWidth="1.7976931348623157E308" styleClass="titulo" text="Mon Compte" textFill="#19221b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="445.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <ToggleButton fx:id="modifierC" layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#modifierC" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-editar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton fx:id="desactiver" mnemonicParsing="false" onAction="#desactivercompte" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-excluir" />
+               </styleClass>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menu" />
+               </toggleGroup>
+            </ToggleButton>
+         </children>
+         <stylesheets>
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+            <URL value="@../../../../../2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+         </stylesheets>
+      </HBox>
+   </children>
+   <stylesheets>
+      <URL value="@CSS/custom.css" />
+      <URL value="@CSS/default.css" />
+   </stylesheets>
+</AnchorPane>

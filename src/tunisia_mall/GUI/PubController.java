@@ -29,6 +29,7 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -284,11 +285,24 @@ public class PubController implements Initializable {
                     }
                 });
 
+
         afficher();
         IPubliciteService ips = new PubliciteService();
         TextFields.bindAutoCompletion(txtrecherchepage, ips.liste_nom_pub());
 
+        txtrecherchepage.textProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+
+                filterEmployeList((String) oldValue, (String) newValue);
     }
+        });
+
+        
+        
+        
+    }
+    
 
     @FXML
     private void insert_image(ActionEvent event) throws IOException {
@@ -326,6 +340,36 @@ public class PubController implements Initializable {
         alert.setHeaderText("ajouté avec succès");
         Optional<ButtonType> result = alert.showAndWait();
         afficher();
+    }
+
+    
+    
+    
+//    ***************************************************************************
+    
+    void filterEmployeList(String oldValue, String newValue) {
+        IPubliciteService ius = new PubliciteService();
+        ObservableList<Publicite> filteredList = FXCollections.observableArrayList();
+        if (txtrecherchepage.getText() == null || (newValue.length() < oldValue.length()) || newValue == null) {
+            TablePub.setItems(ius.displayall());
+
+        } else {
+
+            newValue = newValue.toUpperCase();
+
+            for (Publicite user : TablePub.getItems()) {
+
+                String filterName = user.getPage();
+
+
+                if (filterName.toUpperCase().contains(newValue)) {
+                    filteredList.add(user);
+}
+
+            }
+            TablePub.setItems(filteredList);
+
+        }
     }
 
 }

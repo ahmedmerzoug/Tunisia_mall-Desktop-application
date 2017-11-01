@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -124,16 +125,35 @@ public class EventController implements Initializable {
         afficher();
         EvenementService ips = new EvenementService();
         TextFields.bindAutoCompletion(rechercher, ips.liste_nom_event());
+
+        rechercher.textProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+
+                filterEmployeList((String) oldValue, (String) newValue);
+    }
+        });
     }
 
     @FXML
     private void ajouter(ActionEvent event) {
+        if (!txt_eventname.getText().equals("") && !txt_description.getText().equals("")
+                && !txtdate.getEditor().getText().equals("") && !txtpath.getText().equals("")) {
         IEvenementService ies = new EvenementService();
         Evenement e = new Evenement(txt_eventname.getText(), txt_description.getText(),
                 txtdate.getEditor().getText(), txtpath.getText(), txtchoixuser.getValue());
         ies.add(e);
+            SendMail.sendmail(TableEvent.getSelectionModel().getSelectedItem().getUser().getMail(),
+                    "ajout evenement", "votre evenement a été crée, nom evenement: " + e.toString());
 
         afficher();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("erreur champs vides");
+            alert.setHeaderText("il ya des champs vides");
+            Optional<ButtonType> result = alert.showAndWait();
+    }
+
     }
 
     @FXML
@@ -261,6 +281,31 @@ public class EventController implements Initializable {
     @FXML
     private void refresh(ActionEvent event) {
         afficher();
+    }
+
+    //    ***************************************************************************
+    void filterEmployeList(String oldValue, String newValue) {
+        IEvenementService ius = new EvenementService();
+        ObservableList<Evenement> filteredList = FXCollections.observableArrayList();
+        if (rechercher.getText() == null || (newValue.length() < oldValue.length()) || newValue == null) {
+            TableEvent.setItems(ius.displayall());
+
+        } else {
+
+            newValue = newValue.toUpperCase();
+
+            for (Evenement user : TableEvent.getItems()) {
+
+                String filterName = user.getNom();
+
+                if (filterName.toUpperCase().contains(newValue)) {
+                    filteredList.add(user);
+}
+
+            }
+            TableEvent.setItems(filteredList);
+
+        }
     }
 
 }

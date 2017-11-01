@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="686.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.FXMLGestionClientController">
+   <children>
+      <TableView fx:id="tblclient" layoutX="22.0" layoutY="184.0" prefHeight="510.0" prefWidth="1048.0">
+         <columns>
+            <TableColumn fx:id="tblclmnom" prefWidth="104.0" text="nom" />
+            <TableColumn fx:id="tblclmprenom" prefWidth="125.0" text="prenom" />
+            <TableColumn fx:id="tblclmdatenais" prefWidth="158.0" text="date naissance" />
+            <TableColumn fx:id="tblclmsexe" prefWidth="117.0" text="sexe" />
+            <TableColumn fx:id="tblclmmail" prefWidth="164.0" text="mail" />
+            <TableColumn fx:id="tblclmnum" prefWidth="170.0" text="numero telephone" />
+            <TableColumn fx:id="tblclmadresse" prefWidth="209.0" text="adresse" />
+         </columns>
+      </TableView>
+      <HBox layoutX="20.0" layoutY="20.0" prefHeight="60.0" prefWidth="1107.0" styleClass="box-topo">
+         <children>
+            <Label fx:id="lbTitulo1" layoutX="10.0" maxWidth="1.7976931348623157E308" styleClass="titulo" text="Gestion des Clients" textFill="#19221b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="445.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtPesquisar" prefHeight="50.0" prefWidth="417.0" promptText="chercher" styleClass="pesquisar" />
+            <ToggleButton fx:id="rechercheC" mnemonicParsing="false" onAction="#rechercherC">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="pesquisar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton fx:id="supprimerCl" mnemonicParsing="false" onAction="#supprimerCl" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-excluir" />
+               </styleClass>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menu" />
+               </toggleGroup>
+            </ToggleButton>
+         </children>
+      </HBox>
+   </children>
+   <stylesheets>
+      <URL value="@CSS/custom.css" />
+      <URL value="@CSS/default.css" />
+   </stylesheets>
+</AnchorPane>

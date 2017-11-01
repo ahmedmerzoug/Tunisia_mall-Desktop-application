@@ -103,7 +103,7 @@ public class Client_interface_newController implements Initializable {
 //        client consulte la meme espace que le shopowner
         try {
             holderPane.getChildren().clear();
-            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("Event_shopowner.fxml"));
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("Event_client.fxml"));
             holderPane.getChildren().add(newLoadedPane);
         } catch (IOException ex) {
             Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);

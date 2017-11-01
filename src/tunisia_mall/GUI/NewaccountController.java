@@ -109,8 +109,8 @@ public class NewaccountController implements Initializable {
 
         if (selectedfile != null) {
             getImageUrl = selectedfile.getAbsolutePath();
-            File file=new File(getImageUrl);
-            Image ima=new Image(file.toURI().toString());
+            File file = new File(getImageUrl);
+            Image ima = new Image(file.toURI().toString());
             imageview.setImage(ima);
 //            System.out.println(selectedfile.get);
         } else {
@@ -120,39 +120,49 @@ public class NewaccountController implements Initializable {
 
     @FXML
     private void ajouter(ActionEvent event) throws IOException {
-        u = new User(nomtf.getText(), prenomtf.getText(), txtdate.getEditor().getText(), txtsexe.getValue(),
-                txtlogin.getText(), mdptf.getText(), txtmail.getText(), "client", Integer.parseInt(txtnumero.getText()), txtadresse.getText(), getImageUrl);
 
-        if (ius.existLogin(txtlogin.getText())) {
-            System.out.println("ajout impossible, login existe deja");
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("erreur");
-            alert.setHeaderText("login existe dans la base de donnée");
-            Optional<ButtonType> result = alert.showAndWait();
-        } else {
-            ius.addClient(u);
+        if (!nomtf.getText().equals("") && !prenomtf.getText().equals("") && !txtmail.getText().equals("")
+                && !txtlogin.getText().equals("") && !txtdate.getEditor().getText().equals("") && !txtadresse.getText().equals("") && !txtnumero.getText().equals("")
+                && !mdptf.getText().equals("")) {
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("inscription");
-            alert.setHeaderText("succés d'inscription, passez à interface login afin de s'authentifier");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                SendMail.sendmail(txtmail.getText(), "bienvenu", "test message");
-                Stage stage = new Stage();
-                ((Node) event.getSource()).getScene().getWindow().hide();
-                Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-                Scene scene = new Scene(root);
+            if (ius.existLogin(txtlogin.getText())) {
+                System.out.println("ajout impossible, login existe deja");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("erreur");
+                alert.setHeaderText("login existe dans la base de donnée");
+                Optional<ButtonType> result = alert.showAndWait();
+            } else {
+                u = new User(nomtf.getText(), prenomtf.getText(), txtdate.getEditor().getText(), txtsexe.getValue(),
+                        txtlogin.getText(), mdptf.getText(), txtmail.getText(), "client", Integer.parseInt(txtnumero.getText()), txtadresse.getText(), getImageUrl);
 
-                stage.initStyle(StageStyle.UNDECORATED);
-                stage.setX(windows.getMinX());
-                stage.setY(windows.getMinY());
-                stage.setWidth(windows.getWidth());
-                stage.setHeight(windows.getHeight());
+                ius.addClient(u);
 
-                stage.setScene(scene);
-                stage.show();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("inscription");
+                alert.setHeaderText("succés d'inscription, passez à interface login afin de s'authentifier");
+                Optional<ButtonType> result = alert.showAndWait();
+                SendMail.sendmail(txtmail.getText(), "bienvenu à Tunisia Mall", "test message");
+                if (result.get() == ButtonType.OK) {
+                    Stage stage = new Stage();
+                    ((Node) event.getSource()).getScene().getWindow().hide();
+                    Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+                    Scene scene = new Scene(root);
+
+                    stage.initStyle(StageStyle.UNDECORATED);
+                    stage.setX(windows.getMinX());
+                    stage.setY(windows.getMinY());
+                    stage.setWidth(windows.getWidth());
+                    stage.setHeight(windows.getHeight());
+
+                    stage.setScene(scene);
+                    stage.show();
+                }
             }
-
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("erreur champs vides");
+            alert.setHeaderText("il ya des champs vides");
+            Optional<ButtonType> result = alert.showAndWait();
         }
     }
 

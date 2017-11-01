@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="663.0" prefWidth="1134.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.ForumGesController">
+   <children>
+      <TableView fx:id="tbforum" layoutX="40.0" layoutY="281.0" onMouseClicked="#select" prefHeight="363.0" prefWidth="1075.0">
+         <columns>
+            <TableColumn fx:id="tb_categorie" prefWidth="155.0" text="categorie" />
+            <TableColumn fx:id="tb_description" prefWidth="633.0000152587891" text="description" />
+            <TableColumn fx:id="tb_ahmedplease" prefWidth="152.0" text="date" />
+            <TableColumn fx:id="tb_nom_user" prefWidth="134.0" text="login" />
+         </columns>
+      </TableView>
+      <TextField fx:id="txt_cat" layoutX="190.0" layoutY="98.0" prefHeight="41.0" prefWidth="221.0" />
+      <HBox layoutY="14.0" prefHeight="60.0" prefWidth="1134.0" styleClass="box-topo">
+         <children>
+            <Label fx:id="lbTitulo1" layoutX="10.0" maxWidth="1.7976931348623157E308" styleClass="titulo" text="Tunisia Mall Forum" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="445.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="txtPesquisar" prefHeight="50.0" prefWidth="417.0" promptText="chercher" styleClass="pesquisar" />
+            <ToggleButton mnemonicParsing="false" onAction="#rechercherB">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="pesquisar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" onAction="#ajouter" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-add" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#modifier" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-editar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#supprimer" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-excluir" />
+               </styleClass>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menu" />
+               </toggleGroup>
+            </ToggleButton>
+         </children>
+         <stylesheets>
+            <URL value="@CSS/default.css" />
+            <URL value="@CSS/custom.css" />
+         </stylesheets>
+      </HBox>
+      <TextArea fx:id="txt_desc" layoutX="190.0" layoutY="162.0" prefHeight="102.0" prefWidth="528.0" />
+      <Label layoutX="47.0" layoutY="104.0" prefHeight="29.0" prefWidth="135.0" text="Catégorie :" textFill="#b841a2">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="193.0" text="Description :" textFill="#b841a2">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+   <stylesheets>
+      <URL value="@../../../../../teq/2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/custom.css" />
+      <URL value="@../../../../../teq/2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/default.css" />
+   </stylesheets>
+</AnchorPane>
