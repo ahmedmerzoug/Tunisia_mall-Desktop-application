@@ -109,7 +109,7 @@ public class EventController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) {    	
         IUserService ibs = new UserService();
         txtchoixuser.setItems(ibs.displayall());
 
