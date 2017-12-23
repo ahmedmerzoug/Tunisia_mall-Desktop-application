@@ -42,6 +42,7 @@ import tunisia_mall.Interface.IUserService;
 import tunisia_mall.Services.UserService;
 import tunisia_mall.models.Boutique;
 import tunisia_mall.models.User;
+import tunisia_mall.util.BCrypt;
 
 /**
  * FXML Controller class
@@ -133,8 +134,8 @@ public class NewaccountController implements Initializable {
                 Optional<ButtonType> result = alert.showAndWait();
             } else {
                 u = new User(nomtf.getText(), prenomtf.getText(), txtdate.getEditor().getText(), txtsexe.getValue(),
-                        txtlogin.getText(), mdptf.getText(), txtmail.getText(), "client", Integer.parseInt(txtnumero.getText()), txtadresse.getText(), getImageUrl);
-
+                        txtlogin.getText(), hashmdp(mdptf.getText()), txtmail.getText(),"a:0:{}", Integer.parseInt(txtnumero.getText()), txtadresse.getText(), getImageUrl);
+                                    
                 ius.addClient(u);
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -166,6 +167,12 @@ public class NewaccountController implements Initializable {
         }
     }
 
+    public String hashmdp(String password)
+    {
+    String hashed = BCrypt.hashpw(password, BCrypt.gensalt()); 
+    return hashed;
+    }
+    
     @FXML
     private void ConnectViaFacebook(ActionEvent event) {
     }

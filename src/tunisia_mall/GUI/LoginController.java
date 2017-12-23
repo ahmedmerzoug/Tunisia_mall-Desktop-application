@@ -34,6 +34,7 @@ import tunisia_mall.Services.BoutiqueService;
 import tunisia_mall.Services.UserService;
 import tunisia_mall.Technique.DataSource;
 import tunisia_mall.models.User;
+import tunisia_mall.util.BCrypt;
 
 public class LoginController {
 
@@ -67,13 +68,14 @@ public class LoginController {
     public boolean isLogin(String user, String pass) throws SQLException {
 
         StartConnection();
+        String query = "select * from user where username = ?";
 
-        String query = "select * from user where login = ? and password = ?";
+      //  String query = "select * from user where login = ? and password = ?";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user);
-            preparedStatement.setString(2, pass);
+           
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
 
@@ -83,10 +85,10 @@ public class LoginController {
                 LoggedUser.setPrenom(resultSet.getString("prenom"));
                 LoggedUser.setDate_naissance(resultSet.getString("date_naissance"));
                 LoggedUser.setSexe(resultSet.getString("sexe"));
-                LoggedUser.setLogin(resultSet.getString("login"));
+                LoggedUser.setLogin(resultSet.getString("username"));
                 LoggedUser.setPassword(resultSet.getString("password"));
-                LoggedUser.setMail(resultSet.getString("mail"));
-                LoggedUser.setRole(resultSet.getString("role"));
+                LoggedUser.setMail(resultSet.getString("email"));
+                LoggedUser.setRole(resultSet.getString("roles"));
                 LoggedUser.setNumero_telephone(resultSet.getInt("numero_telephone"));
                 LoggedUser.setAdresse(resultSet.getString("adresse"));
                 LoggedUser.setSalaire(resultSet.getFloat("salaire"));
@@ -95,7 +97,7 @@ public class LoginController {
                 LoggedUser.setPath(resultSet.getString("path"));
                 LoggedUser.setBoutique(new BoutiqueService().findById(resultSet.getInt("id_boutique")));
 
-                return true;
+                return BCrypt.checkpw(pass, LoggedUser.getPassword());
             } else {
                 return false;
             }
@@ -118,7 +120,7 @@ public class LoginController {
                 IUserService ius = new UserService();
 
                 switch (ius.findbyLogin(txt_login.getText()).getRole()) {
-                    case "admin": {
+                    case "a:1:{i:0;s:10:\"ROLE_ADMIN\";}": {
                         Stage stage = new Stage();
                         ((Node) event.getSource()).getScene().getWindow().hide();
                         Parent root = FXMLLoader.load(getClass().getResource("adminapp.fxml"));
@@ -135,14 +137,13 @@ public class LoginController {
                         break;
                     }
 
-                    case "client": {
+                    case "a:0:{}": {
                         Stage stage = new Stage();
                         ((Node) event.getSource()).getScene().getWindow().hide();
                         Parent root = FXMLLoader.load(getClass().getResource("client_interface_new.fxml"));
                         Scene scene = new Scene(root);
 
                         /////this code here is added my ahmed merzoug to notify the winner client 
-                        
                         if (LoggedUser.getId_user()==ius.maxwidin_winnertable() )
                         {
                             
@@ -172,7 +173,7 @@ public class LoginController {
                         break;
                     }
 
-                    case "shopowner": {
+                    case "a:1:{i:0;s:16:\"ROLE_RESPONSABLE\";}": {
                         Stage stage = new Stage();
                         ((Node) event.getSource()).getScene().getWindow().hide();
                         Parent root = FXMLLoader.load(getClass().getResource("shopownerapp.fxml"));
@@ -196,10 +197,16 @@ public class LoginController {
                 alert.setHeaderText("login ou mot de passe incorrecte");
                 Optional<ButtonType> result = alert.showAndWait();
             }
+            
+                 System.out.println("le user est:"+LoggedUser);
+
+            
         } catch (SQLException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+
+        
     }
 
     @FXML
