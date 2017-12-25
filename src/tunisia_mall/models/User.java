@@ -32,7 +32,16 @@ public class User {
     private String date_expiration;
     private String path;
     private Boutique boutique;
-
+    private String username_canonical;
+    private String email_canonical;
+    private int enabled;
+    private String salt;
+    private Date last_login;
+    private String confirmation_token;
+    private Date password_requested_at;
+   
+    
+    
     public User() {
     }
  
@@ -315,8 +324,10 @@ public class User {
 
     @Override
     public String toString() {
-        return  ""  + nom  + " "+ prenom  ;
+        return "User{" + "id_user=" + id_user + ", nom=" + nom + ", prenom=" + prenom + ", date_naissance=" + date_naissance + ", sexe=" + sexe + ", login=" + login + ", password=" + password + ", mail=" + mail + ", role=" + role + ", numero_telephone=" + numero_telephone + ", adresse=" + adresse + ", salaire=" + salaire + ", date_embauche=" + date_embauche + ", date_expiration=" + date_expiration + ", path=" + path + ", boutique=" + boutique + '}';
     }
+
+   
 
     public java.sql.Date convert(String date) throws ParseException {
 
@@ -371,5 +382,63 @@ public class User {
     public void setSexe(String sexe) {
         this.sexe = sexe;
     }
+
+    public String getUsername_canonical() {
+        return username_canonical;
+    }
+
+    public void setUsername_canonical(String username_canonical) {
+        this.username_canonical = username_canonical;
+    }
+
+    public String getEmail_canonical() {
+        return email_canonical;
+    }
+
+    public void setEmail_canonical(String email_canonical) {
+        this.email_canonical = email_canonical;
+    }
+
+    public int getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public Date getLast_login() {
+        return last_login;
+    }
+
+    public void setLast_login(Date last_login) {
+        this.last_login = last_login;
+    }
+
+    public String getConfirmation_token() {
+        return confirmation_token;
+    }
+
+    public void setConfirmation_token(String confirmation_token) {
+        this.confirmation_token = confirmation_token;
+    }
+
+    public Date getPassword_requested_at() {
+        return password_requested_at;
+    }
+
+    public void setPassword_requested_at(Date password_requested_at) {
+        this.password_requested_at = password_requested_at;
+    }
+    
+    
 
 }

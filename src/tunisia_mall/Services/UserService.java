@@ -35,7 +35,7 @@ public class UserService implements IUserService {
 
     @Override
     public void add(User t) {
-        String req = "insert into user (nom,prenom,date_naissance,sexe,login,password,mail,role,numero_telephone,adresse,salaire,date_embauche,date_expiration,path,id_boutique) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String req = "insert into user (nom,prenom,date_naissance,sexe,username,password,mail,role,numero_telephone,adresse,salaire,date_embauche,date_expiration,path,id_boutique) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);
@@ -77,7 +77,7 @@ public class UserService implements IUserService {
 
     @Override
     public void update(User t) {
-        String req = "update user set nom=?,prenom=?,date_naissance=?,sexe=?,login=?,password=?,mail=?,role=?,numero_telephone=?,adresse=?,salaire=?,date_embauche=?,date_expiration=?,path=?,id_boutique=? where id_user = ?";
+        String req = "update user set nom=?,prenom=?,date_naissance=?,sexe=?,username=?,password=?,mail=?,role=?,numero_telephone=?,adresse=?,salaire=?,date_embauche=?,date_expiration=?,path=?,id_boutique=? where id_user = ?";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);
@@ -131,23 +131,14 @@ public class UserService implements IUserService {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                user = new User(
-                        resultSet.getInt("id_user"),
-                        resultSet.getString("nom"),
-                        resultSet.getString("prenom"),
-                        User.convert(resultSet.getDate("date_naissance")),
-                        resultSet.getString("sexe"),
-                        resultSet.getString("username"),
-                        resultSet.getString("password"),
-                        resultSet.getString("email"),
-                        resultSet.getString("roles"), 
-                        resultSet.getInt("numero_telephone"),
-                        resultSet.getString("adresse"),
-                        resultSet.getFloat("salaire"),
-                        User.convert(resultSet.getDate("date_embauche")),
-                        User.convert(resultSet.getDate("date_expiration")),
-                        resultSet.getString("path"), 
-                        new BoutiqueService().findById(resultSet.getInt("id_boutique")));
+                user = new User(resultSet.getInt(1), resultSet.getString(2),
+                        resultSet.getString(3), User.convert(resultSet.getDate(4)),
+                        resultSet.getString(5), resultSet.getString(6), resultSet.getString(7),
+                        resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10),
+                        resultSet.getString(11), resultSet.getFloat(12),
+                        User.convert(resultSet.getDate(13)),
+                        User.convert(resultSet.getDate(14)),
+                        resultSet.getString(15), new BoutiqueService().findById(resultSet.getInt(16)));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -166,23 +157,7 @@ public class UserService implements IUserService {
             preparedStatement.setString(2, role);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                user = new User(
-                        resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        User.convert(resultSet.getDate(4)),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getString(7),
-                        resultSet.getString(8),
-                        resultSet.getString(9), 
-                        resultSet.getInt(10),
-                        resultSet.getString(11),
-                        resultSet.getFloat(12),
-                        User.convert(resultSet.getDate(13)),
-                        User.convert(resultSet.getDate(14)),
-                        resultSet.getString(15),
-                        new BoutiqueService().findById(resultSet.getInt(16)));
+                user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), User.convert(resultSet.getDate(4)), resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10), resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)), User.convert(resultSet.getDate(14)), resultSet.getString(15), new BoutiqueService().findById(resultSet.getInt(16)));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -200,23 +175,7 @@ public class UserService implements IUserService {
             preparedStatement = connection.prepareStatement(req);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User user = new User(
-                        resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        User.convert(resultSet.getDate(4)),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getString(7),
-                        resultSet.getString(8),
-                        resultSet.getString(9),
-                        resultSet.getInt(10),
-                        resultSet.getString(11),
-                        resultSet.getFloat(12),
-                        User.convert(resultSet.getDate(13)),
-                        User.convert(resultSet.getDate(14)),
-                        resultSet.getString(15),
-                        new BoutiqueService().findById(resultSet.getInt(16)));
+                User user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), User.convert(resultSet.getDate(4)), resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10), resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)), User.convert(resultSet.getDate(14)), resultSet.getString(15), new BoutiqueService().findById(resultSet.getInt(16)));
                 users.add(user);
             }
         } catch (SQLException ex) {
@@ -235,39 +194,12 @@ public class UserService implements IUserService {
             preparedStatement = connection.prepareStatement(req);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User use = new User(
-//                        resultSet.getInt(1),
-//                        resultSet.getString(2), 
-//                        resultSet.getString(3),
-//                        User.convert(resultSet.getDate(4)),
-//                        resultSet.getString(5),
-//                        resultSet.getString(6),
-//                        resultSet.getString(7),
-//                        resultSet.getString(8),
-//                        resultSet.getString(9),
-//                        resultSet.getInt(10),
-//                        resultSet.getString(11),
-//                        resultSet.getFloat(12),
-//                        User.convert(resultSet.getDate(13)),
-//                        User.convert(resultSet.getDate(14)),
-//                        resultSet.getString(15),
-//                        new BoutiqueService().findById(resultSet.getInt(16)));
-                        resultSet.getInt(1),
-                        resultSet.getString(13),
-                        resultSet.getString(14),
-                        User.convert(resultSet.getDate(15)),
-                        resultSet.getString(16),
-                        resultSet.getString(2),
-                        resultSet.getString(8),
-                        resultSet.getString(4),
-                        resultSet.getString(12),
-                        resultSet.getInt(17),
-                        resultSet.getString(18),
-                        resultSet.getFloat(19),
-                        User.convert(resultSet.getDate(20)),
-                        User.convert(resultSet.getDate(21)),
-                        resultSet.getString(19),
-                        new BoutiqueService().findById(resultSet.getInt(23)));
+                User use = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+                        User.convert(resultSet.getDate(4)), resultSet.getString(5), resultSet.getString(6),
+                        resultSet.getString(7), resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10),
+                        resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)),
+                        User.convert(resultSet.getDate(14)), resultSet.getString(15),
+                        new BoutiqueService().findById(resultSet.getInt(16)));
                 listeUser.addAll(use);
             }
         } catch (SQLException ex) {
@@ -279,10 +211,11 @@ public class UserService implements IUserService {
 
     @Override
     public void addClient(User t) {
-        String req = "insert into user (nom,prenom,date_naissance,sexe,username,password,email,roles,numero_telephone,adresse,path) values (?,?,?,?,?,?,?,?,?,?,?)";
+        String req = "insert into user (nom,prenom,date_naissance,sexe,username,password,email,roles,numero_telephone,adresse,path,enabled,username_canonical,email_canonical) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);
+
             preparedStatement.setString(1, t.getNom());
             preparedStatement.setString(2, t.getPrenom());
             try {
@@ -298,6 +231,9 @@ public class UserService implements IUserService {
             preparedStatement.setInt(9, t.getNumero_telephone());
             preparedStatement.setString(10, t.getAdresse());
             preparedStatement.setString(11, t.getPath());
+            preparedStatement.setInt(12, 1);
+            preparedStatement.setString(13, t.getLogin());
+            preparedStatement.setString(14, t.getMail());
 
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
@@ -315,23 +251,7 @@ public class UserService implements IUserService {
             preparedStatement.setString(1, s);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                user = new User(
-                        resultSet.getInt(1),
-                        resultSet.getString(13),
-                        resultSet.getString(14),
-                        User.convert(resultSet.getDate(15)),
-                        resultSet.getString(16),
-                        resultSet.getString(2),
-                        resultSet.getString(8),
-                        resultSet.getString(4),
-                        resultSet.getString(12),
-                        resultSet.getInt(17),
-                        resultSet.getString(18),
-                        resultSet.getFloat(19),
-                        User.convert(resultSet.getDate(20)),
-                        User.convert(resultSet.getDate(21)),
-                        resultSet.getString(19),
-                        new BoutiqueService().findById(resultSet.getInt(23)));
+                user = new User(resultSet.getInt(1), resultSet.getString("nom"), resultSet.getString("prenom"), User.convert(resultSet.getDate("date_naissance")), resultSet.getString("sexe"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("email"), resultSet.getString("roles"), resultSet.getInt("numero_telephone"), resultSet.getString("adresse"), resultSet.getFloat("salaire"), User.convert(resultSet.getDate("date_embauche")), User.convert(resultSet.getDate("date_expiration")), resultSet.getString("path"), new BoutiqueService().findById(resultSet.getInt("id_boutique")));
                 break;
             }
         } catch (SQLException ex) {
@@ -343,7 +263,7 @@ public class UserService implements IUserService {
     @Override
     public Boolean existLogin(String s) {
         User user = null;
-        String req = "select * from user where login =? ";
+        String req = "select * from user where username =? ";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);
@@ -362,7 +282,7 @@ public class UserService implements IUserService {
     @Override
     public boolean findbyRole(String role) {
         User user = null;
-        String req = "select * from user where role=?";
+        String req = "select * from user where roles=?";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);
@@ -370,7 +290,7 @@ public class UserService implements IUserService {
             preparedStatement.setString(1, role);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), User.convert(resultSet.getDate(4)), resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10), resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)), User.convert(resultSet.getDate(14)), resultSet.getString(15), new BoutiqueService().findById(resultSet.getInt(16)));
+                user = new User(resultSet.getInt(1), resultSet.getString("nom"), resultSet.getString("prenom"), User.convert(resultSet.getDate("date_naissance")), resultSet.getString("sexe"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("email"), resultSet.getString("roles"), resultSet.getInt("numero_telephone"), resultSet.getString("adresse"), resultSet.getFloat("salaire"), User.convert(resultSet.getDate("date_embauche")), User.convert(resultSet.getDate("date_expiration")), resultSet.getString("path"), new BoutiqueService().findById(resultSet.getInt("id_boutique")));
             }
             return true;
         } catch (SQLException ex) {
@@ -382,7 +302,7 @@ public class UserService implements IUserService {
     @Override
     public ObservableList<User> displayallemp() {
         ObservableList<User> listeuser = FXCollections.observableArrayList();
-        String req = "select * from user where role=? ";
+        String req = "select * from user where roles=? ";
         PreparedStatement preparedStatement;
 
         try {
@@ -390,22 +310,7 @@ public class UserService implements IUserService {
             preparedStatement.setString(1, "Employe");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User u = new User(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        User.convert(resultSet.getDate(4)),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getString(7),
-                        resultSet.getString(8),
-                        resultSet.getString(9),
-                        resultSet.getInt(10),
-                        resultSet.getString(11),
-                        resultSet.getFloat(12),
-                        User.convert(resultSet.getDate(13)),
-                        User.convert(resultSet.getDate(14)),
-                        resultSet.getString(15),
-                        new BoutiqueService().findById(resultSet.getInt(16)));
+                User u = new User(resultSet.getInt(1), resultSet.getString("nom"), resultSet.getString("prenom"), User.convert(resultSet.getDate("date_naissance")), resultSet.getString("sexe"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("email"), resultSet.getString("roles"), resultSet.getInt("numero_telephone"), resultSet.getString("adresse"), resultSet.getFloat("salaire"), User.convert(resultSet.getDate("date_embauche")), User.convert(resultSet.getDate("date_expiration")), resultSet.getString("path"), new BoutiqueService().findById(resultSet.getInt("id_boutique")));
 
                 listeuser.add(u);
 
@@ -419,7 +324,7 @@ public class UserService implements IUserService {
     @Override
     public ObservableList<User> displayallempl(int i) {
         ObservableList<User> listeuser = FXCollections.observableArrayList();
-        String req = "select * from user where role=? and id_boutique=?";
+        String req = "select * from user where roles=? and id_boutique=?";
         PreparedStatement preparedStatement;
 
         try {
@@ -428,22 +333,7 @@ public class UserService implements IUserService {
             preparedStatement.setInt(2, i);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User u = new User(resultSet.getInt(1), 
-                        resultSet.getString(2), 
-                        resultSet.getString(3), 
-                        User.convert(resultSet.getDate(4)),
-                        resultSet.getString(5),
-                        resultSet.getString(6), 
-                        resultSet.getString(7), 
-                        resultSet.getString(8),
-                        resultSet.getString(9),
-                        resultSet.getInt(10), 
-                        resultSet.getString(11), 
-                        resultSet.getFloat(12), 
-                        User.convert(resultSet.getDate(13)),
-                        User.convert(resultSet.getDate(14)),
-                        resultSet.getString(15), 
-                        new BoutiqueService().findById(resultSet.getInt(16)));
+                User u = new User(resultSet.getInt(1), resultSet.getString("nom"), resultSet.getString("prenom"), User.convert(resultSet.getDate("date_naissance")), resultSet.getString("sexe"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("email"), resultSet.getString("roles"), resultSet.getInt("numero_telephone"), resultSet.getString("adresse"), resultSet.getFloat("salaire"), User.convert(resultSet.getDate("date_embauche")), User.convert(resultSet.getDate("date_expiration")), resultSet.getString("path"), new BoutiqueService().findById(resultSet.getInt("id_boutique")));
 
                 listeuser.add(u);
 
@@ -457,7 +347,7 @@ public class UserService implements IUserService {
     @Override
     public ObservableList<User> displayallclient() {
         ObservableList<User> listeuser = FXCollections.observableArrayList();
-        String req = "select * from user where role=?";
+        String req = "select * from user where roles=?";
         PreparedStatement preparedStatement;
 
         try {
@@ -465,10 +355,7 @@ public class UserService implements IUserService {
             preparedStatement.setString(1, "client");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User u = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), User.convert(resultSet.getDate(4)),
-                        resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getString(9),
-                        resultSet.getInt(10), resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)),
-                        User.convert(resultSet.getDate(14)), resultSet.getString(15)/*, new BoutiqueService().findById(resultSet.getInt(16))*/);
+                User u = new User(resultSet.getInt(1), resultSet.getString("nom"), resultSet.getString("prenom"), User.convert(resultSet.getDate("date_naissance")), resultSet.getString("sexe"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("email"), resultSet.getString("roles"), resultSet.getInt("numero_telephone"), resultSet.getString("adresse"), resultSet.getFloat("salaire"), User.convert(resultSet.getDate("date_embauche")), User.convert(resultSet.getDate("date_expiration")), resultSet.getString("path"), new BoutiqueService().findById(resultSet.getInt("id_boutique")));
                 listeuser.add(u);
 
             }
@@ -481,7 +368,7 @@ public class UserService implements IUserService {
     @Override
     public ObservableList<String> displayallclientName() {
         ObservableList<String> listeuser = FXCollections.observableArrayList();
-        String req = "select * from user where role=?";
+        String req = "select * from user where roles=?";
         PreparedStatement preparedStatement;
         String nomprenom;
         try {
@@ -489,10 +376,8 @@ public class UserService implements IUserService {
             preparedStatement.setString(1, "client");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User u = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), User.convert(resultSet.getDate(4)),
-                        resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getString(9),
-                        resultSet.getInt(10), resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)),
-                        User.convert(resultSet.getDate(14)), resultSet.getString(15), new BoutiqueService().findById(resultSet.getInt(16)));
+                User u = new User(resultSet.getInt(1), resultSet.getString("nom"), resultSet.getString("prenom"), User.convert(resultSet.getDate("date_naissance")), resultSet.getString("sexe"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("email"), resultSet.getString("roles"), resultSet.getInt("numero_telephone"), resultSet.getString("adresse"), resultSet.getFloat("salaire"), User.convert(resultSet.getDate("date_embauche")), User.convert(resultSet.getDate("date_expiration")), resultSet.getString("path"), new BoutiqueService().findById(resultSet.getInt("id_boutique")));
+
                 nomprenom = u.getNom() + " " + u.getPrenom();
                 listeuser.add(nomprenom);
 
@@ -506,7 +391,7 @@ public class UserService implements IUserService {
     @Override
     public ObservableList<User> displayallprop() {
         ObservableList<User> listeuser = FXCollections.observableArrayList();
-        String req = "select * from user where role=?";
+        String req = "select * from user where roles=?";
         PreparedStatement preparedStatement;
 
         try {
@@ -514,10 +399,7 @@ public class UserService implements IUserService {
             preparedStatement.setString(1, "shopowner");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User u = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), User.convert(resultSet.getDate(4)),
-                        resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getString(9),
-                        resultSet.getInt(10), resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)),
-                        User.convert(resultSet.getDate(14)), resultSet.getString(15), new BoutiqueService().findById(resultSet.getInt(16)));
+                User u = new User(resultSet.getInt(1), resultSet.getString("nom"), resultSet.getString("prenom"), User.convert(resultSet.getDate("date_naissance")), resultSet.getString("sexe"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("email"), resultSet.getString("roles"), resultSet.getInt("numero_telephone"), resultSet.getString("adresse"), resultSet.getFloat("salaire"), User.convert(resultSet.getDate("date_embauche")), User.convert(resultSet.getDate("date_expiration")), resultSet.getString("path"), new BoutiqueService().findById(resultSet.getInt("id_boutique")));
 
                 listeuser.add(u);
 
@@ -530,7 +412,7 @@ public class UserService implements IUserService {
 
     @Override
     public void desactivercompte(int id) {
-        String req = "update user set login=? where id_user=?";
+        String req = "update user set username=? where id_user=?";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);
@@ -545,7 +427,7 @@ public class UserService implements IUserService {
     @Override
     public ObservableList<User> findEmployeByName(String search) {
         ObservableList<User> listepromo = FXCollections.observableArrayList();
-        String requete = "select * from user where nom=? and role=?";
+        String requete = "select * from user where nom=? and roles=?";
         //// "select * from user where username like '"+search+"
         // System.out.println(requete);
         PreparedStatement preparedStatement;
@@ -589,7 +471,7 @@ public class UserService implements IUserService {
     @Override
     public ObservableList<User> findClientByName(String search) {
         ObservableList<User> listepromo = FXCollections.observableArrayList();
-        String requete = "select * from user where nom=? and role=?";
+        String requete = "select * from user where nom=? and roles=?";
         //// "select * from user where username like '"+search+"
         // System.out.println(requete);
         PreparedStatement preparedStatement;
@@ -633,7 +515,7 @@ public class UserService implements IUserService {
     @Override
     public ObservableList<User> findPropByName(String search) {
         ObservableList<User> listepromo = FXCollections.observableArrayList();
-        String requete = "select * from user where nom = ? and role = ?";
+        String requete = "select * from user where nom = ? and roles = ?";
         //// "select * from user where username like '"+search+"
         // System.out.println(requete);
         PreparedStatement preparedStatement;
@@ -676,7 +558,7 @@ public class UserService implements IUserService {
 
     @Override
     public User findPropByIdB(int id) {
-        String requete = "select * from user where id_boutique = ? and role = ?";
+        String requete = "select * from user where id_boutique = ? and roles = ?";
 
         PreparedStatement preparedStatement;
         User pro = new User();
