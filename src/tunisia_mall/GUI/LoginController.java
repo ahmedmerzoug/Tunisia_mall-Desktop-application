@@ -3,11 +3,13 @@ package tunisia_mall.GUI;
 import com.github.plushaze.traynotification.notification.Notifications;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -68,7 +70,7 @@ public class LoginController {
 
         StartConnection();
 
-        String query = "select * from user where login = ? and password = ?";
+        String query = "select * from user where username = ? and password = ?";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(query);
@@ -83,10 +85,10 @@ public class LoginController {
                 LoggedUser.setPrenom(resultSet.getString("prenom"));
                 LoggedUser.setDate_naissance(resultSet.getString("date_naissance"));
                 LoggedUser.setSexe(resultSet.getString("sexe"));
-                LoggedUser.setLogin(resultSet.getString("login"));
+                LoggedUser.setLogin(resultSet.getString("username"));
                 LoggedUser.setPassword(resultSet.getString("password"));
-                LoggedUser.setMail(resultSet.getString("mail"));
-                LoggedUser.setRole(resultSet.getString("role"));
+                LoggedUser.setMail(resultSet.getString("email"));
+                LoggedUser.setRole(resultSet.getString("roles"));
                 LoggedUser.setNumero_telephone(resultSet.getInt("numero_telephone"));
                 LoggedUser.setAdresse(resultSet.getString("adresse"));
                 LoggedUser.setSalaire(resultSet.getFloat("salaire"));
@@ -142,25 +144,19 @@ public class LoginController {
                         Scene scene = new Scene(root);
 
                         /////this code here is added my ahmed merzoug to notify the winner client 
-                        
-                        if (LoggedUser.getId_user()==ius.maxwidin_winnertable() )
-                        {
-                            
-                            
-                            
+                        if (LoggedUser.getId_user() == ius.maxwidin_winnertable()) {
+
                             String title = "Congratulations sir";
-        String message = "The winner of the day is: ";
-        Notifications notification = Notifications.SUCCESS;
-        
-        TrayNotification tray = new TrayNotification();
-        tray.setTitle(title);
-        tray.setMessage(message);
-        tray.setNotificationType(NotificationType.NOTICE);
-        tray.showAndWait();
+                            String message = "The winner of the day is: ";
+                            Notifications notification = Notifications.SUCCESS;
+
+                            TrayNotification tray = new TrayNotification();
+                            tray.setTitle(title);
+                            tray.setMessage(message);
+                            tray.setNotificationType(NotificationType.NOTICE);
+                            tray.showAndWait();
                         }
-                        
-                        
-                        
+
                         stage.initStyle(StageStyle.UNDECORATED);
                         stage.setX(windows.getMinX());
                         stage.setY(windows.getMinY());
@@ -237,4 +233,5 @@ public class LoginController {
         stage.close();
     }
 
+    
 }

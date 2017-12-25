@@ -140,9 +140,13 @@ public class EvenementService implements IEvenementService {
             preparedStatement = connection.prepareStatement(req);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Evenement b = new Evenement(resultSet.getInt(1), resultSet.getString(2),
-                        resultSet.getString(3), Evenement.convert(resultSet.getDate(4)),
-                        resultSet.getString(5), new UserService().findById(resultSet.getInt(6)));
+                Evenement b = new Evenement(
+                        resultSet.getInt("id_evenement"),
+                        resultSet.getString("nom"),
+                        resultSet.getString("description"),
+                        Evenement.convert(resultSet.getDate("date")),
+                        resultSet.getString("path"),
+                        new UserService().findById(resultSet.getInt("id_user")));
                 listeevent.add(b);
 
             }

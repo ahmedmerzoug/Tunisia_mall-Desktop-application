@@ -5,9 +5,16 @@
  */
 package tunisia_mall.GUI;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,8 +45,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import org.controlsfx.control.textfield.TextFields;
+import static tunisia_mall.GUI.NewaccountController.getImageUrl;
 import tunisia_mall.Interface.IEvenementService;
 import tunisia_mall.Interface.IPubliciteService;
 import tunisia_mall.Interface.IUserService;
@@ -101,6 +111,11 @@ public class EventController implements Initializable {
     @FXML
     private ToggleGroup menu1;
 
+    @FXML
+    private JFXButton btinsertimage;
+
+    String imgName;
+
     Connection connection;
 
     private ObservableList<Evenement> data;
@@ -109,7 +124,7 @@ public class EventController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {    	
+    public void initialize(URL url, ResourceBundle rb) {
         IUserService ibs = new UserService();
         txtchoixuser.setItems(ibs.displayall());
 
@@ -131,28 +146,33 @@ public class EventController implements Initializable {
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
 
                 filterEmployeList((String) oldValue, (String) newValue);
-    }
+            }
         });
     }
 
     @FXML
     private void ajouter(ActionEvent event) {
         if (!txt_eventname.getText().equals("") && !txt_description.getText().equals("")
-                && !txtdate.getEditor().getText().equals("") && !txtpath.getText().equals("")) {
-        IEvenementService ies = new EvenementService();
-        Evenement e = new Evenement(txt_eventname.getText(), txt_description.getText(),
-                txtdate.getEditor().getText(), txtpath.getText(), txtchoixuser.getValue());
-        ies.add(e);
-            SendMail.sendmail(TableEvent.getSelectionModel().getSelectedItem().getUser().getMail(),
-                    "ajout evenement", "votre evenement a été crée, nom evenement: " + e.toString());
+                && !txtdate.getEditor().getText().equals("") && !imgName.equals("")) {
+            IEvenementService ies = new EvenementService();
+            Evenement e = new Evenement(
+                    txt_eventname.getText(),
+                    txt_description.getText(),
+                    txtdate.getEditor().getText(),
+                    imgName,
+                    txtchoixuser.getValue()
+            );
+            ies.add(e);
+            afficher();
 
-        afficher();
+//             SendMail.sendmail(TableEvent.getSelectionModel().getSelectedItem().getUser().getMail(),
+//                    "ajout evenement", "votre evenement a été crée, nom evenement: " + e.toString());
         } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("erreur champs vides");
             alert.setHeaderText("il ya des champs vides");
             Optional<ButtonType> result = alert.showAndWait();
-    }
+        }
 
     }
 
@@ -161,17 +181,26 @@ public class EventController implements Initializable {
         String nom = txt_eventname.getText();
         String des = txt_description.getText();
         String datee = txtdate.getEditor().getText();
-        String path = txtpath.getText();
+//        String path = txtpath.getText();
+//        imgName = btinsertimage.getText();
+//        btinsertimage.setText(path);
         User u = txtchoixuser.getValue();
+        System.out.println("in event " + imgName);
+        System.out.println(btinsertimage.getText());
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            Evenement e = new Evenement(nom, des, datee, path, u);
+
+            if (imgName == null) {
+                imgName=btinsertimage.getText();
+            } 
+
+            Evenement e = new Evenement(nom, des, datee, imgName, u);
             e.setId_evenement(Integer.parseInt(idnew));
             IEvenementService ies = new EvenementService();
             ies.update(e);
-            SendMail.sendmail(TableEvent.getSelectionModel().getSelectedItem().getUser().getMail(),
-                    "Modification des informations d'evenement", "nous vous informons qu il y a des modifications d evenement " + e.toString());
+//            SendMail.sendmail(TableEvent.getSelectionModel().getSelectedItem().getUser().getMail(),
+//                    "Modification des informations d'evenement", "nous vous informons qu il y a des modifications d evenement " + e.toString());
 
 //        ies.add(e);
             afficher();
@@ -190,8 +219,8 @@ public class EventController implements Initializable {
                 IEvenementService ips = new EvenementService();
                 System.out.println(TableEvent.getSelectionModel().getSelectedItem().getUser().getMail());
                 ips.remove(TableEvent.getSelectionModel().getSelectedItem().getId_evenement());
-                SendMail.sendmail(TableEvent.getSelectionModel().getSelectedItem().getUser().getMail(),
-                        "Annulation d evenement", "nous sommes désolés mais l evenement est annulé");
+//                SendMail.sendmail(TableEvent.getSelectionModel().getSelectedItem().getUser().getMail(),
+//                        "Annulation d evenement", "nous sommes désolés mais l evenement est annulé");
                 afficher();
             }
         }
@@ -230,6 +259,7 @@ public class EventController implements Initializable {
     void showPubDetails(Evenement e) throws ParseException {
 
 //        id.setText(String.valueOf(p.getId_pub()));
+System.out.println("id of event is "+e.getId_evenement());
         idnew = Integer.toString(e.getId_evenement());
         SimpleDateFormat inFmt = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat outFmt = new SimpleDateFormat("dd/MM/yyyy");
@@ -248,7 +278,8 @@ public class EventController implements Initializable {
 
         txt_eventname.setText(e.getNom());
         txt_description.setText(e.getDescription());
-        txtpath.setText(e.getPath());
+        btinsertimage.setText(e.getPath());
+        btinsertimage.setText(e.getPath());
         txtchoixuser.setValue(e.getUser());
     }
 
@@ -300,11 +331,49 @@ public class EventController implements Initializable {
 
                 if (filterName.toUpperCase().contains(newValue)) {
                     filteredList.add(user);
-}
+                }
 
             }
             TableEvent.setItems(filteredList);
 
+        }
+    }
+
+    @FXML
+    private void insert_image(ActionEvent event) throws IOException {
+        FileChooser fc = new FileChooser();
+        File selectedfile = fc.showOpenDialog(null);
+        if (selectedfile != null) {
+            getImageUrl = selectedfile.getAbsolutePath();
+            System.out.println("s " + selectedfile);
+            File file = new File(getImageUrl);
+            Image ima = new Image(file.toURI().toString());
+            System.out.println(getImageUrl);
+            int fileNameIndex = getImageUrl.lastIndexOf("\\") + 1;
+
+            imgName = getImageUrl.substring(fileNameIndex);
+            File dest = new File("C:\\wamp64\\www\\TestUser\\web\\images\\amine\\" + imgName);
+            System.out.println("hello" + imgName);
+            copyFileUsingStream(selectedfile, dest);
+        } else {
+            System.out.println("file does not exist");
+        }
+    }
+
+    private static void copyFileUsingStream(File source, File dest) throws IOException {
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(source);
+            os = new FileOutputStream(dest);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+        } finally {
+            is.close();
+            os.close();
         }
     }
 

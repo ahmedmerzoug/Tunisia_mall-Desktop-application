@@ -5,9 +5,16 @@
  */
 package tunisia_mall.GUI;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,8 +44,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import org.controlsfx.control.textfield.TextFields;
+import static tunisia_mall.GUI.NewaccountController.getImageUrl;
 import tunisia_mall.Interface.IEvenementService;
 import tunisia_mall.Interface.IUserService;
 import tunisia_mall.Services.EvenementService;
@@ -98,6 +108,11 @@ public class Event_shopownerController implements Initializable {
 
     String idnew;
 
+    @FXML
+    private JFXButton btinsertimage;
+
+    String imgName;
+
     /**
      * Initializes the controller class.
      */
@@ -119,13 +134,13 @@ public class Event_shopownerController implements Initializable {
         afficher();
         EvenementService ips = new EvenementService();
         TextFields.bindAutoCompletion(recherche, ips.liste_nom_event());
-        
+
         recherche.textProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
 
                 filterEmployeList((String) oldValue, (String) newValue);
-    }
+            }
         });
     }
 
@@ -189,8 +204,12 @@ public class Event_shopownerController implements Initializable {
     @FXML
     private void ajouter(ActionEvent event) {
         IEvenementService ies = new EvenementService();
-        Evenement e = new Evenement(txt_eventname.getText(), txt_description.getText(),
-                txtdate.getEditor().getText(), txtpath.getText(), txtchoixuser.getValue());
+        Evenement e = new Evenement(
+                txt_eventname.getText(),
+                txt_description.getText(),
+                txtdate.getEditor().getText(),
+                imgName,
+                txtchoixuser.getValue());
         ies.add(e);
 
         afficher();
@@ -201,12 +220,17 @@ public class Event_shopownerController implements Initializable {
         String nom = txt_eventname.getText();
         String des = txt_description.getText();
         String datee = txtdate.getEditor().getText();
-        String path = txtpath.getText();
+//        String path = txtpath.getText();
         User u = txtchoixuser.getValue();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            Evenement e = new Evenement(nom, des, datee, path, u);
+
+            if (imgName == null) {
+                imgName = btinsertimage.getText();
+            }
+
+            Evenement e = new Evenement(nom, des, datee, imgName, u);
             e.setId_evenement(Integer.parseInt(idnew));
             IEvenementService ies = new EvenementService();
             ies.update(e);
@@ -257,11 +281,11 @@ public class Event_shopownerController implements Initializable {
 
         txt_eventname.setText(e.getNom());
         txt_description.setText(e.getDescription());
-        txtpath.setText(e.getPath());
+//        txtpath.setText(e.getPath());
+        btinsertimage.setText(e.getPath());
         txtchoixuser.setValue(e.getUser());
     }
 
-    
     void filterEmployeList(String oldValue, String newValue) {
         IEvenementService ius = new EvenementService();
         ObservableList<Evenement> filteredList = FXCollections.observableArrayList();
@@ -276,14 +300,55 @@ public class Event_shopownerController implements Initializable {
 
                 String filterName = user.getNom();
 
-
                 if (filterName.toUpperCase().contains(newValue)) {
                     filteredList.add(user);
-}
+                }
 
             }
             TableEvent.setItems(filteredList);
 
+        }
+    }
+
+    @FXML
+    void insert_image(ActionEvent event) {
+        FileChooser fc = new FileChooser();
+        File selectedfile = fc.showOpenDialog(null);
+        if (selectedfile != null) {
+            getImageUrl = selectedfile.getAbsolutePath();
+            System.out.println("s " + selectedfile);
+            File file = new File(getImageUrl);
+            Image ima = new Image(file.toURI().toString());
+            System.out.println(getImageUrl);
+            int fileNameIndex = getImageUrl.lastIndexOf("\\") + 1;
+
+            imgName = getImageUrl.substring(fileNameIndex);
+            File dest = new File("C:\\wamp64\\www\\TestUser\\web\\images\\amine\\" + imgName);
+            System.out.println("hello" + imgName);
+            try {
+                copyFileUsingStream(selectedfile, dest);
+            } catch (IOException ex) {
+                Logger.getLogger(Event_shopownerController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            System.out.println("file does not exist");
+        }
+    }
+
+    private static void copyFileUsingStream(File source, File dest) throws IOException {
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(source);
+            os = new FileOutputStream(dest);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+        } finally {
+            is.close();
+            os.close();
         }
     }
 

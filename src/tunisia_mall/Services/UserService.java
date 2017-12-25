@@ -131,14 +131,23 @@ public class UserService implements IUserService {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                user = new User(resultSet.getInt(1), resultSet.getString(2),
-                        resultSet.getString(3), User.convert(resultSet.getDate(4)),
-                        resultSet.getString(5), resultSet.getString(6), resultSet.getString(7),
-                        resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10),
-                        resultSet.getString(11), resultSet.getFloat(12),
-                        User.convert(resultSet.getDate(13)),
-                        User.convert(resultSet.getDate(14)),
-                        resultSet.getString(15), new BoutiqueService().findById(resultSet.getInt(16)));
+                user = new User(
+                        resultSet.getInt("id_user"),
+                        resultSet.getString("nom"),
+                        resultSet.getString("prenom"),
+                        User.convert(resultSet.getDate("date_naissance")),
+                        resultSet.getString("sexe"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password"),
+                        resultSet.getString("email"),
+                        resultSet.getString("roles"), 
+                        resultSet.getInt("numero_telephone"),
+                        resultSet.getString("adresse"),
+                        resultSet.getFloat("salaire"),
+                        User.convert(resultSet.getDate("date_embauche")),
+                        User.convert(resultSet.getDate("date_expiration")),
+                        resultSet.getString("path"), 
+                        new BoutiqueService().findById(resultSet.getInt("id_boutique")));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -157,7 +166,23 @@ public class UserService implements IUserService {
             preparedStatement.setString(2, role);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), User.convert(resultSet.getDate(4)), resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10), resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)), User.convert(resultSet.getDate(14)), resultSet.getString(15), new BoutiqueService().findById(resultSet.getInt(16)));
+                user = new User(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        User.convert(resultSet.getDate(4)),
+                        resultSet.getString(5),
+                        resultSet.getString(6),
+                        resultSet.getString(7),
+                        resultSet.getString(8),
+                        resultSet.getString(9), 
+                        resultSet.getInt(10),
+                        resultSet.getString(11),
+                        resultSet.getFloat(12),
+                        User.convert(resultSet.getDate(13)),
+                        User.convert(resultSet.getDate(14)),
+                        resultSet.getString(15),
+                        new BoutiqueService().findById(resultSet.getInt(16)));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -175,7 +200,23 @@ public class UserService implements IUserService {
             preparedStatement = connection.prepareStatement(req);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), User.convert(resultSet.getDate(4)), resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10), resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)), User.convert(resultSet.getDate(14)), resultSet.getString(15), new BoutiqueService().findById(resultSet.getInt(16)));
+                User user = new User(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        User.convert(resultSet.getDate(4)),
+                        resultSet.getString(5),
+                        resultSet.getString(6),
+                        resultSet.getString(7),
+                        resultSet.getString(8),
+                        resultSet.getString(9),
+                        resultSet.getInt(10),
+                        resultSet.getString(11),
+                        resultSet.getFloat(12),
+                        User.convert(resultSet.getDate(13)),
+                        User.convert(resultSet.getDate(14)),
+                        resultSet.getString(15),
+                        new BoutiqueService().findById(resultSet.getInt(16)));
                 users.add(user);
             }
         } catch (SQLException ex) {
@@ -194,12 +235,39 @@ public class UserService implements IUserService {
             preparedStatement = connection.prepareStatement(req);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User use = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
-                        User.convert(resultSet.getDate(4)), resultSet.getString(5), resultSet.getString(6),
-                        resultSet.getString(7), resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10),
-                        resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)),
-                        User.convert(resultSet.getDate(14)), resultSet.getString(15),
-                        new BoutiqueService().findById(resultSet.getInt(16)));
+                User use = new User(
+//                        resultSet.getInt(1),
+//                        resultSet.getString(2), 
+//                        resultSet.getString(3),
+//                        User.convert(resultSet.getDate(4)),
+//                        resultSet.getString(5),
+//                        resultSet.getString(6),
+//                        resultSet.getString(7),
+//                        resultSet.getString(8),
+//                        resultSet.getString(9),
+//                        resultSet.getInt(10),
+//                        resultSet.getString(11),
+//                        resultSet.getFloat(12),
+//                        User.convert(resultSet.getDate(13)),
+//                        User.convert(resultSet.getDate(14)),
+//                        resultSet.getString(15),
+//                        new BoutiqueService().findById(resultSet.getInt(16)));
+                        resultSet.getInt(1),
+                        resultSet.getString(13),
+                        resultSet.getString(14),
+                        User.convert(resultSet.getDate(15)),
+                        resultSet.getString(16),
+                        resultSet.getString(2),
+                        resultSet.getString(8),
+                        resultSet.getString(4),
+                        resultSet.getString(12),
+                        resultSet.getInt(17),
+                        resultSet.getString(18),
+                        resultSet.getFloat(19),
+                        User.convert(resultSet.getDate(20)),
+                        User.convert(resultSet.getDate(21)),
+                        resultSet.getString(19),
+                        new BoutiqueService().findById(resultSet.getInt(23)));
                 listeUser.addAll(use);
             }
         } catch (SQLException ex) {
@@ -211,7 +279,7 @@ public class UserService implements IUserService {
 
     @Override
     public void addClient(User t) {
-        String req = "insert into user (nom,prenom,date_naissance,sexe,login,password,mail,role,numero_telephone,adresse,path) values (?,?,?,?,?,?,?,?,?,?,?)";
+        String req = "insert into user (nom,prenom,date_naissance,sexe,username,password,email,roles,numero_telephone,adresse,path) values (?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);
@@ -240,14 +308,30 @@ public class UserService implements IUserService {
     @Override
     public User findbyLogin(String s) {
         User user = null;
-        String req = "select * from user where login =? ";
+        String req = "select * from user where username =? ";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);
             preparedStatement.setString(1, s);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), User.convert(resultSet.getDate(4)), resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10), resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)), User.convert(resultSet.getDate(14)), resultSet.getString(15), new BoutiqueService().findById(resultSet.getInt(16)));
+                user = new User(
+                        resultSet.getInt(1),
+                        resultSet.getString(13),
+                        resultSet.getString(14),
+                        User.convert(resultSet.getDate(15)),
+                        resultSet.getString(16),
+                        resultSet.getString(2),
+                        resultSet.getString(8),
+                        resultSet.getString(4),
+                        resultSet.getString(12),
+                        resultSet.getInt(17),
+                        resultSet.getString(18),
+                        resultSet.getFloat(19),
+                        User.convert(resultSet.getDate(20)),
+                        User.convert(resultSet.getDate(21)),
+                        resultSet.getString(19),
+                        new BoutiqueService().findById(resultSet.getInt(23)));
                 break;
             }
         } catch (SQLException ex) {
@@ -306,10 +390,22 @@ public class UserService implements IUserService {
             preparedStatement.setString(1, "Employe");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User u = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), User.convert(resultSet.getDate(4)),
-                        resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getString(9),
-                        resultSet.getInt(10), resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)),
-                        User.convert(resultSet.getDate(14)), resultSet.getString(15), new BoutiqueService().findById(resultSet.getInt(16)));
+                User u = new User(resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        User.convert(resultSet.getDate(4)),
+                        resultSet.getString(5),
+                        resultSet.getString(6),
+                        resultSet.getString(7),
+                        resultSet.getString(8),
+                        resultSet.getString(9),
+                        resultSet.getInt(10),
+                        resultSet.getString(11),
+                        resultSet.getFloat(12),
+                        User.convert(resultSet.getDate(13)),
+                        User.convert(resultSet.getDate(14)),
+                        resultSet.getString(15),
+                        new BoutiqueService().findById(resultSet.getInt(16)));
 
                 listeuser.add(u);
 
@@ -332,10 +428,22 @@ public class UserService implements IUserService {
             preparedStatement.setInt(2, i);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User u = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), User.convert(resultSet.getDate(4)),
-                        resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getString(9),
-                        resultSet.getInt(10), resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)),
-                        User.convert(resultSet.getDate(14)), resultSet.getString(15), new BoutiqueService().findById(resultSet.getInt(16)));
+                User u = new User(resultSet.getInt(1), 
+                        resultSet.getString(2), 
+                        resultSet.getString(3), 
+                        User.convert(resultSet.getDate(4)),
+                        resultSet.getString(5),
+                        resultSet.getString(6), 
+                        resultSet.getString(7), 
+                        resultSet.getString(8),
+                        resultSet.getString(9),
+                        resultSet.getInt(10), 
+                        resultSet.getString(11), 
+                        resultSet.getFloat(12), 
+                        User.convert(resultSet.getDate(13)),
+                        User.convert(resultSet.getDate(14)),
+                        resultSet.getString(15), 
+                        new BoutiqueService().findById(resultSet.getInt(16)));
 
                 listeuser.add(u);
 
@@ -606,18 +714,19 @@ public class UserService implements IUserService {
             return pro;
         }
     }
-   /////////this methode is created by ahmed merzoug 
-      @Override
+    /////////this methode is created by ahmed merzoug 
+
+    @Override
     public int maxwidin_winnertable() {
-      int d=0;
+        int d = 0;
         String req = "SELECT id_winner FROM winner WHERE id_tab_winner = (SELECT MAX(id_tab_winner) FROM winner)";
         PreparedStatement preparedStatement;
         try {
-          preparedStatement = connection.prepareStatement(req); 
+            preparedStatement = connection.prepareStatement(req);
             ResultSet resultSet = preparedStatement.executeQuery();
-             while (resultSet.next()) {
-                 System.out.println(req);
-              d= resultSet.getInt(1);
+            while (resultSet.next()) {
+                System.out.println(req);
+                d = resultSet.getInt(1);
 
             }
 /////           d= resultSet.getDate(1);
@@ -625,8 +734,7 @@ public class UserService implements IUserService {
             Logger.getLogger(WinnerService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return d;
-        
-         
+
     }
 
 }

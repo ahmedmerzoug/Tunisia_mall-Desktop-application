@@ -133,7 +133,7 @@ public class NewaccountController implements Initializable {
                 Optional<ButtonType> result = alert.showAndWait();
             } else {
                 u = new User(nomtf.getText(), prenomtf.getText(), txtdate.getEditor().getText(), txtsexe.getValue(),
-                        txtlogin.getText(), mdptf.getText(), txtmail.getText(), "client", Integer.parseInt(txtnumero.getText()), txtadresse.getText(), getImageUrl);
+                        txtlogin.getText(), mdptf.getText(), txtmail.getText(), "client", Integer.parseInt(txtnumero.getText()), txtadresse.getText(), "");
 
                 ius.addClient(u);
 

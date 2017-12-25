@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -70,10 +71,10 @@
          </children>
       </HBox>
       <JFXDatePicker fx:id="txtdate" layoutX="785.0" layoutY="91.0" prefHeight="27.0" prefWidth="243.0" promptText="Date" />
-      <JFXTextField fx:id="txtpath" layoutX="69.0" layoutY="179.0" prefHeight="27.0" prefWidth="243.0" promptText="Path" />
       <JFXComboBox fx:id="txtchoixuser" layoutX="418.0" layoutY="180.0" prefHeight="25.0" prefWidth="243.0" promptText="User" />
       <JFXTextField fx:id="txt_eventname" layoutX="69.0" layoutY="90.0" prefHeight="27.0" prefWidth="243.0" promptText="Nom evenement" />
       <JFXTextField fx:id="txt_description" layoutX="418.0" layoutY="91.0" prefHeight="27.0" prefWidth="243.0" promptText="Description" />
+      <JFXButton fx:id="btinsertimage" layoutX="70.0" layoutY="180.0" onAction="#insert_image" prefHeight="25.0" prefWidth="234.0" text="image evenement" />
    </children>
    <stylesheets>
       <URL value="@CSS/custom.css" />

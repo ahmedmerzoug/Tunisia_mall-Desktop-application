@@ -13,8 +13,19 @@ import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,6 +56,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
+import static jdk.nashorn.internal.objects.NativeRegExp.source;
 import org.controlsfx.control.textfield.TextFields;
 import static tunisia_mall.GUI.NewaccountController.getImageUrl;
 import tunisia_mall.Interface.IBoutiqueService;
@@ -113,6 +125,8 @@ public class PubController implements Initializable {
     private ToggleGroup menu1;
     @FXML
     private JFXButton btinsertimage;
+
+    String imgName;
 
     void afficher() {
         IPubliciteService ips = new PubliciteService();
@@ -191,7 +205,6 @@ public class PubController implements Initializable {
 //        Optional<ButtonType> result = alert.showAndWait();
 //        afficher();
 //    }
-
     @FXML
     void modifier(ActionEvent event) throws ParseException {
         String datedebut = txtdate_debut.getEditor().getText();
@@ -216,7 +229,13 @@ public class PubController implements Initializable {
         p.setDate_fin(datefin);
         p.setPrix(prix);
         p.setPage(page);
-        p.setPath(btinsertimage.getText());
+
+        if (imgName == null) {
+            p.setPath(btinsertimage.getText());
+        } else {
+            p.setPath(imgName);
+        }
+
         p.setBoutique(b);
 
         IPubliciteService ips = new PubliciteService();
@@ -285,7 +304,6 @@ public class PubController implements Initializable {
                     }
                 });
 
-
         afficher();
         IPubliciteService ips = new PubliciteService();
         TextFields.bindAutoCompletion(txtrecherchepage, ips.liste_nom_pub());
@@ -295,27 +313,46 @@ public class PubController implements Initializable {
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
 
                 filterEmployeList((String) oldValue, (String) newValue);
-    }
+            }
         });
 
-        
-        
-        
     }
-    
 
     @FXML
     private void insert_image(ActionEvent event) throws IOException {
         FileChooser fc = new FileChooser();
         File selectedfile = fc.showOpenDialog(null);
-        System.out.println(selectedfile);
         if (selectedfile != null) {
             getImageUrl = selectedfile.getAbsolutePath();
+            System.out.println("s " + selectedfile);
             File file = new File(getImageUrl);
             Image ima = new Image(file.toURI().toString());
             System.out.println(getImageUrl);
+            int fileNameIndex = getImageUrl.lastIndexOf("\\") + 1;
+
+            imgName = getImageUrl.substring(fileNameIndex);
+            File dest = new File("C:\\wamp64\\www\\TestUser\\web\\images\\amine\\" + imgName);
+
+            copyFileUsingStream(selectedfile, dest);
         } else {
             System.out.println("file does not exist");
+        }
+    }
+
+    private static void copyFileUsingStream(File source, File dest) throws IOException {
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(source);
+            os = new FileOutputStream(dest);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+        } finally {
+            is.close();
+            os.close();
         }
     }
 
@@ -323,16 +360,13 @@ public class PubController implements Initializable {
     private void refresh(ActionEvent event) {
         afficher();
     }
-    
-    
-    
+
 //    **********************************************Caution test*********************
-    
-     @FXML
+    @FXML
     void ajouter(ActionEvent event) {
         IPubliciteService ips = new PubliciteService();
         Publicite p = new Publicite(txtdate_debut.getEditor().getText(), txtdate_fin.getEditor().getText(),
-                Float.parseFloat(txtprix.getText()), txtpage.getText(), getImageUrl, txtchoixboutique.getValue());
+                Float.parseFloat(txtprix.getText()), txtpage.getText(), imgName, txtchoixboutique.getValue());
 
         ips.add(p);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -342,11 +376,7 @@ public class PubController implements Initializable {
         afficher();
     }
 
-    
-    
-    
 //    ***************************************************************************
-    
     void filterEmployeList(String oldValue, String newValue) {
         IPubliciteService ius = new PubliciteService();
         ObservableList<Publicite> filteredList = FXCollections.observableArrayList();
@@ -361,10 +391,9 @@ public class PubController implements Initializable {
 
                 String filterName = user.getPage();
 
-
                 if (filterName.toUpperCase().contains(newValue)) {
                     filteredList.add(user);
-}
+                }
 
             }
             TablePub.setItems(filteredList);

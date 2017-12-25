@@ -247,16 +247,18 @@ public class PubliciteService implements IPubliciteService {
             preparedStatement.setDate(2, t.convert(t.getDate_fin()));
             preparedStatement.setFloat(3, t.getPrix());
             preparedStatement.setString(4, t.getPage());
+//
+//            File thefile = new File(t.getPath());
+//            FileInputStream input = null;
+//            try {
+//                input = new FileInputStream(thefile);
+//            } catch (FileNotFoundException ex) {
+//                Logger.getLogger(PubliciteService.class.getName()).log(Level.SEVERE, null, ex);
+//            }
 
-            File thefile = new File(t.getPath());
-            FileInputStream input = null;
-            try {
-                input = new FileInputStream(thefile);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(PubliciteService.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            preparedStatement.setBinaryStream(5, input);
+            preparedStatement.setString(5, t.getPath());
 
-            preparedStatement.setBinaryStream(5, input);
             preparedStatement.setInt(6, t.getBoutique().getId_boutique());
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
