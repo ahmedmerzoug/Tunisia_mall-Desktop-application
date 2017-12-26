@@ -94,7 +94,13 @@ public class Client_interface_newController implements Initializable {
     @FXML
     private void acceuil(ActionEvent event) {
 //        client_interface_new
+              try {
             holderPane.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("Produit_123.fxml"));
+            holderPane.getChildren().add(newLoadedPane);
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 
