@@ -17,7 +17,7 @@ import com.restfb.FacebookClient;
 import com.restfb.Parameter;
 import com.restfb.types.FacebookType;
 import com.sun.nio.sctp.Notification;
-import static com.sun.xml.internal.ws.api.model.wsdl.WSDLBoundOperation.ANONYMOUS.optional;
+////import static com.sun.xml.internal.ws.api.model.wsdl.WSDLBoundOperation.ANONYMOUS.optional;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -36,7 +36,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
-import static sun.text.normalizer.NormalizerImpl.convert;
+/////import static sun.text.normalizer.NormalizerImpl.convert;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
@@ -117,10 +117,10 @@ System.out.println(dateFormat.format(cal.getTime()));
        win.add(pp);
          wintxt.setText("The winner of the day is: \n"+user.toString());
         
-       String accessToken ="EAACEdEose0cBAI8TkdZBbKKLSVLPuVb0ET9KtZAFKwYZA0aSIHGzoBmAqcHhWNjKd3sZATK5kN7mXeyr737QbGYZBw1xfKoacMqTgVAReKmcRxI8gxkCph8aZBFZBwQOu50ZBo1oMMZAsjVSDpTdI5EaZBqShv5o4pCCJIUXoRHXZAMNOD8zYIWixCypf20dZBPCEGwZD" ;
+    /*   String accessToken ="EAACEdEose0cBAI8TkdZBbKKLSVLPuVb0ET9KtZAFKwYZA0aSIHGzoBmAqcHhWNjKd3sZATK5kN7mXeyr737QbGYZBw1xfKoacMqTgVAReKmcRxI8gxkCph8aZBFZBwQOu50ZBo1oMMZAsjVSDpTdI5EaZBqShv5o4pCCJIUXoRHXZAMNOD8zYIWixCypf20dZBPCEGwZD" ;
       FacebookClient fbClien = new DefaultFacebookClient(accessToken);
       FacebookType response = fbClien.publish("me/feed",FacebookType.class,Parameter.with("message", "idim ya 5ra"));
-
+*/
     
   }
   
