@@ -49,8 +49,17 @@ import tunisia_mall.models.User;
 import tunisia_mall.models.Winner;
 import java.sql.SQLException;
 import java.util.Optional;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+
+
 /**
  * FXML Controller class
  *
@@ -62,13 +71,21 @@ public class WinnerController implements Initializable {
     private TextField wintxt;
     @FXML
     private Button btnwinner;
+    @FXML
+    private TableView<Winner> tbwinners;
+    @FXML
+    private TableColumn<Winner, Integer> tbusername;
+    @FXML
+    private TableColumn<Winner, Date> tbdate;
+    @FXML
+    private Label lbTitulo1;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        afficherall();
         
         // TODO
     }    
@@ -148,5 +165,20 @@ System.out.println(dateFormat.format(cal.getTime()));
    
    
     }
+    
+    
+    
+     void afficherall() {
+        IWinnerService aaa = new WinnerService();
+        ///   User aea = new User();
+
+        tbwinners.setItems(aaa.displayall());
+       
+
+        tbusername.setCellValueFactory(new PropertyValueFactory<>("id_winner"));
+        tbdate.setCellValueFactory(new PropertyValueFactory<>("winner_date"));
+
+    }
+
 }
     

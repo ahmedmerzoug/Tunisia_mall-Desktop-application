@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
 <AnchorPane id="AnchorPane" prefHeight="460.0" prefWidth="671.0" stylesheets="@../../../../../teq/2410/Tunisia_mall/src/tunisia_mall/GUI/CSS/bootstrap2.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.WinnerController">
    <children>
@@ -14,13 +19,28 @@
             <Image url="@img/daywin.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="740.0" fitWidth="1164.0">
+      <ImageView fitHeight="740.0" fitWidth="1142.0">
          <image>
             <Image url="@../../../../../teq/2410/Tunisia_mall/src/tunisia_mall/GUI/img/daywin.png" />
          </image>
       </ImageView>
       <Button fx:id="btnwinner" contentDisplay="BOTTOM" layoutX="448.0" layoutY="210.0" mnemonicParsing="false" onAction="#randombutt" prefHeight="49.0" prefWidth="245.0" styleClass="succes" stylesheets="@../../../../../Downloads/bootstrap/src/main/resources/bootstrap2.css" text="le Gagnant du jour est : " textFill="#d76f6f" textOverrun="CENTER_WORD_ELLIPSIS" AnchorPane.bottomAnchor="516.0" AnchorPane.leftAnchor="448.0" AnchorPane.rightAnchor="423.0" AnchorPane.topAnchor="210.0" />
       <TextField fx:id="wintxt" layoutX="377.0" layoutY="296.0" prefHeight="35.0" prefWidth="411.0" />
+      <TableView fx:id="tbwinners" layoutX="847.0" layoutY="110.0" prefHeight="496.0" prefWidth="293.0">
+        <columns>
+          <TableColumn fx:id="tbusername" prefWidth="144.0" text="Username" />
+          <TableColumn fx:id="tbdate" prefWidth="148.0" text="Date " />
+        </columns>
+      </TableView>
+      <HBox layoutX="854.0" layoutY="10.0" prefHeight="60.0" prefWidth="270.0" styleClass="box-topo">
+         <children>
+            <Label fx:id="lbTitulo1" layoutX="10.0" maxWidth="1.7976931348623157E308" styleClass="titulo" text=" Liste des Gagnants" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="445.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS" />
+         </children>
+         <stylesheets>
+            <URL value="@CSS/default.css" />
+            <URL value="@CSS/custom.css" />
+         </stylesheets>
+      </HBox>
    </children>
    <styleClass>
       <String fx:value="primary" />

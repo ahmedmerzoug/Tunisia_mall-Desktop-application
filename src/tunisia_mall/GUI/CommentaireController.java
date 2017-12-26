@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +24,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -49,10 +52,6 @@ public class CommentaireController implements Initializable {
     @FXML
     private Label lbTitulo1;
     @FXML
-    private TextField txtPesquisar;
-    @FXML
-    private ToggleGroup menu;
-    @FXML
     private TableColumn tb_date_commentaire;
     @FXML
     private TableColumn tb_login_user;
@@ -75,7 +74,8 @@ public class CommentaireController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        data = FXCollections.observableArrayList();
+      ///  data = FXCollections.observableArrayList();
+         ObservableList<Commentaire> listecommentaire=FXCollections.observableArrayList();
         
         String req = "select * from commentaire where id_forum1=?";
             PreparedStatement preparedStatement;
@@ -91,16 +91,15 @@ public class CommentaireController implements Initializable {
                      p1.setDate_commentaire(Commentaire.convert(resultSet.getDate("date_commentaire")));
                      
                      p1.setUser(LoginController.LoggedUser);
-                     data.add(p1);
+                     listecommentaire.add(p1);
                      
 
                     
                 }
-                tb_commentaire.setItems(data);
+                tb_commentaire.setItems(listecommentaire);
             } catch (SQLException ex) {
                 Logger.getLogger(ForumGesController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
           ////////  System.out.println(S);
            
       ///// afficher ();    
@@ -109,7 +108,8 @@ public class CommentaireController implements Initializable {
       void afficher ()
     {
          ICommentaireService aaa = new CommentaireService();
-        tb_commentaire.setItems(aaa.displayall());
+         
+        tb_commentaire.setItems(aaa.displayallbyidforum(ForumGesController.comm.getId_topic()));
         tb_contenu.setCellValueFactory(new PropertyValueFactory<>("contenu"));
         
      
@@ -149,9 +149,6 @@ public class CommentaireController implements Initializable {
   
         
         
-        @FXML
-    private void rechercherB(ActionEvent event) {
-    }
 
     @FXML
     private void ajouter(ActionEvent event) {
@@ -164,11 +161,15 @@ Calendar cal = Calendar.getInstance();
         System.out.println(dateFormat.format(cal.getTime()));
       Commentaire b = new Commentaire(txt_Ajout.getText(),dateFormat.format(cal.getTime()),LoginController.LoggedUser,ForumGesController.comm);
        ///////// System.out.println("today date is "+dateFormat.format(cal.getTime()));
-            
+       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+       alert.setHeaderText("commentaire added with sucess");
+       Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){      
        aaa.add(b);
+    }txt_Ajout.clear();
+    afficher();
     }
 
-    @FXML
     private void modifier(ActionEvent event) {
        if(( tb_commentaire.getSelectionModel().getSelectedItem().getId_commentaire())==1)
        {
@@ -177,8 +178,5 @@ Calendar cal = Calendar.getInstance();
     }
     
 
-    @FXML
-    private void supprimer(ActionEvent event) {
-    }
     
 }
