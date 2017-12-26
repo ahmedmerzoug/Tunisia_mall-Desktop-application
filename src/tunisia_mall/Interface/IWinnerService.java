@@ -6,6 +6,8 @@
 package tunisia_mall.Interface;
 
 import java.sql.Date;
+import javafx.collections.ObservableList;
+
 import tunisia_mall.models.User;
 import tunisia_mall.models.Winner;
 
@@ -20,5 +22,9 @@ public interface IWinnerService extends IService<Winner, Integer> {
     int winnerOfTheDay();
     Date maxwinnerdate ();
      String identifywithrole( String r);
+     
+     
+      public ObservableList<Winner> displayall();
+   
     
 }

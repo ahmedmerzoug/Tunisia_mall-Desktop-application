@@ -79,8 +79,6 @@ public class ForumGesController implements Initializable {
     private Label lbTitulo1;
     @FXML
     private TextField txtPesquisar;
-    @FXML
-    private ToggleGroup menu;
 public static Forum comm ;    
 
     /**
@@ -139,8 +137,15 @@ public static Forum comm ;
         System.out.println(dateFormat.format(cal.getTime()));
         Forum b = new Forum(txt_cat.getText(), txt_desc.getText(), dateFormat.format(cal.getTime()), LoginController.LoggedUser);
         System.out.println("today date is " + dateFormat.format(cal.getTime()));
-
+   Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+       alert.setHeaderText("done with success");
+       Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
         aaa.add(b);
+        } 
+          txt_cat.clear();
+            txt_desc.clear();
+            afficher();
     }
 
     @FXML
@@ -174,14 +179,6 @@ public static Forum comm ;
 
     }
 
-    @FXML
-    private void modifier(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void supprimer(ActionEvent event) {
-    }
 
     @FXML
     private void select(MouseEvent event) throws IOException {

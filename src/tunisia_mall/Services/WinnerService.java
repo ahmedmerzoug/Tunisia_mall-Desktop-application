@@ -16,8 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import tunisia_mall.Interface.IWinnerService;
 import tunisia_mall.Technique.DataSource;
+
 import tunisia_mall.models.User;
 import tunisia_mall.models.Winner;
 
@@ -259,6 +262,27 @@ public class WinnerService implements IWinnerService {
     @Override
     public String identifywithrole(String r) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ObservableList<Winner> displayall() {
+        
+         ObservableList<Winner> listeCarte=FXCollections.observableArrayList();
+        String req= "select * from winner";
+        PreparedStatement preparedStatement;
+        
+        try {
+            preparedStatement=connection.prepareStatement(req);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            while(resultSet.next()){
+             Winner winner = new Winner(resultSet.getInt(1),Winner.convert(resultSet.getDate(2)),resultSet.getInt(3)) ;
+                listeCarte.add(winner);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BoutiqueService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listeCarte;
     }
 
     

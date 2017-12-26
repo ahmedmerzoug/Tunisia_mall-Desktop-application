@@ -36,7 +36,7 @@ public class CommentaireService implements ICommentaireService{
     @Override
     public ObservableList<Commentaire> displayall() {
          ObservableList<Commentaire> listecommentaire=FXCollections.observableArrayList();
-        String req= "select * from commentaire";
+        String req= "select * from commentaire ";
         PreparedStatement preparedStatement;
         
         try {
@@ -89,9 +89,9 @@ public class CommentaireService implements ICommentaireService{
 
     @Override
     public Commentaire findById(Integer r) {
-          Commentaire commentaire = null;
-        /*
-         Commentaire commentaire = null;
+        Commentaire commentaire = null;
+        
+       
         String req = "select * from commentaire where id_forum1 =?";
         PreparedStatement preparedStatement;
         try {
@@ -104,7 +104,7 @@ public class CommentaireService implements ICommentaireService{
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }*/
+        }
         return commentaire;
     }
 

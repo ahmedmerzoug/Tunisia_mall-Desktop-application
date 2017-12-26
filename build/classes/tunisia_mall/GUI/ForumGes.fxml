@@ -8,7 +8,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
@@ -39,21 +38,6 @@
                   <String fx:value="menus-tela" />
                   <String fx:value="menu-add" />
                </styleClass>
-            </ToggleButton>
-            <ToggleButton layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#modifier" text="">
-               <styleClass>
-                  <String fx:value="menus-tela" />
-                  <String fx:value="menu-editar" />
-               </styleClass>
-            </ToggleButton>
-            <ToggleButton layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#supprimer" text="">
-               <styleClass>
-                  <String fx:value="menus-tela" />
-                  <String fx:value="menu-excluir" />
-               </styleClass>
-               <toggleGroup>
-                  <ToggleGroup fx:id="menu" />
-               </toggleGroup>
             </ToggleButton>
          </children>
          <stylesheets>
