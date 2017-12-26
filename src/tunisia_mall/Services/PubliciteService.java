@@ -302,6 +302,8 @@ public class PubliciteService implements IPubliciteService {
 //*********************************caution test***********************
     @Override
     public ObservableList<Publicite> displayallDemandePub() {
+        
+        
         ObservableList<Publicite> listepub = FXCollections.observableArrayList();
         String req = "select * from demande_pub";
         PreparedStatement preparedStatement;
