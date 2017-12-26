@@ -121,20 +121,11 @@ String idnew ;
 
     }
     
-     public boolean verifiernbr(String num) {
-        String masque = "[0-9]{5}$";
-        Pattern pattern = Pattern.compile(masque);
-        Matcher controler = pattern.matcher(num);
-        if (controler.matches()) {
-            return true;
-        }
-        return false;
-    }
+ 
 
     @FXML
     private void ajouter(ActionEvent event) {
-        if (verifiernbr(nbpoints.getText()))
-        {
+      
           ICarteFideliteService aaa = new CarteFideliteService();
           
         CarteFidelite b = new CarteFidelite(Integer.parseInt((nbpoints.getText())),txtdatecarte.getEditor().getText(),cbIdclient.getValue());
@@ -149,14 +140,7 @@ String idnew ;
         
         }
         afficherall();
-        }
-        else 
-        {        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("alerte");
-               alert.setHeaderText("vérifier votre données");
-                Optional<ButtonType> result = alert.showAndWait();
-                afficherall();
-        }
+      
         
     }
     
@@ -256,7 +240,7 @@ String idnew ;
 
         idnew = String.valueOf(p.getId_carte_fidelite());
 
-        SimpleDateFormat inFmt = new SimpleDateFormat("dd/MM/yyyy");
+     /*   SimpleDateFormat inFmt = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat outFmt = new SimpleDateFormat("MM/dd/yyyy");
         String dated = inFmt.format(outFmt.parse(p.getDate_creation()));
 
@@ -270,7 +254,7 @@ String idnew ;
         } catch (DateTimeParseException exc) {
             throw exc;      // Rethrow the exception.
         }
-
+*/
       
         
 

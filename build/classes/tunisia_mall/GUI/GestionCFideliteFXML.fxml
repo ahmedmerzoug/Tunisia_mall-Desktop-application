@@ -18,7 +18,7 @@
    <children>
       <TableView fx:id="TableCarteF" layoutX="21.0" layoutY="243.0" prefHeight="301.0" prefWidth="1058.0">
          <columns>
-            <TableColumn fx:id="tbidclient" prefWidth="98.0" text="Id Client" />
+            <TableColumn fx:id="tbidclient" prefWidth="98.0" text="Client" />
             <TableColumn fx:id="tbnomclient" prefWidth="277.0" text="Nom client" />
             <TableColumn fx:id="tbprenomclient" prefWidth="236.0" text="Prénom client " />
             <TableColumn fx:id="tbnbrpoint" prefWidth="255.0" text="nombre des Points Fidélité" />
@@ -63,7 +63,7 @@
          </stylesheets>
       </HBox>
       <Text layoutX="59.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date création" />
-      <Text layoutX="59.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id Client" wrappingWidth="43.921875" />
+      <Text layoutX="59.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client" wrappingWidth="43.921875" />
       <ComboBox fx:id="cbIdclient" layoutX="244.0" layoutY="80.0" prefWidth="150.0" promptText="Veuillez choirsir le client" />
       <DatePicker fx:id="txtdatecarte" layoutX="242.0" layoutY="176.0" />
       <TextField fx:id="nbpoints" layoutX="243.0" layoutY="123.0" />
