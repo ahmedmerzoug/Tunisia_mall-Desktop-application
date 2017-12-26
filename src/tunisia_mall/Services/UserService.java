@@ -149,7 +149,7 @@ public class UserService implements IUserService {
     @Override
     public User findbyIdRole(int id_user, String role) {
         User user = null;
-        String req = "select * from user where id_user =? AND role=?";
+        String req = "select * from user where id_user =? AND roles=?";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);
@@ -157,7 +157,14 @@ public class UserService implements IUserService {
             preparedStatement.setString(2, role);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), User.convert(resultSet.getDate(4)), resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10), resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)), User.convert(resultSet.getDate(14)), resultSet.getString(15), new BoutiqueService().findById(resultSet.getInt(16)));
+                 user = new User(resultSet.getInt("id_user"), resultSet.getString("nom"),
+                        resultSet.getString("prenom"), User.convert(resultSet.getDate("date_naissance")),
+                        resultSet.getString("sexe"), resultSet.getString("username"), resultSet.getString("password"),
+                        resultSet.getString("email"), resultSet.getString("roles"), resultSet.getInt("numero_telephone"),
+                        resultSet.getString("adresse"), resultSet.getFloat("salaire"),
+                        User.convert(resultSet.getDate("date_embauche")),
+                        User.convert(resultSet.getDate("date_expiration")),
+                        resultSet.getString("path"), new BoutiqueService().findById(resultSet.getInt("id_boutique")));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -175,7 +182,15 @@ public class UserService implements IUserService {
             preparedStatement = connection.prepareStatement(req);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), User.convert(resultSet.getDate(4)), resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10), resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)), User.convert(resultSet.getDate(14)), resultSet.getString(15), new BoutiqueService().findById(resultSet.getInt(16)));
+                User user = new User(resultSet.getInt("id_user"), resultSet.getString("nom"),
+                        resultSet.getString("prenom"), User.convert(resultSet.getDate("date_naissance")),
+                        resultSet.getString("sexe"), resultSet.getString("username"), resultSet.getString("password"),
+                        resultSet.getString("email"), resultSet.getString("roles"), resultSet.getInt("numero_telephone"),
+                        resultSet.getString("adresse"), resultSet.getFloat("salaire"),
+                        User.convert(resultSet.getDate("date_embauche")),
+                        User.convert(resultSet.getDate("date_expiration")),
+                        resultSet.getString("path"), new BoutiqueService().findById(resultSet.getInt("id_boutique")));
+                 
                 users.add(user);
             }
         } catch (SQLException ex) {

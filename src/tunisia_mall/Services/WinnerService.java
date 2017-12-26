@@ -57,7 +57,7 @@ public class WinnerService implements IWinnerService {
         User userWinner = null;
         boolean f_return = false;
        
-              userWinner = executeDBQuery("SELECT * from user where role =\"client\" and id_user = " + (w_id));
+              userWinner = executeDBQuery("SELECT * from user where id_user = " + (w_id));
         System.out.println(userWinner);
         /*Here we will get the list of the last 7 winners*/
         List<Winner> winners = new ArrayList<>();
@@ -186,7 +186,14 @@ public class WinnerService implements IWinnerService {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), User.convert(resultSet.getDate(4)), resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getString(9), resultSet.getInt(10), resultSet.getString(11), resultSet.getFloat(12), User.convert(resultSet.getDate(13)), User.convert(resultSet.getDate(14)), resultSet.getString(15), new BoutiqueService().findById(resultSet.getInt(16)));
+                   user = new User(resultSet.getInt("id_user"), resultSet.getString("nom"),
+                        resultSet.getString("prenom"), User.convert(resultSet.getDate("date_naissance")),
+                        resultSet.getString("sexe"), resultSet.getString("username"), resultSet.getString("password"),
+                        resultSet.getString("email"), resultSet.getString("roles"), resultSet.getInt("numero_telephone"),
+                        resultSet.getString("adresse"), resultSet.getFloat("salaire"),
+                        User.convert(resultSet.getDate("date_embauche")),
+                        User.convert(resultSet.getDate("date_expiration")),
+                        resultSet.getString("path"), new BoutiqueService().findById(resultSet.getInt("id_boutique")));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
