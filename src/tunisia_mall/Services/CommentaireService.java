@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -111,6 +112,33 @@ public class CommentaireService implements ICommentaireService{
     @Override
     public List<Commentaire> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ObservableList<Commentaire> displayallbyidforum(Integer aa) {
+           ObservableList<Commentaire> listecommentaire=FXCollections.observableArrayList();
+         
+        String req = "select * from commentaire where id_forum1 =?";
+         PreparedStatement preparedStatement;
+          Commentaire commentaire = null;
+        try {
+
+             preparedStatement = connection.prepareStatement(req);
+            preparedStatement.setInt(1, aa);
+             ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                commentaire =  new Commentaire(resultSet.getInt(1),resultSet.getString(2),Commentaire.convert(resultSet.getDate(3)), new UserService().findbyLogin(resultSet.getString(4)), new ForumService().findById(resultSet.getInt(5)));
+
+              
+                listecommentaire.add(commentaire);
+            }
+            System.out.println("-------------------" + listecommentaire);
+            return listecommentaire;
+
+        } catch (SQLException ex) {
+            System.out.println("erreuruèu  " + ex.getMessage());
+            return null;
+        }
     }
     
     

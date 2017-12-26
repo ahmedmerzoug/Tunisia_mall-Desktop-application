@@ -100,7 +100,6 @@ public class CommentaireController implements Initializable {
             } catch (SQLException ex) {
                 Logger.getLogger(ForumGesController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
           ////////  System.out.println(S);
            
       ///// afficher ();    
@@ -110,7 +109,7 @@ public class CommentaireController implements Initializable {
     {
          ICommentaireService aaa = new CommentaireService();
          
-        tb_commentaire.setItems(aaa.displayall());
+        tb_commentaire.setItems(aaa.displayallbyidforum(ForumGesController.comm.getId_topic()));
         tb_contenu.setCellValueFactory(new PropertyValueFactory<>("contenu"));
         
      

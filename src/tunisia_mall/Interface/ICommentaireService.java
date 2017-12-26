@@ -14,4 +14,5 @@ import tunisia_mall.models.Commentaire;
  */
 public interface ICommentaireService extends IService<Commentaire, Integer> {
      ObservableList<Commentaire> displayall();
+     ObservableList<Commentaire> displayallbyidforum(Integer aa);
 }
