@@ -12,6 +12,10 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -83,7 +87,7 @@ public class Pub_shopownerController implements Initializable {
     private ToggleGroup menu1;
 
     Connection connection;
-    
+    String imgName;
 
     private ObservableList<Publicite> data;
     @FXML
@@ -98,7 +102,7 @@ public class Pub_shopownerController implements Initializable {
     private JFXComboBox<Boutique> txtchoixboutique;
     @FXML
     private JFXButton btinsertimage;
-    
+
     public static String pathOfimage;
 
     /**
@@ -116,7 +120,7 @@ public class Pub_shopownerController implements Initializable {
 
     void afficher() {
         IPubliciteService ips = new PubliciteService();
-        TablePub.setItems(ips.displayall());
+        TablePub.setItems(ips.displayalldemandepub());
 
 //        System.out.println(ips.displayall());
 //        idpub.setCellValueFactory(new PropertyValueFactory<>("id_pub"));
@@ -171,7 +175,7 @@ public class Pub_shopownerController implements Initializable {
     @FXML
     private void ajouter(ActionEvent event) {
         if (!txtdate_debut.getEditor().getText().equals("") && !txtdate_fin.getEditor().getText().equals("")
-                && !txtprix.getText().equals("") && !txtpage.getText().equals("") && !getImageUrl.equals("")) {
+                && !txtprix.getText().equals("") && !txtpage.getText().equals("") && !imgName.equals("")) {
 
             connection = DataSource.getInsatance().getConnection();
             Publicite t = new Publicite();
@@ -183,21 +187,14 @@ public class Pub_shopownerController implements Initializable {
                 preparedStatement.setDate(2, t.convert(txtdate_fin.getEditor().getText()));
                 preparedStatement.setFloat(3, Float.parseFloat(txtprix.getText()));
                 preparedStatement.setString(4, txtpage.getText());
-
-                File thefile = new File(getImageUrl);
-                FileInputStream input = null;
-                try {
-                    input = new FileInputStream(thefile);
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(PubliciteService.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                preparedStatement.setBinaryStream(5, input);
+                preparedStatement.setString(5, imgName);
 
                 preparedStatement.setInt(6, txtchoixboutique.getValue().getId_boutique());
                 pathOfimage = getImageUrl;
 
                 preparedStatement.executeUpdate();
+                        afficher();
+
 
             } catch (SQLException ex) {
                 Logger.getLogger(PubliciteService.class.getName()).log(Level.SEVERE, null, ex);
@@ -218,13 +215,41 @@ public class Pub_shopownerController implements Initializable {
     private void insert_image(ActionEvent event) {
         FileChooser fc = new FileChooser();
         File selectedfile = fc.showOpenDialog(null);
-
         if (selectedfile != null) {
             getImageUrl = selectedfile.getAbsolutePath();
+            System.out.println("s " + selectedfile);
             File file = new File(getImageUrl);
             Image ima = new Image(file.toURI().toString());
+            System.out.println(getImageUrl);
+            int fileNameIndex = getImageUrl.lastIndexOf("\\") + 1;
+
+            imgName = getImageUrl.substring(fileNameIndex);
+            File dest = new File("C:\\wamp64\\www\\TestUser\\web\\images\\amine\\" + imgName);
+
+            try {
+                copyFileUsingStream(selectedfile, dest);
+            } catch (IOException ex) {
+                Logger.getLogger(Pub_shopownerController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             System.out.println("file does not exist");
+        }
+    }
+
+    private static void copyFileUsingStream(File source, File dest) throws IOException {
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(source);
+            os = new FileOutputStream(dest);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+        } finally {
+            is.close();
+            os.close();
         }
     }
 

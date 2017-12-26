@@ -192,8 +192,8 @@ public class EventController implements Initializable {
         if (result.get() == ButtonType.OK) {
 
             if (imgName == null) {
-                imgName=btinsertimage.getText();
-            } 
+                imgName = btinsertimage.getText();
+            }
 
             Evenement e = new Evenement(nom, des, datee, imgName, u);
             e.setId_evenement(Integer.parseInt(idnew));
@@ -259,7 +259,7 @@ public class EventController implements Initializable {
     void showPubDetails(Evenement e) throws ParseException {
 
 //        id.setText(String.valueOf(p.getId_pub()));
-System.out.println("id of event is "+e.getId_evenement());
+        System.out.println("id of event is " + e.getId_evenement());
         idnew = Integer.toString(e.getId_evenement());
         SimpleDateFormat inFmt = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat outFmt = new SimpleDateFormat("dd/MM/yyyy");
@@ -273,7 +273,7 @@ System.out.println("id of event is "+e.getId_evenement());
             txtdate.setValue(date);
 
         } catch (DateTimeParseException exc) {
-            throw exc;      // Rethrow the exception.
+//            throw exc;      // Rethrow the exception.
         }
 
         txt_eventname.setText(e.getNom());

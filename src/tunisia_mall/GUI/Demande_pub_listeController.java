@@ -20,7 +20,10 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -100,10 +103,18 @@ public class Demande_pub_listeController implements Initializable {
                         Logger.getLogger(PubController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 });
-        IPubliciteService ips = new PubliciteService();
-        TextFields.bindAutoCompletion(txtrecherchepage, ips.liste_nom_pub());
-
         afficher();
+        IPubliciteService ips = new PubliciteService();
+        TextFields.bindAutoCompletion(txtrecherchepage, ips.liste_nom_demande_pub());
+
+        txtrecherchepage.textProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+
+                filterEmployeList((String) oldValue, (String) newValue);
+            }
+        });
+        
         // TODO
     }
 
@@ -122,7 +133,7 @@ public class Demande_pub_listeController implements Initializable {
         alert.setTitle("Ajout publicité");
         alert.setHeaderText("ajouté avec succès");
         Optional<ButtonType> result = alert.showAndWait();
-//        ips.remove_demande_pub(TabledemandePub.getSelectionModel().getSelectedItem().getId_pub());
+        ips.remove_demande_pub(TabledemandePub.getSelectionModel().getSelectedItem().getId_pub());
         afficher();
     }
 
@@ -157,7 +168,7 @@ public class Demande_pub_listeController implements Initializable {
 
     void afficher() {
         IPubliciteService ips = new PubliciteService();
-        TabledemandePub.setItems(ips.displayallDemandePub());
+        TabledemandePub.setItems(ips.displayalldemandepub());
         System.out.println(ips.liste_nom_pub());
 
         date_debut_column.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
@@ -180,6 +191,7 @@ public class Demande_pub_listeController implements Initializable {
 //        idnew = String.valueOf(p.getId_pub());
         SimpleDateFormat inFmt = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat outFmt = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println("hello "+p.getDate_debut());
         String dated = outFmt.format(inFmt.parse(p.getDate_debut()));
 //        txtdate_debut.setPromptText(dated);
 
@@ -215,6 +227,30 @@ public class Demande_pub_listeController implements Initializable {
         btinsertimage.setText(p.getPath());
         System.out.println(btinsertimage.getText());
         txtchoixboutique.setValue(p.getBoutique());
+    }
+    
+    void filterEmployeList(String oldValue, String newValue) {
+        IPubliciteService ius = new PubliciteService();
+        ObservableList<Publicite> filteredList = FXCollections.observableArrayList();
+        if (txtrecherchepage.getText() == null || (newValue.length() < oldValue.length()) || newValue == null) {
+            TabledemandePub.setItems(ius.displayalldemandepub());
+
+        } else {
+
+            newValue = newValue.toUpperCase();
+
+            for (Publicite user : TabledemandePub.getItems()) {
+
+                String filterName = user.getPage();
+
+                if (filterName.toUpperCase().contains(newValue)) {
+                    filteredList.add(user);
+                }
+
+            }
+            TabledemandePub.setItems(filteredList);
+
+        }
     }
 
 }

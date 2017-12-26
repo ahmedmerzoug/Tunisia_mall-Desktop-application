@@ -160,7 +160,6 @@ public class PubliciteService implements IPubliciteService {
     }
 
 //    resultSet.getBinaryStream(6)
-    
 //    @Override
 //    public String getPubImage() {
 //        String req = "SELECT path FROM publicite WHERE length(path)>20 order by rand() limit 1";
@@ -221,7 +220,6 @@ public class PubliciteService implements IPubliciteService {
 //        }
 //        return listepub;
 //    }
-
     @Override
     public void remove_demande_pub(Integer r) {
         String req = "delete from demande_pub where id_pub =?";
@@ -280,11 +278,11 @@ public class PubliciteService implements IPubliciteService {
             ResultSet resultSet = preparedStatement.executeQuery();
             File thefile = new File("src/tunisia_mall/GUI/img/test.png");
 //            File x=new File("");
-            FileOutputStream output=new FileOutputStream(thefile);
+            FileOutputStream output = new FileOutputStream(thefile);
             if (resultSet.next()) {
-                InputStream input=resultSet.getBinaryStream("path");
-                byte[] buffer=new byte[1024];
-                while(input.read(buffer)>0){
+                InputStream input = resultSet.getBinaryStream("path");
+                byte[] buffer = new byte[1024];
+                while (input.read(buffer) > 0) {
                     output.write(buffer);
                 }
                 return "src/tunisia_mall/GUI/img/test.png";
@@ -336,11 +334,11 @@ public class PubliciteService implements IPubliciteService {
             ResultSet resultSet = preparedStatement.executeQuery();
             File thefile = new File("src/tunisia_mall/GUI/img/test1.png");
 //            File x=new File("");
-            FileOutputStream output=new FileOutputStream(thefile);
+            FileOutputStream output = new FileOutputStream(thefile);
             if (resultSet.next()) {
-                InputStream input=resultSet.getBinaryStream("path");
-                byte[] buffer=new byte[1024];
-                while(input.read(buffer)>0){
+                InputStream input = resultSet.getBinaryStream("path");
+                byte[] buffer = new byte[1024];
+                while (input.read(buffer) > 0) {
                     output.write(buffer);
                 }
                 return "src/tunisia_mall/GUI/img/test1.png";
@@ -356,18 +354,49 @@ public class PubliciteService implements IPubliciteService {
         return "";
     }
 
+    @Override
+    public ObservableList<Publicite> displayalldemandepub() {
+        ObservableList<Publicite> listepub = FXCollections.observableArrayList();
+        String req = "select * from demande_pub";
+        PreparedStatement preparedStatement;
 
+        try {
+            preparedStatement = connection.prepareStatement(req);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Publicite b = new Publicite(
+                        resultSet.getInt("id_pub"),
+                        Publicite.convert(resultSet.getDate("date_debut")),
+                        Publicite.convert(resultSet.getDate("date_fin")),
+                        resultSet.getFloat("prix"),
+                        resultSet.getString("page"),
+                        resultSet.getString("path"),
+                        new BoutiqueService().findById(resultSet.getInt("id_boutique")));
+                listepub.add(b);
 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PubliciteService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listepub;
+    }
 
+    @Override
+    public List<String> liste_nom_demande_pub() {
+        List<String> listenompub = FXCollections.observableArrayList();
+        String req = "select page from demande_pub";
+        PreparedStatement preparedStatement;
 
-
-
-
-
-
-
-
-
-
+        try {
+            preparedStatement = connection.prepareStatement(req);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                listenompub.add(resultSet.getString("page"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PubliciteService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listenompub;
+    }
 
 }

@@ -205,8 +205,8 @@ public class FXMLGestionEmployeCAController implements Initializable {
                 && !(dateexp_txt.getEditor().getText().equals("")) && !(idbout_combo.getValue().equals(""))) {
             if (cj.testnomprenom(nom_txt.getText())) {
                 if (cj.testnomprenom(prenom_txt.getText())) {
-                    if (cj.testlogin(login_txt.getText())) {
-                        if (cj.loginvalide(login_txt.getText())) {
+                    if (true) {
+                        if (true) {
 
                             if (cj.testpassword(password_txt.getText())) {
                                 if (cj.GSM(numerotel_txt.getText())) {

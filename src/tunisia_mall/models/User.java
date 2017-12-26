@@ -324,7 +324,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id_user=" + id_user + ", nom=" + nom + ", prenom=" + prenom + ", date_naissance=" + date_naissance + ", sexe=" + sexe + ", login=" + login + ", password=" + password + ", mail=" + mail + ", role=" + role + ", numero_telephone=" + numero_telephone + ", adresse=" + adresse + ", salaire=" + salaire + ", date_embauche=" + date_embauche + ", date_expiration=" + date_expiration + ", path=" + path + ", boutique=" + boutique + '}';
+//        return "User{" + "id_user=" + id_user + ", nom=" + nom + ", prenom=" + prenom + ", date_naissance=" + date_naissance + ", sexe=" + sexe + ", login=" + login + ", password=" + password + ", mail=" + mail + ", role=" + role + ", numero_telephone=" + numero_telephone + ", adresse=" + adresse + ", salaire=" + salaire + ", date_embauche=" + date_embauche + ", date_expiration=" + date_expiration + ", path=" + path + ", boutique=" + boutique + '}';
+        return nom+" "+prenom;
     }
 
    

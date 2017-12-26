@@ -27,4 +27,8 @@ public interface IPubliciteService extends IService<Publicite, Integer> {
 
     String getPubImageListeDemande();
 
+    ObservableList<Publicite> displayalldemandepub();
+
+    List<String> liste_nom_demande_pub();
+
 }
