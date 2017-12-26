@@ -3,12 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Amine/Documents/GitHub/lastversion-of-the-pi/src/tunisia_mall/GUI/EventController.java</file>
             <file>file:/C:/Users/Amine/Documents/GitHub/lastversion-of-the-pi/src/tunisia_mall/GUI/PubController.java</file>
             <file>file:/C:/Users/Amine/Documents/GitHub/lastversion-of-the-pi/src/tunisia_mall/Services/PubliciteService.java</file>
             <file>file:/C:/Users/Amine/Documents/GitHub/lastversion-of-the-pi/src/tunisia_mall/GUI/Pub_shopownerController.java</file>
             <file>file:/C:/Users/Amine/Documents/GitHub/lastversion-of-the-pi/src/tunisia_mall/Interface/IPubliciteService.java</file>
             <file>file:/C:/Users/Amine/Documents/GitHub/lastversion-of-the-pi/src/tunisia_mall/GUI/Demande_pub_listeController.java</file>
+=======
+            <file>file:/C:/Users/ahmed/Desktop/lastversion-of-the-pi/src/tunisia_mall/Services/WinnerService.java</file>
+>>>>>>> master
         </group>
     </open-files>
 </project-private>

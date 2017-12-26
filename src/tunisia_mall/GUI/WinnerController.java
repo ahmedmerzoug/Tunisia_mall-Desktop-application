@@ -11,7 +11,7 @@
 package tunisia_mall.GUI;
 
 import com.github.plushaze.traynotification.animations.Animations;
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+//import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
