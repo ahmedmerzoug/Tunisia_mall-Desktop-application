@@ -24,6 +24,16 @@ public class Produit {
 
     public Produit() {
     }
+
+    public Produit(String nom, String type, float prix, int quantite, float prix_achat_gros, String path, String description) {
+        this.nom = nom;
+        this.type = type;
+        this.prix = prix;
+        this.quantite = quantite;
+        this.prix_achat_gros = prix_achat_gros;
+        this.path = path;
+        this.description = description;
+    }
     
 
     public Produit(int id_produit, String nom, String type, float prix, int quantite, float prix_achat_gros, int nb_vente, String path, String description, Boutique boutique) {

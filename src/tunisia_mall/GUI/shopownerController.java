@@ -112,7 +112,7 @@ public class shopownerController implements Initializable {
 
       Image whatsAppImg = new Image("http://imagenpng.com/wp-content/uploads/2015/09/imagenes-png.png");
         
-         tray.setTray("welcome", "sopowner to your interface", whatsAppImg, Paint.valueOf("#2A9A84"),AnimationType.SLIDE);
+         tray.setTray("welcome", "shopowner to your interface", whatsAppImg, Paint.valueOf("#2A9A84"),AnimationType.SLIDE);
         tray.showAndDismiss(Duration.seconds(4));
         // TODO
     }
@@ -131,6 +131,14 @@ public class shopownerController implements Initializable {
 
     @FXML
     private void menu_gestion_boutiques_shopowner(ActionEvent event) {
+          try {
+            boxConteudo.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource("Produitshop123.fxml"));
+            boxConteudo.getChildren().add(newLoadedPane);
+
+        } catch (IOException ex) {
+            Logger.getLogger(adminAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
