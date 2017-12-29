@@ -135,7 +135,7 @@ String idnew ;
         if (result.get() == ButtonType.OK){
             
         aaa.add(b);
-       //// NomB.clear();cbType.setValue("Veuillez choirsir le type");
+       nbpoints.clear();
        //// cbPosition.setValue("Veuillez choirsir la position");
         
         }

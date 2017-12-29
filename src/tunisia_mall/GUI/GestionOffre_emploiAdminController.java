@@ -180,7 +180,7 @@ public class GestionOffre_emploiAdminController implements Initializable {
         col_salaire.setCellValueFactory(new PropertyValueFactory<>("salaire"));
         col_salaire.cellFactoryProperty();
 
-        col_nbr.setCellValueFactory(new PropertyValueFactory<>("nbr_demandé"));
+        col_nbr.setCellValueFactory(new PropertyValueFactory<>("nbr_demande"));
         col_nbr.cellFactoryProperty();
 
         col_date.setCellValueFactory(new PropertyValueFactory<>("date_expiration"));

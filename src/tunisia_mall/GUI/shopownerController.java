@@ -27,6 +27,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import tray.animations.AnimationType;
 import tray.notification.TrayNotification;
+import tunisia_mall.Interface.IUserService;
+import tunisia_mall.Services.UserService;
+import tunisia_mall.models.User;
 
 /**
  * FXML Controller class
@@ -80,10 +83,6 @@ public class shopownerController implements Initializable {
     @FXML
     private ToggleGroup grupoMenus1111;
     @FXML
-    private ToggleButton bouton_Forum_shopowner;
-    @FXML
-    private ToggleGroup grupoMenus11111;
-    @FXML
     private Button btnClose;
     @FXML
     private AnchorPane boxConteudo;
@@ -108,12 +107,13 @@ public class shopownerController implements Initializable {
         String nom = LoginController.LoggedUser.getNom();
         String prenom = LoginController.LoggedUser.getPrenom();
         hello_text.setText("hello " + nom + " " + prenom);
+        IUserService aa = new UserService();
          TrayNotification tray = new TrayNotification();
-
-      Image whatsAppImg = new Image("http://imagenpng.com/wp-content/uploads/2015/09/imagenes-png.png");
+         User b =  aa.findbypath(LoginController.LoggedUser.getId_user());
+          Image whatsAppImg = new Image("http://localhost/TestUser/web/images/Userimage/" + b.getPath());
         
-         tray.setTray("welcome", "shopowner to your interface", whatsAppImg, Paint.valueOf("#2A9A84"),AnimationType.SLIDE);
-        tray.showAndDismiss(Duration.seconds(4));
+         tray.setTray("welcome", nom +" "+prenom, whatsAppImg, Paint.valueOf("#2A9A84"),AnimationType.SLIDE);
+        tray.showAndDismiss(Duration.seconds(10));
         // TODO
     }
 
@@ -199,7 +199,6 @@ public class shopownerController implements Initializable {
         }
     }
 
-    @FXML
     private void menu_Forum_shopowner(ActionEvent event) {
 
         try {

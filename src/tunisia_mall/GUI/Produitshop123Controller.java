@@ -20,15 +20,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import static tunisia_mall.GUI.NewaccountController.getImageUrl;
+import tunisia_mall.Interface.IEvenementService;
 import tunisia_mall.Interface.IProduitService;
+import tunisia_mall.Interface.IUserService;
+import tunisia_mall.Services.EvenementService;
 import tunisia_mall.Services.ProduitService;
+import tunisia_mall.Services.UserService;
 import tunisia_mall.models.Produit;
 
 
@@ -71,12 +78,26 @@ public class Produitshop123Controller implements Initializable {
     private TextField tpeixgros;
     @FXML
     private TextArea tdescrip;
+    @FXML
+    private TableView<Produit> tbtable;
+    @FXML
+    private TableColumn<Produit, String> tbNom;
+    @FXML
+    private TableColumn<Produit, String> tbtype;
+    @FXML
+    private TableColumn<Produit, Float> tbprix;
+    @FXML
+    private TableColumn<Produit, Integer> tbquantite;
+    @FXML
+    private TableColumn<Produit, Float> tbprixachatengros;
+    @FXML
+    private TableColumn<Produit, String> tbdesc;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       afficherall();
     }    
 
     @FXML
@@ -85,20 +106,41 @@ public class Produitshop123Controller implements Initializable {
 
     @FXML
     private void ajouter(ActionEvent event) {
-            
+        
+        int ab = LoginController.LoggedUser.getBoutique().getId_boutique();
+       int v = LoginController.LoggedUser.getId_user();
+        String bb = "ih";
+             if (!tnom.getText().equals("") && !ttype.getText().equals("")
+                && !tprix.getText().equals("")&& !tquan.getText().equals("")
+                     && !tpeixgros.getText().equals("")&& !tdescrip.getText().equals("")&& !imgName.equals("")) {
                  IProduitService ies = new ProduitService();
-            Produit  e = new Produit(
-                    tnom.getText(),
-                    ttype.getText(),
+                 
+                 IUserService aa = new UserService();
+                         
+            Produit  e = new Produit(bb,ttype.getText(),
                    Integer.parseInt( tprix.getText()),
                     Integer.parseInt( tquan.getText()), Integer.parseInt( tpeixgros.getText()),
-                    
-                    
-                    imgName,tdescrip.getText()
-                    
-            );
+                     imgName,tdescrip.getText(),ab);
+            
+            
+             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+       alert.setHeaderText("done with success");
+       Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+
             ies.add(e);
-         
+            afficherall();
+             tnom.clear(); ttype.clear(); tprix.clear(); tquan.clear(); tpeixgros.clear();
+              tdescrip.clear() ;
+              System.out.println("print the idboutique  "+LoginController.LoggedUser.getBoutique().getId_boutique());
+              System.out.println("aaaa" +LoginController.LoggedUser.getPath() );
+        }
+          } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("erreur champs vides");
+            alert.setHeaderText("il ya des champs vides");
+            Optional<ButtonType> result = alert.showAndWait();
+        }
 
 //             SendMail.sendmail(TableEvent.getSelectionModel().getSelectedItem().getUser().getMail(),
 //                    "ajout evenement", "votre evenement a été crée, nom evenement: " + e.toString());
@@ -111,6 +153,25 @@ public class Produitshop123Controller implements Initializable {
 
     @FXML
     private void supprimer(ActionEvent event) {
+           try {
+
+            if (!tbtable.getSelectionModel().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("suppression de produit");
+                alert.setHeaderText("etes-vous sur que vous voulez supprimer ce produit :  "
+                        + tbtable.getSelectionModel().getSelectedItem().getNom());
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    IProduitService abc = new ProduitService();
+                    abc.remove(tbtable.getSelectionModel().getSelectedItem().getId_produit());
+                    afficherall();
+                }
+
+            }
+        } catch (Exception ex) {
+            System.out.println("erreur lors du chargement des forums " + ex.getMessage());
+
+        }
     }
 
     @FXML
@@ -151,5 +212,21 @@ public class Produitshop123Controller implements Initializable {
             os.close();
         }
     }
+       
+       public void afficherall()
+       {
+           
+            IProduitService ips = new ProduitService();
+        tbtable.setItems(ips.displayall());
+
+        tbNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        tbtype.setCellValueFactory(new PropertyValueFactory<>("type"));
+        tbprix.setCellValueFactory(new PropertyValueFactory<>("prix"));
+        tbquantite.setCellValueFactory(new PropertyValueFactory<>("quantite"));
+                tbprixachatengros.setCellValueFactory(new PropertyValueFactory<>("prix_achat_gros"));
+
+                        tbdesc.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+       }
     
 }

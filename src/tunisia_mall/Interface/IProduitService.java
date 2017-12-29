@@ -5,6 +5,7 @@
  */
 package tunisia_mall.Interface;
 
+import javafx.collections.ObservableList;
 import tunisia_mall.models.Produit;
 
 /**
@@ -12,5 +13,5 @@ import tunisia_mall.models.Produit;
  * @author Amine
  */
 public interface IProduitService extends IService<Produit, Integer> {
-    
+     public ObservableList<Produit> displayall();
 }

@@ -48,7 +48,7 @@ public class Offre_emploiService implements IOffre_emploiService {
     public void add(Offre_emploi o) {
 
         try {
-            String req = "insert into offre_emploi (id_user_fk,id_boutique_fk,poste,specialite,salaire,nbr_demandé,date_expiration) values (?,?,?,?,?,?,?)";
+            String req = "insert into offre_emploi (id_user_fk,id_boutique_fk,poste,specialite,salaire,nbr_demande,date_expiration) values (?,?,?,?,?,?,?)";
             preparedStatement = connection.prepareStatement(req);
 
             //preparedStatement.setInt(1,o.getId());
@@ -71,7 +71,7 @@ public class Offre_emploiService implements IOffre_emploiService {
 
     @Override
     public void update(Offre_emploi o) {
-        String req = "update offre_emploi set  poste=?,specialite=?,salaire=?,nbr_demandé=?,date_expiration=? where id_offre = ?";
+        String req = "update offre_emploi set  poste=?,specialite=?,salaire=?,nbr_demande=?,date_expiration=? where id_offre = ?";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);

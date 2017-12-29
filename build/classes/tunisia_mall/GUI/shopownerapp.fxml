@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@css/app.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.shopownerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@css/app.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.shopownerController">
     <children>
         <BorderPane layoutX="-25.0" layoutY="99.0" prefHeight="800.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <left>
@@ -121,16 +121,6 @@
                                     <ToggleButton fx:id="bouton_Parametres_shopowner" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#menu_Parametres_shopowner" text="Mon compte">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="grupoMenus1111" />
-                                       </toggleGroup>
-                                       <styleClass>
-                                          <String fx:value="menus" />
-                                          <String fx:value="menu-localizacao" />
-                                          <String fx:value="menu-grupo" />
-                                       </styleClass>
-                                    </ToggleButton>
-                                    <ToggleButton fx:id="bouton_Forum_shopowner" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#menu_Forum_shopowner" text="Forum">
-                                       <toggleGroup>
-                                          <ToggleGroup fx:id="grupoMenus11111" />
                                        </toggleGroup>
                                        <styleClass>
                                           <String fx:value="menus" />
