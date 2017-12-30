@@ -48,4 +48,6 @@ public interface IUserService extends IService<User, Integer> {
     
 
       int maxwidin_winnertable();
+      
+       User findbypath(int s);
 }

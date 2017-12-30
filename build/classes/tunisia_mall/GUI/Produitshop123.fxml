@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="1156.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.Produitshop123Controller">
+   <children>
+      <HBox layoutX="10.0" layoutY="10.0" prefHeight="60.0" prefWidth="1125.0" styleClass="box-topo">
+         <children>
+            <Label fx:id="lbTitulo1" layoutX="10.0" maxWidth="1.7976931348623157E308" styleClass="titulo" text="Gestion des Produits" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="445.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS" />
+            <ToggleButton mnemonicParsing="false" onAction="#ajouter" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-add" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#supprimer" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-excluir" />
+               </styleClass>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menu" />
+               </toggleGroup>
+            </ToggleButton>
+         </children>
+         <stylesheets>
+            <URL value="@CSS/default.css" />
+            <URL value="@CSS/custom.css" />
+         </stylesheets>
+      </HBox>
+      <Text fx:id="txtnom" layoutX="48.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nom  :" />
+      <Text fx:id="txtType" layoutX="49.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type :" />
+      <Text fx:id="txtPrix" layoutX="51.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix : " />
+      <Text fx:id="txtquantite" layoutX="51.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantité :" />
+      <Text fx:id="txtprix_achat_gros" layoutX="330.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="prix d'achat en gros :" />
+      <Text layoutX="330.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image de produit: " />
+      <Text fx:id="txtDescription" layoutX="330.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description :" />
+      <ToggleButton layoutX="483.0" layoutY="245.0" mnemonicParsing="false" onAction="#on_insert_action" prefHeight="16.0" prefWidth="149.0" stylesheets="@CSS/custom.css">
+         <styleClass>
+            <String fx:value="menus-tela" />
+            <String fx:value="menu-visitas" />
+         </styleClass></ToggleButton>
+      <TextField fx:id="tnom" layoutX="130.0" layoutY="90.0" />
+      <TextField fx:id="ttype" layoutX="130.0" layoutY="150.0" />
+      <TextField fx:id="tprix" layoutX="130.0" layoutY="204.0" />
+      <TextField fx:id="tquan" layoutX="130.0" layoutY="248.0" />
+      <TextField fx:id="tpeixgros" layoutX="472.0" layoutY="90.0" />
+      <TextArea fx:id="tdescrip" layoutX="472.0" layoutY="145.0" prefHeight="79.0" prefWidth="503.0" />
+      <TableView fx:id="tbtable" layoutX="47.0" layoutY="327.0" prefHeight="375.0" prefWidth="930.0">
+        <columns>
+          <TableColumn fx:id="tbNom" prefWidth="124.0" text="Nom " />
+          <TableColumn fx:id="tbtype" prefWidth="84.0" text="Type" />
+            <TableColumn fx:id="tbprix" prefWidth="41.0" text="Prix" />
+            <TableColumn fx:id="tbquantite" prefWidth="67.0" text="Quantité" />
+            <TableColumn fx:id="tbprixachatengros" prefWidth="138.0" text="Prix d'achat en gros" />
+            <TableColumn fx:id="tbdesc" prefWidth="472.0" text="Description" />
+        </columns>
+         <padding>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </opaqueInsets>
+      </TableView>
+   </children>
+</AnchorPane>

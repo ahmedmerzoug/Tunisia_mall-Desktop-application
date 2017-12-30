@@ -27,6 +27,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Paint;
+import javafx.util.Duration;
+import tray.animations.AnimationType;
+import tray.notification.TrayNotification;
 import tunisia_mall.Interface.IUserService;
 import tunisia_mall.Services.UserService;
 import tunisia_mall.models.User;
@@ -70,7 +75,11 @@ public class FXMLCompteClientController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+     
+        
+ 
+        
+        
         sexe_combo.setItems(comboListsexe);
         afficher();
     }

@@ -636,4 +636,23 @@ public class UserService implements IUserService {
 
     }
 
+    @Override
+    public User findbypath(int s) {
+              User user = null;
+        String req = "select path from user where id_user =?";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(req);
+            preparedStatement.setInt(1, s);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                user = new User(resultSet.getString("path"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return user;
+    }
+
 }

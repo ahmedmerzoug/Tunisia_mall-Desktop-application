@@ -20,13 +20,45 @@ public class Produit {
     private int nb_vente;
     private String path;
     private String description;
-    private Boutique boutique;
+    private int boutique;
 
     public Produit() {
     }
+
+    public Produit(String nom, String type, float prix, int quantite, float prix_achat_gros, String path, String description) {
+        this.nom = nom;
+        this.type = type;
+        this.prix = prix;
+        this.quantite = quantite;
+        this.prix_achat_gros = prix_achat_gros;
+        this.path = path;
+        this.description = description;
+    }
+
+  
+
+    public Produit(String nom, String type, float prix, int quantite, float prix_achat_gros, String path, String description, int boutique) {
+        this.nom = nom;
+        this.type = type;
+        this.prix = prix;
+        this.quantite = quantite;
+        this.prix_achat_gros = prix_achat_gros;
+        this.path = path;
+        this.description = description;
+        this.boutique = boutique;
+    }
+
+    public Produit(String nom, String type, float prix, int quantite, float prix_achat_gros, String description) {
+        this.nom = nom;
+        this.type = type;
+        this.prix = prix;
+        this.quantite = quantite;
+        this.prix_achat_gros = prix_achat_gros;
+        this.description = description;
+    }
     
 
-    public Produit(int id_produit, String nom, String type, float prix, int quantite, float prix_achat_gros, int nb_vente, String path, String description, Boutique boutique) {
+    public Produit(int id_produit, String nom, String type, float prix, int quantite, float prix_achat_gros, int nb_vente, String path, String description, int boutique) {
         this.id_produit = id_produit;
         this.nom = nom;
         this.type = type;
@@ -39,7 +71,7 @@ public class Produit {
         this.boutique = boutique;
     }
 
-    public Produit(String nom, String type, float prix, int quantite, float prix_achat_gros, int nb_vente, String path, String description, Boutique boutique) {
+    public Produit(String nom, String type, float prix, int quantite, float prix_achat_gros, int nb_vente, String path, String description, int boutique) {
         this.nom = nom;
         this.type = type;
         this.prix = prix;
@@ -73,6 +105,8 @@ public class Produit {
         this.path = path;
         this.description = description;
     }
+
+   
 
     public int getId_produit() {
         return id_produit;
@@ -146,11 +180,11 @@ public class Produit {
         this.description = description;
     }
 
-    public Boutique getBoutique() {
+    public int getBoutique() {
         return boutique;
     }
 
-    public void setBoutique(Boutique boutique) {
+    public void setBoutique(int boutique ) {
         this.boutique = boutique;
     }
 

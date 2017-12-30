@@ -25,10 +25,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import tray.animations.AnimationType;
+import tray.notification.TrayNotification;
 import static tunisia_mall.GUI.NewaccountController.getImageUrl;
 import tunisia_mall.Interface.IPubliciteService;
+import tunisia_mall.Interface.IUserService;
 import tunisia_mall.Services.PubliciteService;
+import tunisia_mall.Services.UserService;
+import tunisia_mall.models.User;
 
 /**
  * FXML Controller class
@@ -85,9 +92,19 @@ public class Client_interface_newController implements Initializable {
         File file = new File(img);
         Image ima = new Image(file.toURI().toString());
         publicite_image.setImage(ima);
+              String nom = LoginController.LoggedUser.getNom();
+        String prenom = LoginController.LoggedUser.getPrenom();
+     /////  hello_text.setText("hello " + nom + " " + prenom);
+        IUserService aa = new UserService();
+         TrayNotification tray = new TrayNotification();
+         User b =  aa.findbypath(LoginController.LoggedUser.getId_user());
+          Image whatsAppImg = new Image("http://localhost/TestUser/web/images/Userimage/" + b.getPath());
         
-        String nom = LoginController.LoggedUser.getNom();
-        String prenom=LoginController.LoggedUser.getPrenom();
+         tray.setTray("welcome", nom +" "+prenom, whatsAppImg, Paint.valueOf("#2A9A84"),AnimationType.FADE);
+        tray.showAndDismiss(Duration.seconds(10));
+        
+        
+        
         hello_text.setText("hello "+nom+" "+prenom);
     }
 
