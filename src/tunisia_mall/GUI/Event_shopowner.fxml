@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import java.lang.String?>
@@ -70,7 +69,6 @@
             </ToggleButton>
          </children></HBox>
       <JFXDatePicker fx:id="txtdate" layoutX="795.0" layoutY="101.0" prefHeight="27.0" prefWidth="243.0" promptText="Date" />
-      <JFXComboBox fx:id="txtchoixuser" layoutX="428.0" layoutY="190.0" prefHeight="25.0" prefWidth="243.0" promptText="User" />
       <JFXTextField fx:id="txt_eventname" layoutX="79.0" layoutY="100.0" prefHeight="27.0" prefWidth="243.0" promptText="Nom evenement" />
       <JFXTextField fx:id="txt_description" layoutX="428.0" layoutY="101.0" prefHeight="27.0" prefWidth="243.0" promptText="Description" />
       <JFXButton fx:id="btinsertimage" layoutX="79.0" layoutY="190.0" onAction="#insert_image" prefHeight="25.0" prefWidth="243.0" text="image evenement" />

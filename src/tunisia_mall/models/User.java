@@ -440,6 +440,8 @@ public class User {
         this.password_requested_at = password_requested_at;
     }
     
-    
+    public User getuser() {
+        return this;
+    }
 
 }

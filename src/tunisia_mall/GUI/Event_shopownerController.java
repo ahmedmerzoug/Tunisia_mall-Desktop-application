@@ -97,8 +97,7 @@ public class Event_shopownerController implements Initializable {
     private JFXDatePicker txtdate;
     @FXML
     private JFXTextField txtpath;
-    @FXML
-    private JFXComboBox<User> txtchoixuser;
+
     @FXML
     private JFXTextField txt_eventname;
     @FXML
@@ -120,7 +119,7 @@ public class Event_shopownerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         IUserService ibs = new UserService();
-        txtchoixuser.setItems(ibs.displayall());
+//        txtchoixuser.setItems(ibs.displayall());
 
         TableEvent.getSelectionModel().selectedItemProperty().
                 addListener((observable, oldValue, newValue) -> {
@@ -146,7 +145,7 @@ public class Event_shopownerController implements Initializable {
 
     void afficher() {
         IEvenementService ips = new EvenementService();
-        TableEvent.setItems(ips.displayall());
+        TableEvent.setItems(ips.displayallforshopowner(LoginController.LoggedUser.getId_user()));
 
         nomeventcolumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         descriptioncolumn.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -209,7 +208,8 @@ public class Event_shopownerController implements Initializable {
                 txt_description.getText(),
                 txtdate.getEditor().getText(),
                 imgName,
-                txtchoixuser.getValue());
+                LoginController.LoggedUser.getuser()
+        );
         ies.add(e);
 
         afficher();
@@ -221,7 +221,8 @@ public class Event_shopownerController implements Initializable {
         String des = txt_description.getText();
         String datee = txtdate.getEditor().getText();
 //        String path = txtpath.getText();
-        User u = txtchoixuser.getValue();
+//        User u = txtchoixuser.getValue();
+        User u = LoginController.LoggedUser.getuser();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
@@ -283,7 +284,7 @@ public class Event_shopownerController implements Initializable {
         txt_description.setText(e.getDescription());
 //        txtpath.setText(e.getPath());
         btinsertimage.setText(e.getPath());
-        txtchoixuser.setValue(e.getUser());
+//        txtchoixuser.setValue(e.getUser());
     }
 
     void filterEmployeList(String oldValue, String newValue) {
