@@ -54,6 +54,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import tunisia_mall.util.BCrypt;
 
 
 /**
@@ -154,7 +155,7 @@ public class FXMLGestionPropCAController implements Initializable {
                         Logger.getLogger(FXMLGestionEmployeCAController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 });
-        path_txt.setText("file:/E:/4infoB1/PiDev/2410/Tunisia_mall/src/tunisia_mall/img/fb-avatar.jpg");
+        path_txt.setText("img\\fb-avatar.jpg");
          txtPesquisar.textProperty().addListener(new ChangeListener() {
 
             @Override
@@ -190,7 +191,11 @@ public class FXMLGestionPropCAController implements Initializable {
         });
 
     }
-
+public String hashmdp(String password)
+    {
+    String hashed = BCrypt.hashpw(password, BCrypt.gensalt()); 
+    return hashed;
+    }
     @FXML
     private void ajouterP(ActionEvent event) throws ParseException {
         ControlesaisieJ cj = new ControlesaisieJ();
@@ -212,7 +217,7 @@ public class FXMLGestionPropCAController implements Initializable {
                                         if ((cj.testdateEMB_dateEXP(dateem_txt.getEditor().getText(), dateexp_txt.getEditor().getText())) == -1) {
                                             //****************************************************************
                                             User u = new User(nom_txt.getText(), prenom_txt.getText(), dnaissance_txt.getEditor().getText(), sexe_combo.getValue(), login_txt.getText(),
-                                                    password_txt.getText(), mail_txt.getText(), "shopowner", Integer.parseInt(numerotel_txt.getText()), adresse_txt.getText(),
+                                                   hashmdp(password_txt.getText()), mail_txt.getText(), "a:1:{i:0;s:16:\"ROLE_RESPONSABLE\";}", Integer.parseInt(numerotel_txt.getText()), adresse_txt.getText(),
                                                     dateem_txt.getEditor().getText(), dateexp_txt.getEditor().getText(), path_txt.getText(), ibs.findBoutiqueByNom(idbout_combo.getValue()));
                                             ius.add(u);
 
@@ -283,7 +288,7 @@ public class FXMLGestionPropCAController implements Initializable {
 
     @FXML
     private void modifierP(ActionEvent event) throws ParseException {
-        if (!tblproprietaire.getSelectionModel().isEmpty()) {
+         if (!tblproprietaire.getSelectionModel().isEmpty()) {
             IBoutiqueService ibs = new BoutiqueService();
             String datenaissance = dnaissance_txt.getEditor().getText();
             SimpleDateFormat inFmt = new SimpleDateFormat("dd/MM/yyyy");
@@ -314,7 +319,7 @@ public class FXMLGestionPropCAController implements Initializable {
             u.setLogin(login_txt.getText());
             u.setPassword(password_txt.getText());
             u.setMail(mail_txt.getText());
-            u.setRole("shopowner");
+            u.setRole("a:1:{i:0;s:16:\"ROLE_RESPONSABLE\";}");
             u.setNumero_telephone(Integer.parseInt(numerotel_txt.getText()));
             u.setAdresse(adresse_txt.getText());
             u.setSalaire(0);

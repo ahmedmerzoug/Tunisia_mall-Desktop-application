@@ -54,6 +54,7 @@ import tunisia_mall.Services.UserService;
 import tunisia_mall.models.Boutique;
 import tunisia_mall.models.User;
 import tunisia_mall.GUI.LoginController;
+import tunisia_mall.util.BCrypt;
 import tunisia_mall.util.ControlesaisieJ;
 
 /**
@@ -180,7 +181,11 @@ public class FXMLGestionEmployeCPController implements Initializable {
 
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////
-
+public String hashmdp(String password)
+    {
+    String hashed = BCrypt.hashpw(password, BCrypt.gensalt()); 
+    return hashed;
+    }
     @FXML
     private void ajouterE(ActionEvent event) throws ParseException {
         ControlesaisieJ cj = new ControlesaisieJ();
@@ -202,7 +207,7 @@ public class FXMLGestionEmployeCPController implements Initializable {
                                         if ((cj.testdateEMB_dateEXP(dateem_txt.getEditor().getText(), dateexp_txt.getEditor().getText())) == -1) {
                                             //****************************************************************
                                             User u = new User(nom_txt.getText(), prenom_txt.getText(), dnaissance_txt.getEditor().getText(), sexe_combo.getValue(), login_txt.getText(),
-                                                    password_txt.getText(), mail_txt.getText(), "employe", Integer.parseInt(numerotel_txt.getText()), adresse_txt.getText(),
+                                                    hashmdp(password_txt.getText()), mail_txt.getText(), "Employe", Integer.parseInt(numerotel_txt.getText()), adresse_txt.getText(),
                                                     Integer.parseInt(salaire_txt.getText()), dateem_txt.getEditor().getText(), dateexp_txt.getEditor().getText(), path_txt.getText(), ibs.findById(LoginController.LoggedUser.getBoutique().getId_boutique()));
                                             ius.add(u);
 
