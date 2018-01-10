@@ -18,5 +18,7 @@ public interface IEvenementService extends IService<Evenement, Integer> {
     public ObservableList<Evenement> displayall();
 
     List<String> liste_nom_event();
+    
+    public ObservableList<Evenement> displayallforshopowner(int id);
 
 }

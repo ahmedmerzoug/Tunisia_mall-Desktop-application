@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="518.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.ConsulterDemande_emploiShopController">
+   <children>
+      <HBox layoutX="10.0" layoutY="10.0" prefHeight="60.0" prefWidth="900.0" styleClass="box-topo">
+         <children>
+            <Label fx:id="lbTitulo1" layoutX="10.0" maxWidth="1.7976931348623157E308" styleClass="titulo" text="Consultation des demandes d'emploi" textFill="#51b91d" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="445.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Text fill="#a10b88" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrer par expérience">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="combobox" onAction="#affcombo" prefWidth="150.0" />
+         </children>
+      </HBox>
+      <TableView fx:id="demande_table" layoutX="50.0" layoutY="183.0" onMouseClicked="#choix_demande" prefHeight="214.0" prefWidth="747.0">
+         <columns>
+            <TableColumn fx:id="nom_emp" prefWidth="75.0" text="Nom" />
+            <TableColumn fx:id="prenom_emp" prefWidth="49.0" text="Prénom" />
+            <TableColumn fx:id="date_naissance" prefWidth="101.0" text="Date naissance" />
+            <TableColumn fx:id="adresse" prefWidth="56.0" text="Adresse" />
+            <TableColumn fx:id="sexe" prefWidth="71.0" text="Sexe" />
+            <TableColumn fx:id="email" prefWidth="84.0" text="Email" />
+            <TableColumn fx:id="num_tel" prefWidth="136.0" text="Numéro téléphone" />
+            <TableColumn fx:id="qualification" prefWidth="91.0" text="Qualification" />
+            <TableColumn fx:id="experience" prefWidth="83.0" text="Expérience" />
+         </columns>
+      </TableView>
+      <Button fx:id="mail_btn" layoutX="686.0" layoutY="436.0" mnemonicParsing="false" onAction="#envoyermail" text="Envoyer mail" textFill="#c91d1d" />
+      <Button fx:id="refreshbtn" layoutX="811.0" layoutY="196.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" visible="false" />
+   </children>
+</AnchorPane>

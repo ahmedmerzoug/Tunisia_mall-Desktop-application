@@ -55,6 +55,10 @@ public class User {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public User(String path) {
+        this.path = path;
+    }
+
     public User(String nom, String prenom, String date_naissance, String sexe, String login, String password, String mail, String role, int numero_telephone, String adresse, String date_embauche, String date_expiration, String path, Boutique boutique) {
         this.nom = nom;
         this.prenom = prenom;
@@ -440,6 +444,8 @@ public class User {
         this.password_requested_at = password_requested_at;
     }
     
-    
+    public User getuser() {
+        return this;
+    }
 
 }

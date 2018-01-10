@@ -16,11 +16,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import tray.animations.AnimationType;
+import tray.notification.TrayNotification;
 import tunisia_mall.Interface.IUserService;
 import tunisia_mall.Services.UserService;
 import tunisia_mall.models.User;
@@ -430,10 +435,7 @@ public class adminAppController implements Initializable {
     }
 
     void initialize() {
-//        instance = this;
-//        Grupo.notEmpty(grupoMenus, grupoCatalogacao, grupoEmprestimo, grupoLocaliacao, grupoUtilidades, grupoVisitantes);//não permite grupos de menus com menus deselecionados
-//        menuDashboard(null);
-        //lbUser.setText("Olá, " + LoginController.usuarioLogado.getNome());
+
     }
 
     /**
@@ -483,9 +485,16 @@ public class adminAppController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String nom = LoginController.LoggedUser.getNom();
+     String nom = LoginController.LoggedUser.getNom();
         String prenom = LoginController.LoggedUser.getPrenom();
         hello_text.setText("hello " + nom + " " + prenom);
+        IUserService aa = new UserService();
+         TrayNotification tray = new TrayNotification();
+         User b =  aa.findbypath(LoginController.LoggedUser.getId_user());
+          Image whatsAppImg = new Image("http://localhost/TestUser/web/images/Userimage/" + b.getPath());
+        
+         tray.setTray("welcome", nom +" "+prenom, whatsAppImg, Paint.valueOf("#2A9A84"),AnimationType.POPUP);
+        tray.showAndDismiss(Duration.seconds(10));
 
     }
 

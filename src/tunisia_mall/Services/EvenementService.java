@@ -173,5 +173,32 @@ public class EvenementService implements IEvenementService {
         }
         return listenomevent;
     }
+
+    @Override
+    public ObservableList<Evenement> displayallforshopowner(int id) {
+        ObservableList<Evenement> listeevent = FXCollections.observableArrayList();
+        String req = "select * from evenement where id_user=?";
+        PreparedStatement preparedStatement;
+
+        try {
+            preparedStatement = connection.prepareStatement(req);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Evenement b = new Evenement(
+                        resultSet.getInt("id_evenement"),
+                        resultSet.getString("nom"),
+                        resultSet.getString("description"),
+                        Evenement.convert(resultSet.getDate("date")),
+                        resultSet.getString("path"),
+                        new UserService().findById(resultSet.getInt("id_user")));
+                listeevent.add(b);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BoutiqueService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listeevent;
+    }
     
 }

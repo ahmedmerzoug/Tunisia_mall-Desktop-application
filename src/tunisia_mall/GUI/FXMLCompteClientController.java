@@ -27,6 +27,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Paint;
+import javafx.util.Duration;
+import tray.animations.AnimationType;
+import tray.notification.TrayNotification;
 import tunisia_mall.Interface.IUserService;
 import tunisia_mall.Services.UserService;
 import tunisia_mall.models.User;
@@ -70,7 +75,11 @@ public class FXMLCompteClientController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+     
+        
+ 
+        
+        
         sexe_combo.setItems(comboListsexe);
         afficher();
     }
@@ -94,7 +103,7 @@ public class FXMLCompteClientController implements Initializable {
 
                             LocalDate db = dnaissance_txt.getValue();
 
-                            String dateembauche = LoginController.LoggedUser.getDate_embauche();
+                            /*String dateembauche = LoginController.LoggedUser.getDate_embauche();
                             SimpleDateFormat inFmt1 = new SimpleDateFormat("yyyy-MM-dd");
                             SimpleDateFormat outFmt1 = new SimpleDateFormat("dd/MM/yyyy");
                             String dateEMB = outFmt1.format(inFmt1.parse(dateembauche));
@@ -103,11 +112,11 @@ public class FXMLCompteClientController implements Initializable {
                             SimpleDateFormat inFmt2 = new SimpleDateFormat("yyyy-MM-dd");
                             SimpleDateFormat outFmt2 = new SimpleDateFormat("dd/MM/yyyy");
 
-                            String dateexp = outFmt2.format(inFmt2.parse(dateexpiration));
+                            String dateexp = outFmt2.format(inFmt2.parse(dateexpiration));*/
 
                             LoginController.LoggedUser.setDate_naissance(dateN);
-                            LoginController.LoggedUser.setDate_embauche(dateEMB);
-                            LoginController.LoggedUser.setDate_expiration(dateexp);
+                            /*LoginController.LoggedUser.setDate_embauche(dateEMB);
+                            LoginController.LoggedUser.setDate_expiration(dateexp);*/
 
                             LoginController.LoggedUser.setSexe(sexe_combo.getValue());
                             LoginController.LoggedUser.setLogin(login_txt.getText());
@@ -120,8 +129,8 @@ public class FXMLCompteClientController implements Initializable {
                             LoginController.LoggedUser.setPath(path_txt.getText());
 
                             IUserService ius = new UserService();
-
-                            ius.update(LoginController.LoggedUser);
+                            UserService us=new UserService();
+                            us.update2(LoginController.LoggedUser);
 
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Modifier Données ");

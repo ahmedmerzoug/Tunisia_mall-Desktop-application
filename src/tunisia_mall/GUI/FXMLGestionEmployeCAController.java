@@ -52,6 +52,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
+import tunisia_mall.util.BCrypt;
 
 /**
  * FXML Controller class
@@ -151,7 +152,7 @@ public class FXMLGestionEmployeCAController implements Initializable {
                         Logger.getLogger(FXMLGestionEmployeCAController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 });
-        path_txt.setText("file:/E:/4infoB1/PiDev/2410/Tunisia_mall/src/tunisia_mall/img/fb-avatar.jpg");
+        path_txt.setText("img\\fb-avatar.jpg");
 
         IUserService ius = new UserService();
 
@@ -193,7 +194,11 @@ public class FXMLGestionEmployeCAController implements Initializable {
             }
         });
     }
-
+public String hashmdp(String password)
+    {
+    String hashed = BCrypt.hashpw(password, BCrypt.gensalt()); 
+    return hashed;
+    }
     @FXML
     private void ajouterE(ActionEvent event) throws ParseException {
         ControlesaisieJ cj = new ControlesaisieJ();
@@ -215,7 +220,7 @@ public class FXMLGestionEmployeCAController implements Initializable {
                                             //****************************************************************
                                             IUserService ius = new UserService();
                                             User u = new User(nom_txt.getText(), prenom_txt.getText(), dnaissance_txt.getEditor().getText(), sexe_combo.getValue(), login_txt.getText(),
-                                                    password_txt.getText(), mail_txt.getText(), "Employe", Integer.parseInt(numerotel_txt.getText()), adresse_txt.getText(),
+                                                    hashmdp(password_txt.getText()), mail_txt.getText(), "Employe", Integer.parseInt(numerotel_txt.getText()), adresse_txt.getText(),
                                                     Integer.parseInt(salaire_txt.getText()), dateem_txt.getEditor().getText(), dateexp_txt.getEditor().getText(), path_txt.getText(), ibs.findBoutiqueByNom(idbout_combo.getValue()));
                                             ius.add(u);
 
@@ -314,7 +319,7 @@ public class FXMLGestionEmployeCAController implements Initializable {
             u.setPrenom(prenom_txt.getText());
             u.setSexe(sexe_combo.getValue());
             u.setLogin(login_txt.getText());
-            u.setPassword(password_txt.getText());
+            u.setPassword(hashmdp(password_txt.getText()));
             u.setMail(mail_txt.getText());
             u.setRole("Employe");
             u.setNumero_telephone(Integer.parseInt(numerotel_txt.getText()));
@@ -414,6 +419,7 @@ public class FXMLGestionEmployeCAController implements Initializable {
 
     @FXML
     private void supprimerE(ActionEvent event) {
+        
         if (!tblemploye.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("suppression d'employe ");
@@ -435,7 +441,7 @@ public class FXMLGestionEmployeCAController implements Initializable {
     }
 
     void afficher() {
-        IUserService ius = new UserService();
+       IUserService ius = new UserService();
 
         tblemploye.setItems(ius.displayallemp());
 
@@ -462,6 +468,7 @@ public class FXMLGestionEmployeCAController implements Initializable {
 
     void showEmployeDetails(User e) throws ParseException {
 
+
 //        id.setText(String.valueOf(p.getId_pub()));
         idEnew = String.valueOf(e.getId_user());
 
@@ -471,7 +478,7 @@ public class FXMLGestionEmployeCAController implements Initializable {
         SimpleDateFormat outFmt = new SimpleDateFormat("dd/MM/yyyy");
 
         String dateN = outFmt.format(inFmt.parse(e.getDate_naissance()));
-
+       
 //        txtdate_debut.setPromptText(dated);
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
