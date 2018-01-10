@@ -46,6 +46,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import org.controlsfx.control.textfield.TextFields;
@@ -113,6 +114,9 @@ public class EventController implements Initializable {
 
     @FXML
     private JFXButton btinsertimage;
+    
+    @FXML
+    private ImageView image;
 
     String imgName;
 
@@ -275,6 +279,9 @@ public class EventController implements Initializable {
         } catch (DateTimeParseException exc) {
 //            throw exc;      // Rethrow the exception.
         }
+        
+//        Image image1=new Image("C:\\wamp64\\www\\TestUser\\web\\images\\amine\\"+e.getPath());
+//        image.setImage(image1);
 
         txt_eventname.setText(e.getNom());
         txt_description.setText(e.getDescription());

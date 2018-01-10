@@ -35,40 +35,42 @@ public class UserService implements IUserService {
 
     @Override
     public void add(User t) {
-        String req = "insert into user (username,email,enabled,password,roles,nom,prenom,date_naissance,sexe,numero_telephone,adresse,salaire,date_embauche,date_expiration,path,id_boutique) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String req = "insert into user (username,username_canonical,email,email_canonical,enabled,password,roles,nom,prenom,date_naissance,sexe,numero_telephone,adresse,salaire,date_embauche,date_expiration,path,id_boutique) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);
             preparedStatement.setString(1, t.getLogin());
-            preparedStatement.setString(2, t.getMail());
-            preparedStatement.setString(3, "1");
-            preparedStatement.setString(4, t.getPassword());
-            preparedStatement.setString(5, t.getRole());
-            preparedStatement.setString(6, t.getNom());
-            preparedStatement.setString(7, t.getPrenom());
+            preparedStatement.setString(2, t.getLogin());
+            preparedStatement.setString(3, t.getMail());
+            preparedStatement.setString(4, t.getMail());
+            preparedStatement.setString(5, "1");
+            preparedStatement.setString(6, t.getPassword());
+            preparedStatement.setString(7, t.getRole());
+            preparedStatement.setString(8, t.getNom());
+            preparedStatement.setString(9, t.getPrenom());
             try {
-                preparedStatement.setDate(8, t.convert(t.getDate_naissance()));
+                preparedStatement.setDate(10, t.convert(t.getDate_naissance()));
             } catch (ParseException ex) {
                 Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
             }
-            preparedStatement.setString(9, t.getSexe());          
-            preparedStatement.setInt(10, t.getNumero_telephone());
-            preparedStatement.setString(11, t.getAdresse());
-            preparedStatement.setFloat(12, t.getSalaire());
+            preparedStatement.setString(11, t.getSexe());          
+            preparedStatement.setInt(12, t.getNumero_telephone());
+            preparedStatement.setString(13, t.getAdresse());
+            preparedStatement.setFloat(14, t.getSalaire());
             try {
-                preparedStatement.setDate(13, t.convert(t.getDate_embauche()));
+                preparedStatement.setDate(15, t.convert(t.getDate_embauche()));
             } catch (ParseException ex) {
                 Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                preparedStatement.setDate(14, t.convert(t.getDate_expiration()));
+                preparedStatement.setDate(16, t.convert(t.getDate_expiration()));
             } catch (ParseException ex) {
                 Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            preparedStatement.setString(15, t.getPath());
+            preparedStatement.setString(17, t.getPath());
 
-            preparedStatement.setInt(16, t.getBoutique().getId_boutique());
+            preparedStatement.setInt(18, t.getBoutique().getId_boutique());
 
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
