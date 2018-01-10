@@ -38,7 +38,6 @@
          </columns>
       </TableView>
       <Button fx:id="mail_btn" layoutX="635.0" layoutY="442.0" mnemonicParsing="false" onAction="#envoyermail" text="Envoyer mail" textFill="#e40808" />
-      <Button fx:id="statbtn" layoutX="517.0" layoutY="442.0" mnemonicParsing="false" onAction="#stat" text="Statistique" textFill="#c21121" />
       <CheckBox fx:id="mine" layoutX="47.0" layoutY="109.0" mnemonicParsing="false" onAction="#mes_boutiques" text="Mes boutiques uniquement" textFill="#da8a3f">
          <font>
             <Font size="18.0" />

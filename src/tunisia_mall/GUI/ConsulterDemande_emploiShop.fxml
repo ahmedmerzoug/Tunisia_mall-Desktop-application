@@ -41,7 +41,6 @@
          </columns>
       </TableView>
       <Button fx:id="mail_btn" layoutX="686.0" layoutY="436.0" mnemonicParsing="false" onAction="#envoyermail" text="Envoyer mail" textFill="#c91d1d" />
-      <Button fx:id="statbtn" layoutX="590.0" layoutY="436.0" mnemonicParsing="false" onAction="#stat" text="Statistique" textFill="#d31616" />
-      <Button fx:id="refreshbtn" layoutX="811.0" layoutY="196.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
+      <Button fx:id="refreshbtn" layoutX="811.0" layoutY="196.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" visible="false" />
    </children>
 </AnchorPane>

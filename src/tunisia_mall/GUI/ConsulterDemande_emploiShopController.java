@@ -71,27 +71,25 @@ public class ConsulterDemande_emploiShopController implements Initializable {
     @FXML
     private ComboBox<Integer> combobox;
     @FXML
-    private Button statbtn;
-    @FXML
     private Button mail_btn;
-
+    @FXML
+    private Button refreshbtn;
     /**
      * Initializes the controller class.
      */
     private ObservableList<Demande_emploi> list_demande = FXCollections.observableArrayList();
     Demande_emploi d = new Demande_emploi();
     Demande_emploiService de = new Demande_emploiService();
-    @FXML
-    private Button refreshbtn;
+  
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Demande_emploiService ds = new Demande_emploiService();
         // IUserService iu = new UserService ();
         combobox.setItems(ds.displayall());
-
+        System.out.println(LoginController.LoggedUser.getId_user());
         list_demande = FXCollections.observableArrayList(de.getAll3(LoginController.LoggedUser.getId_user()));
-
+        System.out.println(de.getAll3(LoginController.LoggedUser.getId_user()));
         nom_emp.setCellValueFactory(new PropertyValueFactory<>("nom_emp"));
         nom_emp.cellFactoryProperty();
 
@@ -120,6 +118,7 @@ public class ConsulterDemande_emploiShopController implements Initializable {
         experience.cellFactoryProperty();
 
         demande_table.setItems(list_demande);
+        
     }
 
     public static String adress;
@@ -182,18 +181,6 @@ public class ConsulterDemande_emploiShopController implements Initializable {
 
     }
 
-    @FXML
-    private void stat(ActionEvent event) throws IOException {
-
-        /*       Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("AdminDemande_emploi_stat.fxml"));
-            
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-            ((Node) event.getSource()).getScene().getWindow().hide();
-         */
-    }
 
     @FXML
     private void refresh(ActionEvent event) {

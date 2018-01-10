@@ -56,20 +56,18 @@ import tunisia_mall.models.Offre_emploi;
  */
 public class ClientOffre_emploiController implements Initializable {
 
-     Connection connection;
+    Connection connection;
     public static Offre_emploi OffreS;
-    
-    
-    
-     public void StartConnection() {
+
+    public void StartConnection() {
         connection = DataSource.getInsatance().getConnection();
     }
-    
-   @FXML
-    private DatePicker date_picker; 
-   @FXML
+
+    @FXML
+    private DatePicker date_picker;
+    @FXML
     private TableView<Offre_emploi> table_offre_client;
-    
+
     @FXML
     private TableColumn<Offre_emploi, String> col_boutiq;
     @FXML
@@ -100,20 +98,17 @@ public class ClientOffre_emploiController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
-    
     private ObservableList<Offre_emploi> list_offre = FXCollections.observableArrayList();
     // private ObservableList options = FXCollections.observableArrayList();
     Offre_emploi o = new Offre_emploi();
     Offre_emploiService oe = new Offre_emploiService();
     public static Boutique BoutiqS;
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      list_offre = FXCollections.observableArrayList(oe.getAll2());
+        list_offre = FXCollections.observableArrayList(oe.getAll2());
 
-        col_boutiq.setCellValueFactory(new Callback <TableColumn.CellDataFeatures<Offre_emploi, String>, ObservableValue<String>>() {
+        col_boutiq.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Offre_emploi, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Offre_emploi, String> param) {
                 return new SimpleStringProperty(param.getValue().getBoutique().getNom());
@@ -124,21 +119,22 @@ public class ClientOffre_emploiController implements Initializable {
         col_post.setCellValueFactory(new PropertyValueFactory<>("poste"));
         col_post.cellFactoryProperty();
 
-       
         col_specialite.setCellValueFactory(new PropertyValueFactory<>("specialite"));
         col_specialite.cellFactoryProperty();
 
         col_salaire.setCellValueFactory(new PropertyValueFactory<>("salaire"));
         col_salaire.cellFactoryProperty();
 
-        col_nbr.setCellValueFactory(new PropertyValueFactory<>("nbr_demandé"));
+        col_nbr.setCellValueFactory(new PropertyValueFactory<>("nbr_demande"));
         col_nbr.cellFactoryProperty();
-
+        System.out.println(col_nbr);
+        
+        
         col_date.setCellValueFactory(new PropertyValueFactory<>("date_expiration"));
         col_date.cellFactoryProperty();
-        table_offre_client.setItems(list_offre);        
-        
-    }    
+        table_offre_client.setItems(list_offre);
+
+    }
 
     /* public boolean id_offre (int id_offre) {
       
@@ -160,42 +156,36 @@ public class ClientOffre_emploiController implements Initializable {
         }
         return false;
     } */
-    
-    
     @FXML
     private void clicked_table(MouseEvent event) {
-    
-           if (table_offre_client.getSelectionModel().getSelectedItem() != null) {
+
+        if (table_offre_client.getSelectionModel().getSelectedItem() != null) {
             Offre_emploi o = table_offre_client.getSelectionModel().getSelectedItem();
-            
+
             Boutique b = new Boutique();
-            Offre_emploiService oe= new Offre_emploiService();
-            
+            Offre_emploiService oe = new Offre_emploiService();
+
             OffreS = new Offre_emploi();
             OffreS.setId_offre(o.getId_offre());
-           OffreS.setBoutique(o.getBoutique());
-            BoutiqS= new Boutique();
+            OffreS.setBoutique(o.getBoutique());
+            BoutiqS = new Boutique();
             BoutiqS.setId_boutique(OffreS.getBoutique().getId_boutique());
-            
-            
-                LocalDate ld = o.getDate_expiration().toLocalDate();
-                System.out.println(OffreS);
-               System.out.println(BoutiqS);
-                 date_picker.setValue(ld);
-           
-        
+
+            LocalDate ld = o.getDate_expiration().toLocalDate();
+            System.out.println(OffreS);
+            System.out.println(BoutiqS);
+            date_picker.setValue(ld);
+
+        }
+
     }
-        
-    
-    }
- 
-    
 
     @FXML
     private void comboaction(ActionEvent event) {
     }
 
     private String x;
+
     @FXML
     private void afficher(ActionEvent event) {
 
@@ -205,8 +195,7 @@ public class ClientOffre_emploiController implements Initializable {
 
         table_offre_client.setItems(FXCollections.observableArrayList(offres));
 
-        col_boutiq.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Offre_emploi, String>, ObservableValue<String>>() 
-        {
+        col_boutiq.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Offre_emploi, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Offre_emploi, String> param) {
                 return new SimpleStringProperty(param.getValue().getBoutique().getNom());
@@ -214,7 +203,6 @@ public class ClientOffre_emploiController implements Initializable {
 
         });
 
-       
         col_post.setCellValueFactory(new PropertyValueFactory<>("poste"));
         col_post.cellFactoryProperty();
 
@@ -224,53 +212,49 @@ public class ClientOffre_emploiController implements Initializable {
         col_salaire.setCellValueFactory(new PropertyValueFactory<>("salaire"));
         col_salaire.cellFactoryProperty();
 
-        col_nbr.setCellValueFactory(new PropertyValueFactory<>("nbr_demandé"));
+        col_nbr.setCellValueFactory(new PropertyValueFactory<>("nbr_demande"));
         col_nbr.cellFactoryProperty();
 
         col_date.setCellValueFactory(new PropertyValueFactory<>("date_expiration"));
         col_date.cellFactoryProperty();
 
-    
     }
 
-    
     public static String convert(java.sql.Date d) {
         SimpleDateFormat df = new SimpleDateFormat("dd/ MMMM/ yyyy");
         String text = df.format(d);
         return text;
     }
-    
-    
+
     @FXML
     private void poster_demande(ActionEvent event) throws IOException {
-    
-       ZoneId z = ZoneId.of( "Africa/Tunis" );
-    LocalDate today = LocalDate.now(z);
-   
-         LocalDate db = date_picker.getValue();
-     
-         if (db.isAfter(today))
-         {
-             System.out.println("c bon");
+
+        ZoneId z = ZoneId.of("Africa/Tunis");
+        LocalDate today = LocalDate.now(z);
+
+        LocalDate db = date_picker.getValue();
+
+        if (db.isAfter(today)) {
+            System.out.println("c bon");
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("ClientGestion_demande.fxml"));
-            
+
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-            ((Node) event.getSource()).getScene().getWindow().hide();
-         }}
+            //((Node) event.getSource()).getScene().getWindow().hide();
+        }
+    }
 
     @FXML
     private void refresh(ActionEvent event) {
-        
+
         ObservableList<Offre_emploi> list = FXCollections.observableArrayList(oe.getAll2());
 //            tableApprenant.setItems(list);
         table_offre_client.setItems(list);
         table_offre_client.getColumns().get(0).setVisible(false);
         table_offre_client.getColumns().get(0).setVisible(true);
-        
+
     }
 
-    
 }

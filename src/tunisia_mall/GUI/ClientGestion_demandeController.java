@@ -50,8 +50,6 @@ import tunisia_mall.models.User;
 public class ClientGestion_demandeController implements Initializable {
 
     @FXML
-    private Button retourbtn;
-    @FXML
     private TextField nom_entry;
     @FXML
     private TextField prenom_entry;
@@ -117,7 +115,6 @@ public class ClientGestion_demandeController implements Initializable {
 
     }
 
-    @FXML
     private void retour(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("ClientOffre_emploi.fxml"));
@@ -236,7 +233,7 @@ public class ClientGestion_demandeController implements Initializable {
         java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
         return sqlDate;
     }
-    
+     java.sql.Date l;
     @FXML
     private void affich_coord(ActionEvent event)  {
          UserService us = new UserService();
@@ -245,15 +242,17 @@ public class ClientGestion_demandeController implements Initializable {
 
         nom_entry.setText(u.getNom());
         prenom_entry.setText(u.getPrenom());
-        java.sql.Date l;
+       
+       
         try {
             l = convert(u.getDate_naissance());
-            LocalDate L = l.toLocalDate();
-        daten_entry.setValue(L);
-        
         } catch (ParseException ex) {
             Logger.getLogger(ClientGestion_demandeController.class.getName()).log(Level.SEVERE, null, ex);
         }
+            LocalDate L = l.toLocalDate();
+        daten_entry.setValue(L);
+        
+      
         
         adress_entry.setText(u.getAdresse());
         num_tel_entry.setText(String.valueOf(u.getNumero_telephone()));
@@ -289,10 +288,27 @@ public class ClientGestion_demandeController implements Initializable {
     @FXML
     private void num(KeyEvent event) {
         
-            if(qualif_entry.getText().trim().length()>0)
+        
+        
+        
+         if (exper_entry.getText().trim().length() > 0) {
+            try {
+                int i = Integer.parseInt(exper_entry.getText());
+            } catch (NumberFormatException e) {
+                qualiferror.setVisible(true);
+                qualiferror.setText("veuillez entrez des valeurs numeriques");
+                //  Signup.setDisable(true);
+            }
+        } else {
+            qualiferror.setVisible(false);
+            // Signup.setDisable(false);
+        }
+        
+        
+        /*    if(exper_entry.getText().trim().length()>0)
         {
          try {
-            int i = Integer.parseInt(qualif_entry.getText());
+            int i = Integer.parseInt(exper_entry.getText());
              }
          catch (NumberFormatException e) {
             qualiferror.setVisible(true);
@@ -305,7 +321,7 @@ public class ClientGestion_demandeController implements Initializable {
             qualiferror.setVisible(false);
            // Signup.setDisable(false);
             }
- 
+ */
         
     }
 

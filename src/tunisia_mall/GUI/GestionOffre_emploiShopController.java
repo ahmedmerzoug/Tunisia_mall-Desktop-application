@@ -140,7 +140,7 @@ public class GestionOffre_emploiShopController implements Initializable {
         col_salaire.setCellValueFactory(new PropertyValueFactory<>("salaire"));
         col_salaire.cellFactoryProperty();
 
-        col_nbr.setCellValueFactory(new PropertyValueFactory<>("nbr_demandé"));
+        col_nbr.setCellValueFactory(new PropertyValueFactory<>("nbr_demande"));
         col_nbr.cellFactoryProperty();
 
         col_date.setCellValueFactory(new PropertyValueFactory<>("date_expiration"));
@@ -178,7 +178,7 @@ private String x;
         col_salaire.setCellValueFactory(new PropertyValueFactory<>("salaire"));
         col_salaire.cellFactoryProperty();
 
-        col_nbr.setCellValueFactory(new PropertyValueFactory<>("nbr_demandé"));
+        col_nbr.setCellValueFactory(new PropertyValueFactory<>("nbr_demande"));
         col_nbr.cellFactoryProperty();
 
         col_date.setCellValueFactory(new PropertyValueFactory<>("date_expiration"));
@@ -216,10 +216,14 @@ private String x;
 
     @FXML
     private void anchorajout(ActionEvent event) {
-        
-      modifbtn.setVisible(false);
+        modifbtn.setVisible(false);
         anchor.setVisible(true);
         btnvalider.setVisible(true);
+        post_entry.setText("");
+        specialite_entry.setText("");
+        salaire_entry.setText("");
+        nbrempl_entry.setText("");
+      
         
     }
 
@@ -246,7 +250,13 @@ private String x;
 
     @FXML
     private void affich_in_entry(MouseEvent event) {
-            anchor.setVisible(false);
+        
+        anchor.setVisible(false);
+        modifbtn.setVisible(false);
+     btnvalider.setVisible(false);
+       ajoutavecsucce.setVisible(false);
+        
+           
 
         if (table_offre.getSelectionModel().getSelectedItem() != null) {
             Offre_emploi o = table_offre.getSelectionModel().getSelectedItem();
@@ -274,7 +284,7 @@ private String x;
     private void refresh(ActionEvent event) {
         
     anchor.setVisible(false);
-
+ajoutavecsucce.setVisible(false);
         ObservableList<Offre_emploi> list = FXCollections.observableArrayList(oe.getAll3(LoginController.LoggedUser.getId_user()));
 
         table_offre.setItems(list);
@@ -312,8 +322,9 @@ private String x;
            
 
         }
-        
         anchor.setVisible(false);
+        modifbtn.setVisible(false);
+       
       
       
     }
@@ -379,6 +390,8 @@ private String x;
             anchor.setVisible(false);
           //  anchorajoutsucce.setVisible(true);
         } 
+         
+         btnvalider.setVisible(false);
 
     }
 
