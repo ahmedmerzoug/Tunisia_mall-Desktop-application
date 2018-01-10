@@ -12,14 +12,14 @@
 
 <AnchorPane id="AnchorPane" prefHeight="495.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.ClientOffre_emploiController">
    <children>
-      <TableView fx:id="table_offre_client" layoutX="28.0" layoutY="86.0" onMouseClicked="#clicked_table" prefHeight="262.0" prefWidth="690.0">
+      <TableView fx:id="table_offre_client" layoutX="61.0" layoutY="90.0" onMouseClicked="#clicked_table" prefHeight="262.0" prefWidth="668.0">
          <columns>
-            <TableColumn fx:id="col_boutiq" prefWidth="94.0" text="Boutique" />
-            <TableColumn fx:id="col_post" prefWidth="91.0" text="Poste" />
-            <TableColumn fx:id="col_specialite" prefWidth="90.0" text="Spécialité" />
-            <TableColumn fx:id="col_salaire" prefWidth="95.0" text="Salaire" />
-            <TableColumn fx:id="col_nbr" prefWidth="151.0" text="Nombre demandé" />
-            <TableColumn fx:id="col_date" prefWidth="168.0" text="Date d'expiration" />
+            <TableColumn fx:id="col_boutiq" prefWidth="92.0" text="Boutique" />
+            <TableColumn fx:id="col_post" minWidth="0.0" prefWidth="79.0" text="Poste" />
+            <TableColumn fx:id="col_specialite" prefWidth="109.0" text="Spécialité" />
+            <TableColumn fx:id="col_salaire" prefWidth="90.0" text="Salaire" />
+            <TableColumn fx:id="col_nbr" prefWidth="151.0" text="Nombre demandé" visible="false" />
+            <TableColumn fx:id="col_date" prefWidth="319.0" text="Date d'expiration" />
          </columns>
       </TableView>
       <Text layoutX="28.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des offres :" />

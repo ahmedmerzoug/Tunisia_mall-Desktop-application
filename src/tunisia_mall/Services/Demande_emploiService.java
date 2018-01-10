@@ -180,6 +180,7 @@ public class Demande_emploiService implements IDemande_emploiService {
             while (resultSet.next()) {
                 Demande_emploi demande_emploi = new Demande_emploi(resultSet.getString(4), resultSet.getString(5), resultSet.getDate(6), resultSet.getString(7), resultSet.getString(8), resultSet.getString(9), resultSet.getString(10), resultSet.getString(11), resultSet.getInt(12));
                 demandes.add(demande_emploi);
+                System.out.println(demande_emploi);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

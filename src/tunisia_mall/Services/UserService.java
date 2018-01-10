@@ -35,39 +35,40 @@ public class UserService implements IUserService {
 
     @Override
     public void add(User t) {
-        String req = "insert into user (nom,prenom,date_naissance,sexe,username,password,mail,role,numero_telephone,adresse,salaire,date_embauche,date_expiration,path,id_boutique) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String req = "insert into user (username,email,enabled,password,roles,nom,prenom,date_naissance,sexe,numero_telephone,adresse,salaire,date_embauche,date_expiration,path,id_boutique) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);
-            preparedStatement.setString(1, t.getNom());
-            preparedStatement.setString(2, t.getPrenom());
+            preparedStatement.setString(1, t.getLogin());
+            preparedStatement.setString(2, t.getMail());
+            preparedStatement.setString(3, "1");
+            preparedStatement.setString(4, t.getPassword());
+            preparedStatement.setString(5, t.getRole());
+            preparedStatement.setString(6, t.getNom());
+            preparedStatement.setString(7, t.getPrenom());
             try {
-                preparedStatement.setDate(3, t.convert(t.getDate_naissance()));
+                preparedStatement.setDate(8, t.convert(t.getDate_naissance()));
             } catch (ParseException ex) {
                 Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
             }
-            preparedStatement.setString(4, t.getSexe());
-            preparedStatement.setString(5, t.getLogin());
-            preparedStatement.setString(6, t.getPassword());
-            preparedStatement.setString(7, t.getMail());
-            preparedStatement.setString(8, t.getRole());
-            preparedStatement.setInt(9, t.getNumero_telephone());
-            preparedStatement.setString(10, t.getAdresse());
-            preparedStatement.setFloat(11, t.getSalaire());
+            preparedStatement.setString(9, t.getSexe());          
+            preparedStatement.setInt(10, t.getNumero_telephone());
+            preparedStatement.setString(11, t.getAdresse());
+            preparedStatement.setFloat(12, t.getSalaire());
             try {
-                preparedStatement.setDate(12, t.convert(t.getDate_embauche()));
+                preparedStatement.setDate(13, t.convert(t.getDate_embauche()));
             } catch (ParseException ex) {
                 Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                preparedStatement.setDate(13, t.convert(t.getDate_expiration()));
+                preparedStatement.setDate(14, t.convert(t.getDate_expiration()));
             } catch (ParseException ex) {
                 Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            preparedStatement.setString(14, t.getPath());
+            preparedStatement.setString(15, t.getPath());
 
-            preparedStatement.setInt(15, t.getBoutique().getId_boutique());
+            preparedStatement.setInt(16, t.getBoutique().getId_boutique());
 
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
@@ -77,7 +78,7 @@ public class UserService implements IUserService {
 
     @Override
     public void update(User t) {
-        String req = "update user set nom=?,prenom=?,date_naissance=?,sexe=?,username=?,password=?,mail=?,role=?,numero_telephone=?,adresse=?,salaire=?,date_embauche=?,date_expiration=?,path=?,id_boutique=? where id_user = ?";
+        String req = "update user set nom=?,prenom=?,date_naissance=?,sexe=?,username=?,password=?,email=?,roles=?,numero_telephone=?,adresse=?,salaire=?,date_embauche=?,date_expiration=?,path=?,id_boutique=? where id_user = ?";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(req);
@@ -106,7 +107,34 @@ public class UserService implements IUserService {
         }
 
     }
+public void update2(User t) {
+        String req = "update user set nom=?,prenom=?,date_naissance=?,sexe=?,username=?,password=?,email=?,roles=?,numero_telephone=?,adresse=?,salaire=?,path=?,id_boutique=? where id_user = ?";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(req);
+            preparedStatement.setString(1, t.getNom());
+            preparedStatement.setString(2, t.getPrenom());
+            preparedStatement.setDate(3, t.convert(t.getDate_naissance()));
+            preparedStatement.setString(4, t.getSexe());
 
+            preparedStatement.setString(5, t.getLogin());
+            preparedStatement.setString(6, t.getPassword());
+            preparedStatement.setString(7, t.getMail());
+            preparedStatement.setString(8, t.getRole());
+            preparedStatement.setInt(9, t.getNumero_telephone());
+            preparedStatement.setString(10, t.getAdresse());
+            preparedStatement.setFloat(11, t.getSalaire());           
+            preparedStatement.setString(14, t.getPath());
+//            preparedStatement.setInt(15, t.getBoutique().getId_boutique());
+            preparedStatement.setInt(16, t.getId_user());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+        } catch (ParseException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
     @Override
     public void remove(Integer id_user) {
         String req = "delete from user where id_user =?";
@@ -390,7 +418,7 @@ public class UserService implements IUserService {
         String nomprenom;
         try {
             preparedStatement = connection.prepareStatement(req);
-            preparedStatement.setString(1, "client");
+            preparedStatement.setString(1, "a:0:{}");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 User u = new User(resultSet.getInt(1), resultSet.getString("nom"), resultSet.getString("prenom"), User.convert(resultSet.getDate("date_naissance")), resultSet.getString("sexe"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("email"), resultSet.getString("roles"), resultSet.getInt("numero_telephone"), resultSet.getString("adresse"), resultSet.getFloat("salaire"), User.convert(resultSet.getDate("date_embauche")), User.convert(resultSet.getDate("date_expiration")), resultSet.getString("path"), new BoutiqueService().findById(resultSet.getInt("id_boutique")));
@@ -496,7 +524,7 @@ public class UserService implements IUserService {
         try {
             preparedStatement = connection.prepareStatement(requete);
             preparedStatement.setString(1, search);
-            preparedStatement.setString(2, "client");
+            preparedStatement.setString(2, "a:0:{}");
             ResultSet resultat = preparedStatement.executeQuery();
             while (resultat.next()) {
 
@@ -540,7 +568,7 @@ public class UserService implements IUserService {
         try {
             preparedStatement = connection.prepareStatement(requete);
             preparedStatement.setString(1, search);
-            preparedStatement.setString(2, "shopowner");
+            preparedStatement.setString(2, "a:1:{i:0;s:16:\"ROLE_RESPONSABLE\";}");
             ResultSet resultat = preparedStatement.executeQuery();
             while (resultat.next()) {
 
@@ -583,7 +611,7 @@ public class UserService implements IUserService {
         try {
             preparedStatement = connection.prepareStatement(requete);
             preparedStatement.setInt(1, id);
-            preparedStatement.setString(2, "shopowner");
+            preparedStatement.setString(2, "a:1:{i:0;s:16:\"ROLE_RESPONSABLE\";}");
             ResultSet resultat = preparedStatement.executeQuery();
 
             while (resultat.next()) {

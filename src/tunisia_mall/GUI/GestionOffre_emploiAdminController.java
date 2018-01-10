@@ -113,7 +113,7 @@ public class GestionOffre_emploiAdminController implements Initializable {
     private Label message;
     @FXML
     private Label ajoutavecsucce;
-   
+
     @FXML
     private Label remplirchamp;
     @FXML
@@ -217,8 +217,13 @@ public class GestionOffre_emploiAdminController implements Initializable {
         modifbtn.setVisible(false);
         anchor.setVisible(true);
         btnvalider.setVisible(true);
-        //anchorajoutsucce.setVisible(false);
-
+        post_entry.setText("");
+        specialite_entry.setText("");
+        salaire_entry.setText("");
+        nbrempl_entry.setText("");
+       // date_expiration_entry.setٍText(null);
+      // anchorajoutsucce.setVisible(false);
+      //ajoutavecsucce.setVisible(false);
     }
 
     @FXML
@@ -226,7 +231,7 @@ public class GestionOffre_emploiAdminController implements Initializable {
 
         btnvalider.setVisible(false);
         anchor.setVisible(true);
-       // anchorajoutsucce.setVisible(false);
+        // anchorajoutsucce.setVisible(false);
 
         modifbtn.setVisible(true);
 
@@ -249,7 +254,10 @@ public class GestionOffre_emploiAdminController implements Initializable {
     private void affich_in_entry(MouseEvent event) {
 
         anchor.setVisible(false);
-       // anchorajoutsucce.setVisible(false);
+        modifbtn.setVisible(false);
+     btnvalider.setVisible(false);
+       ajoutavecsucce.setVisible(false);
+        // anchorajoutsucce.setVisible(false);
 
         if (table_offre.getSelectionModel().getSelectedItem() != null) {
             Offre_emploi o = table_offre.getSelectionModel().getSelectedItem();
@@ -266,14 +274,15 @@ public class GestionOffre_emploiAdminController implements Initializable {
             date_expiration_entry.setValue(L);
 
         }
-
+                modifbtn.setVisible(false);
+                btnvalider.setVisible(false);
     }
 
     @FXML
     private void refresh(ActionEvent event) {
 
         anchor.setVisible(false);
-
+            ajoutavecsucce.setVisible(false);
         ObservableList<Offre_emploi> list = FXCollections.observableArrayList(oe.getAll2());
 
         table_offre.setItems(list);
@@ -281,12 +290,13 @@ public class GestionOffre_emploiAdminController implements Initializable {
         table_offre.getColumns().get(0).setVisible(true);
         modifbtn.setVisible(false);
         btnvalider.setVisible(false);
-       // anchorajoutsucce.setVisible(false);
+        
+        // anchorajoutsucce.setVisible(false);
     }
 
     @FXML
     private void modifier(ActionEvent event) {
-       // anchorajoutsucce.setVisible(false);
+        // anchorajoutsucce.setVisible(false);
         if (table_offre.getSelectionModel().getSelectedItem() != null) {
             Offre_emploi o = table_offre.getSelectionModel().getSelectedItem();
             Offre_emploiService oe = new Offre_emploiService();
@@ -308,19 +318,21 @@ public class GestionOffre_emploiAdminController implements Initializable {
         }
 
         anchor.setVisible(false);
+        modifbtn.setVisible(false);
 
     }
 
     @FXML
     private void valider(ActionEvent event) throws IOException, SQLException {
 
-       // anchorajoutsucce.setVisible(false);
-       remplirchamp.setText("");
-       message.setText("");
+        // anchorajoutsucce.setVisible(false);
+        remplirchamp.setText("");
+        //  ajoutavecsucce.setVisible(false);
+        message.setText("");
         Offre_emploi o = new Offre_emploi();
         Offre_emploiService of = new Offre_emploiService();
         boolean valide = true;
-        boolean validedate=true;
+        boolean validedate = true;
         User u = new User();
         UserService us = new UserService();
         u = us.findById(LoginController.LoggedUser.getId_user());
@@ -346,20 +358,19 @@ public class GestionOffre_emploiAdminController implements Initializable {
             remplirchamp.setText("Il faut remplir tous les champs");
         }
 
-        
         ZoneId z = ZoneId.of("Africa/Tunis");
         LocalDate today = LocalDate.now(z);
         if (date_expiration_entry.getValue() != null) {
-        LocalDate db = date_expiration_entry.getValue();
+            LocalDate db = date_expiration_entry.getValue();
 
-        if(!db.isAfter(today))
-        {validedate=false;
-        message.setText("Date passée");
+            if (!db.isAfter(today)) {
+                validedate = false;
+                message.setText("Date passée");
+            }
         }
-        }
-               
-         if ( (validedate)&& (valide) ) {
-                LocalDate db = date_expiration_entry.getValue(); 
+
+        if ((validedate) && (valide)) {
+            LocalDate db = date_expiration_entry.getValue();
             o.setBoutique(u.getBoutique());
             o.setPoste(post_entry.getText());
             o.setSpecialite(specialite_entry.getText());
@@ -370,10 +381,13 @@ public class GestionOffre_emploiAdminController implements Initializable {
             of.add(o);
             ajoutavecsucce.setText("Ajout effectué avec succès");
             anchor.setVisible(false);
-          //  anchorajoutsucce.setVisible(true);
-        } 
+            //  anchorajoutsucce.setVisible(true);
+        }
+        
+        btnvalider.setVisible(false);
+      
+        
     }
-
 
     @FXML
     private void mes_boutiques(ActionEvent event) {
@@ -399,48 +413,38 @@ public class GestionOffre_emploiAdminController implements Initializable {
 
     @FXML
     private void salairenum(KeyEvent event) {
-  
-        if(salaire_entry.getText().trim().length()>0)
-        {
-         try {
-            int i = Integer.parseInt(salaire_entry.getText());
-             }
-         catch (NumberFormatException e) {
-            numerror.setVisible(true);
-            numerror.setText("veuillez entrez des valeurs numeriques");
-          //  Signup.setDisable(true);
+
+        if (salaire_entry.getText().trim().length() > 0) {
+            try {
+                int i = Integer.parseInt(salaire_entry.getText());
+            } catch (NumberFormatException e) {
+                numerror.setVisible(true);
+                numerror.setText("veuillez entrez des valeurs numeriques");
+                //  Signup.setDisable(true);
             }
-        }
-        
-        else{
+        } else {
             numerror.setVisible(false);
-           // Signup.setDisable(false);
-            }
-    
+            // Signup.setDisable(false);
+        }
+
     }
-  
 
     @FXML
     private void nbrnum(KeyEvent event) {
-        
-        
-           if(nbrempl_entry.getText().trim().length()>0)
-        {
-         try {
-            int i = Integer.parseInt(salaire_entry.getText());
-             }
-         catch (NumberFormatException e) {
-            numerror.setVisible(true);
-            numerror.setText("veuillez entrez des valeurs numeriques");
-          //  Signup.setDisable(true);
+
+        if (nbrempl_entry.getText().trim().length() > 0) {
+            try {
+                int i = Integer.parseInt(salaire_entry.getText());
+            } catch (NumberFormatException e) {
+                numerror.setVisible(true);
+                numerror.setText("veuillez entrez des valeurs numeriques");
+                //  Signup.setDisable(true);
             }
-        }
-        
-        else{
+        } else {
             numerror.setVisible(false);
-           // Signup.setDisable(false);
-            }
-        
+            // Signup.setDisable(false);
+        }
+
     }
 
 }

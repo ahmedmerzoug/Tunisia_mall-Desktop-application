@@ -9,118 +9,108 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="705.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.ClientGestion_demandeController">
+<AnchorPane id="AnchorPane" prefHeight="651.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.ClientGestion_demandeController">
    <children>
-      <Text layoutX="62.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom:">
+      <Text fill="#0b0da4" layoutX="62.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="480.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom:">
+      <Text fill="#0b0da4" layoutX="457.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="463.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date naissance">
+      <Text fill="#0b0da4" layoutX="427.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date naissance:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="490.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse" wrappingWidth="93.37499918043613">
+      <Text fill="#0b0da4" layoutX="443.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse:" wrappingWidth="93.37499918043613">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="346.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sexe">
+      <Text layoutX="308.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sexe:" visible="false">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="72.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+      <Text fill="#0b0da4" layoutX="62.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="18.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro téléphone">
+      <Text fill="#0b0da4" layoutX="40.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Téléphone:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="22.0" layoutY="567.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qualification">
+      <Text fill="#0b0da4" layoutX="50.0" layoutY="497.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expérience (ans)" wrappingWidth="109.0830078125">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="571.0" layoutY="566.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expérience">
+      <Text fill="#0b0da4" layoutX="443.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qualification">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Button fx:id="retourbtn" layoutX="18.0" layoutY="654.0" mnemonicParsing="false" onAction="#retour" prefHeight="39.0" prefWidth="109.0" text="Back">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
       <TextField fx:id="nom_entry" layoutX="149.0" layoutY="184.0" />
-      <TextField fx:id="prenom_entry" layoutX="586.0" layoutY="279.0" />
-      <DatePicker fx:id="daten_entry" layoutX="586.0" layoutY="334.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="adress_entry" layoutX="586.0" layoutY="390.0" />
-      <TextField fx:id="sexe_entry" layoutX="388.0" layoutY="447.0" />
-      <TextField fx:id="email_entry" layoutX="170.0" layoutY="334.0" onKeyReleased="#email" />
-      <TextField fx:id="num_tel_entry" layoutX="170.0" layoutY="390.0" />
-      <TextField fx:id="qualif_entry" layoutX="660.0" layoutY="548.0" onKeyReleased="#num" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="exper_entry" layoutX="133.0" layoutY="548.0" />
-      <Button fx:id="ajouterbtn" layoutX="614.0" layoutY="661.0" mnemonicParsing="false" onAction="#ajouter_dem" text="ajouter">
+      <TextField fx:id="prenom_entry" layoutX="557.0" layoutY="184.0" />
+      <DatePicker fx:id="daten_entry" layoutX="557.0" layoutY="254.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="adress_entry" layoutX="557.0" layoutY="338.0" />
+      <TextField fx:id="sexe_entry" layoutX="360.0" layoutY="396.0" visible="false" />
+      <TextField fx:id="email_entry" layoutX="149.0" layoutY="254.0" onKeyReleased="#email" />
+      <TextField fx:id="num_tel_entry" layoutX="149.0" layoutY="338.0" />
+      <TextField fx:id="qualif_entry" layoutX="557.0" layoutY="491.0" onKeyReleased="#num" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="exper_entry" layoutX="149.0" layoutY="491.0" />
+      <Button fx:id="ajouterbtn" layoutX="464.0" layoutY="606.0" mnemonicParsing="false" onAction="#ajouter_dem" text="ajouter">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="modifierbtn" layoutX="690.0" layoutY="661.0" mnemonicParsing="false" onAction="#modif_dem" text="Modifier">
+      <Button fx:id="modifierbtn" layoutX="528.0" layoutY="606.0" mnemonicParsing="false" onAction="#modif_dem" text="Modifier" visible="false">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="supprimerbtn" layoutX="771.0" layoutY="661.0" mnemonicParsing="false" onAction="#supp_dem" prefHeight="30.0" prefWidth="85.0" text="Supprimer">
+      <Button fx:id="supprimerbtn" layoutX="601.0" layoutY="606.0" mnemonicParsing="false" onAction="#supp_dem" prefHeight="30.0" prefWidth="85.0" text="Supprimer" visible="false">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="rechercherbtn" layoutX="319.0" layoutY="602.0" mnemonicParsing="false" onAction="#afficher" prefHeight="30.0" prefWidth="93.0" text="Rechercher">
+      <Button fx:id="rechercherbtn" layoutX="698.0" layoutY="37.0" mnemonicParsing="false" onAction="#afficher" prefHeight="30.0" prefWidth="93.0" text="Rechercher" visible="false">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Text layoutX="18.0" layoutY="618.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour modifier">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
       <TextField fx:id="id_offre_dem" layoutX="298.0" layoutY="68.0" prefHeight="25.0" prefWidth="376.0" visible="false" />
-      <TextField fx:id="rech_entry" layoutX="140.0" layoutY="599.0" promptText="Chercher par E-mail" />
+      <TextField fx:id="rech_entry" layoutX="537.0" layoutY="40.0" promptText="Chercher par E-mail" visible="false" />
       <TextField fx:id="id_dem_entry" layoutX="595.0" layoutY="377.0" visible="false" />
-      <Label fx:id="message" layoutX="176.0" layoutY="531.0" prefHeight="17.0" prefWidth="394.0" />
-      <RadioButton fx:id="affich_coordbtn" layoutX="592.0" layoutY="21.0" mnemonicParsing="false" onAction="#affich_coord" text="Afficher mes coordonnées">
+      <Label fx:id="message" layoutX="190.0" layoutY="549.0" prefHeight="39.0" prefWidth="438.0" />
+      <RadioButton fx:id="affich_coordbtn" layoutX="537.0" layoutY="80.0" mnemonicParsing="false" onAction="#affich_coord" text="Afficher mes coordonnées" textFill="#0cb931">
          <font>
             <Font size="18.0" />
          </font>
       </RadioButton>
-      <Text layoutX="336.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Completez ces champs" wrappingWidth="205.13671875">
+      <Text fill="#b50808" layoutX="283.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Completez ces champs" wrappingWidth="205.13671875">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="247.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vous avez ">
+      <Text fill="#ae0c0c" layoutX="30.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vous avez ">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Label fx:id="nbr_dem" layoutX="355.0" layoutY="44.0" prefHeight="17.0" prefWidth="67.0" />
-      <Text layoutX="443.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="demande(s)">
+      <Label fx:id="nbr_dem" layoutX="120.0" layoutY="39.0" prefHeight="30.0" prefWidth="46.0" />
+      <Text fill="#9e0c0c" layoutX="143.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="demande(s)">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Label fx:id="emailerror" layoutX="206.0" layoutY="359.0" prefHeight="17.0" prefWidth="187.0" />
-      <Label fx:id="qualiferror" layoutX="573.0" layoutY="582.0" prefHeight="39.0" prefWidth="226.0" />
+      <Label fx:id="emailerror" layoutX="46.0" layoutY="289.0" prefHeight="30.0" prefWidth="299.0" />
+      <Label fx:id="qualiferror" layoutX="62.0" layoutY="526.0" prefHeight="30.0" prefWidth="299.0" />
    </children>
 </AnchorPane>

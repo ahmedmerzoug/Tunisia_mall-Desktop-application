@@ -48,7 +48,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="numerror" layoutX="373.0" layoutY="44.0" prefHeight="17.0" prefWidth="149.0" textFill="#ab1919" />
+            <Label fx:id="numerror" layoutX="373.0" layoutY="44.0" prefHeight="17.0" prefWidth="211.0" textFill="#ab1919" />
          </children>
       </AnchorPane>
       <HBox layoutX="5.0" layoutY="14.0" prefHeight="60.0" prefWidth="1036.0" styleClass="box-topo">
@@ -94,8 +94,8 @@
             <TableColumn fx:id="col_post" prefWidth="94.0" text="Poste" />
             <TableColumn fx:id="col_specialite" prefWidth="107.0" text="Spécialité" />
             <TableColumn fx:id="col_salaire" prefWidth="98.0" text="Salaire" />
-            <TableColumn fx:id="col_nbr" prefWidth="171.0" text="Nombre demandé" />
-            <TableColumn fx:id="col_date" minWidth="0.0" prefWidth="147.0" text="Date d'expiration" />
+            <TableColumn fx:id="col_nbr" prefWidth="171.0" text="Nombre demandé" visible="false" />
+            <TableColumn fx:id="col_date" minWidth="0.0" prefWidth="352.0" text="Date d'expiration de l'offre" />
          </columns>
       </TableView>
       <Button fx:id="refreshbtn" layoutX="944.0" layoutY="136.0" mnemonicParsing="false" onAction="#refresh" text="refresh" />

@@ -68,8 +68,6 @@ public class ConsulterDemande_emploiAdminController implements Initializable {
     @FXML
     private ComboBox<Integer> combobox;
     @FXML
-    private Button statbtn;
-    @FXML
     private Button mail_btn;
 
     /**
@@ -117,6 +115,7 @@ public class ConsulterDemande_emploiAdminController implements Initializable {
         experience.cellFactoryProperty();
 
         demande_table.setItems(list_demande);
+        
     }
 
     public static String adress;
@@ -175,7 +174,6 @@ public class ConsulterDemande_emploiAdminController implements Initializable {
 
     }
 
-    @FXML
     private void stat(ActionEvent event) throws IOException {
 
         Stage stage = new Stage();
