@@ -223,8 +223,8 @@ public class EventController implements Initializable {
                 IEvenementService ips = new EvenementService();
                 System.out.println(TableEvent.getSelectionModel().getSelectedItem().getUser().getMail());
                 ips.remove(TableEvent.getSelectionModel().getSelectedItem().getId_evenement());
-//                SendMail.sendmail(TableEvent.getSelectionModel().getSelectedItem().getUser().getMail(),
-//                        "Annulation d evenement", "nous sommes désolés mais l evenement est annulé");
+                SendMail.sendmail("amine.mraihi@esprit.tn",
+                     "Annulation d evenement", "nous sommes désolés mais l evenement est annulé");
                 afficher();
             }
         }
@@ -262,13 +262,11 @@ public class EventController implements Initializable {
 
     void showPubDetails(Evenement e) throws ParseException {
 
-//        id.setText(String.valueOf(p.getId_pub()));
-        System.out.println("id of event is " + e.getId_evenement());
+   //     System.out.println("id of event is " + e.getId_evenement());
         idnew = Integer.toString(e.getId_evenement());
         SimpleDateFormat inFmt = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat outFmt = new SimpleDateFormat("dd/MM/yyyy");
         String dated = outFmt.format(inFmt.parse(e.getDate()));
-//        txtdate_debut.setPromptText(dated);
 
         try {
             DateTimeFormatter formatter
@@ -280,8 +278,6 @@ public class EventController implements Initializable {
 //            throw exc;      // Rethrow the exception.
         }
         
-//        Image image1=new Image("C:\\wamp64\\www\\TestUser\\web\\images\\amine\\"+e.getPath());
-//        image.setImage(image1);
 
         txt_eventname.setText(e.getNom());
         txt_description.setText(e.getDescription());

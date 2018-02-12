@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="657.0" prefWidth="1262.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.FXMLGestionEmployeCAController">
+<AnchorPane id="AnchorPane" prefHeight="657.0" prefWidth="1262.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tunisia_mall.GUI.FXMLGestionEmployeCAController">
    <children>
       <HBox layoutX="10.0" layoutY="10.0" prefHeight="60.0" prefWidth="1107.0" styleClass="box-topo">
          <children>
@@ -96,7 +96,7 @@
       <DatePicker fx:id="dateexp_txt" layoutX="397.0" layoutY="265.0" />
       <ImageView fx:id="image" fitHeight="216.0" fitWidth="183.0" layoutX="884.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../2410/Tunisia_mall/src/tunisia_mall/img/fb-avatar.jpg" />
+            <Image url="@img/fb-avatar.jpg" />
          </image>
       </ImageView>
       <ToggleButton fx:id="ajoutimage" layoutX="1078.0" layoutY="143.0" mnemonicParsing="false" onAction="#ajouterimg" text="">
